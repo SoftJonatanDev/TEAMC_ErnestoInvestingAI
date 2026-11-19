@@ -1,10 +1,145 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Backtesting de portafolios · Ernesto Investing AI</title><link rel="stylesheet" href="css/styles.css"></head>
+<title>Backtesting de portafolios · Ernesto Investing AI</title>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* Estilos propios del módulo; reutilizan las variables de css/styles.css (tema claro/oscuro) */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{margin:.5rem 0 0;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--ac)}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+.head h1{margin-top:.1rem}
+.cabecera-card{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
+.cabecera-card h2{margin:0}
+.cabecera-card p{margin:.1rem 0 0;font-size:.9rem}
+.stack{display:grid;gap:1rem;margin-top:1rem}
+.chart.sm{height:16rem}
+
+/* Botones de series */
+.toggles{display:flex;gap:.4rem;flex-wrap:wrap}
+.toggles button{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .65rem;font-size:.85rem;border-radius:999px}
+.toggles button[aria-pressed="true"]{background:var(--hl);border-color:var(--ac);font-weight:600}
+.toggles button[aria-pressed="false"]{color:var(--mut);text-decoration:line-through}
+.sw{display:inline-block;width:1.2rem;height:0;border-top:3px solid var(--c,currentColor);flex:none}
+.sw.ref{border-top-style:dashed}
+
+/* Tabla ordenable */
+.tw{min-width:0}
+th button{background:transparent;border:0;padding:.1rem .15rem;font-weight:700;display:inline-flex;gap:.3rem;align-items:center;text-align:inherit;border-radius:4px}
+th button:hover{background:transparent;text-decoration:underline}
+th button .si::after{content:"↕";color:var(--mut);font-weight:400}
+th[aria-sort="ascending"] button .si::after{content:"▲";color:var(--ac)}
+th[aria-sort="descending"] button .si::after{content:"▼";color:var(--ac)}
+td.l .sw{margin-right:.45rem;vertical-align:middle}
+.lider td{background:var(--hl)}
+@supports (background:color-mix(in srgb,red,blue)){.lider td{background:color-mix(in srgb,var(--up) 12%,var(--panel))}}
+.lider td:first-child{box-shadow:inset 4px 0 0 var(--up)}
+.sup{display:inline-block;margin-left:.5rem;padding:.05rem .5rem;border-radius:999px;background:var(--up);color:var(--bg);font-size:.72rem;font-weight:700;letter-spacing:.04em}
+
+/* Sección inferior */
+.dos{display:grid;gap:1rem;grid-template-columns:minmax(0,3fr) minmax(0,2fr);margin-top:1rem}
+@media (max-width:800px){.dos{grid-template-columns:minmax(0,1fr)}}
+details.reb{border:1px solid var(--bd);border-radius:10px;margin:.5rem 0;background:var(--panel)}
+details.reb>summary{cursor:pointer;padding:.55rem .8rem;display:flex;justify-content:space-between;gap:.75rem;font-weight:600;border-radius:10px}
+details.reb>summary:hover{background:var(--hl)}
+details.reb .cuerpo{padding:.2rem .8rem .8rem}
+.cart-w{margin:.5rem 0 0}
+.cart-w strong{display:block;font-size:.9rem}
+.cart-w ul{list-style:none;margin:.2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem}
+.cart-w li{border:1px solid var(--bd);border-radius:6px;padding:.05rem .45rem;font-size:.85rem}
+.interp{border-left:4px solid var(--ac)}
+.interp .eyebrow{margin:0}
+.interp h2{margin:.2rem 0 .6rem}
+.interp p{margin:.5rem 0}
+details.alt{margin-top:1rem}
+details.alt>summary{cursor:pointer;font-weight:600;padding:.2rem 0}
+.pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
+@media (max-width:640px){.toggles button{font-size:.8rem}}
+</style></head>
 <body data-page="backtesting"><main>
-<h1>Backtesting de portafolios</h1>
-<div class="stub"><p><strong>Módulo por construir por su equipo.</strong> Simular el desempeño de los 3 portafolios durante 252 sesiones con rebalanceo mensual y compararlos con SPY, QQQ, EPU y un portafolio igual ponderado.</p>
-<h2>Qué debe contener</h2><ul><li>Curvas de capital (base 100) y de drawdown.</li><li>Tabla de métricas: retorno total, CAGR, volatilidad, Sharpe, máximo drawdown, Calmar y meses positivos.</li><li>Línea de tiempo de rebalanceos con los pesos de cada fecha.</li><li>Interpretación escrita: ¿por qué las carteras superaron o no al benchmark en estos datos sintéticos?</li></ul>
-<p class="mut">Datos de entrada: <code>data/09_backtesting_portafolios.json</code>. Todos están simulados (patrones realistas).</p></div>
-<h2>Vista previa de los datos de entrada</h2><div id="prev"></div>
-<script src="js/common.js"></script><script>window.STUB={files:['09_backtesting_portafolios.json']}</script><script src="js/stub.js"></script></main></body></html>
+
+<p class="eyebrow">EVALUACIÓN HISTÓRICA</p>
+<div class="head">
+  <div>
+    <h1>Backtesting</h1>
+    <p class="mut" id="subtitulo">Cargando datos…</p>
+  </div>
+  <span class="tag" id="insignia"></span>
+</div>
+
+<p class="aviso" role="note"><strong>Backtesting sobre historia sintética · desempeño pasado no garantiza desempeño futuro.</strong></p>
+
+<div class="stack">
+  <!-- Tarjeta 1: curvas de capital -->
+  <section class="card" aria-labelledby="h-capital">
+    <div class="cabecera-card">
+      <div><h2 id="h-capital">Curvas de capital</h2><p class="mut" id="sub-capital">Valor acumulado con base 100</p></div>
+      <div class="toggles" id="toggles" role="group" aria-label="Series visibles en ambos gráficos"></div>
+    </div>
+    <div id="graf-capital" class="chart" role="img" aria-label="Gráfico de curvas de capital"></div>
+  </section>
+
+  <!-- Tarjeta 2: drawdown -->
+  <section class="card" aria-labelledby="h-dd">
+    <div class="cabecera-card">
+      <div><h2 id="h-dd">Drawdown</h2><p class="mut">Caída porcentual desde el máximo previo</p></div>
+    </div>
+    <div id="graf-dd" class="chart" role="img" aria-label="Gráfico de drawdown"></div>
+  </section>
+
+  <!-- Tarjeta 3: métricas -->
+  <section class="card" aria-labelledby="h-met">
+    <div class="cabecera-card">
+      <h2 id="h-met">Métricas comparativas derivadas</h2>
+      <p class="mut" id="sub-met"></p>
+    </div>
+    <div class="tw">
+      <table id="tabla-met">
+        <caption class="sr">Métricas por estrategia. Cada encabezado es un botón que ordena la tabla.</caption>
+        <thead><tr id="fila-th"></tr></thead>
+        <tbody id="cuerpo-met"></tbody>
+      </table>
+    </div>
+    <p class="sr" id="estado-orden" role="status" aria-live="polite"></p>
+  </section>
+</div>
+
+<!-- Tabla alternativa para lectores de pantalla -->
+<details class="card alt" id="alt">
+  <summary>Tabla resumen alternativa de las curvas (valor inicial y final)</summary>
+  <div class="tw" style="margin-top:.6rem">
+    <table>
+      <caption id="alt-cap" class="sr"></caption>
+      <thead><tr>
+        <th scope="col" class="l">Serie</th><th scope="col" class="l">Tipo</th>
+        <th scope="col">Valor inicial</th><th scope="col">Valor final</th><th scope="col">Variación</th>
+      </tr></thead>
+      <tbody id="alt-cuerpo"></tbody>
+    </table>
+  </div>
+</details>
+
+<!-- Sección inferior en dos columnas -->
+<div class="dos">
+  <section class="card" aria-labelledby="h-reb">
+    <h2 id="h-reb" style="margin-top:0">Rebalanceos y pesos por fecha</h2>
+    <p class="mut" id="turnover" style="margin:.2rem 0 .6rem;font-size:.9rem"></p>
+    <div id="acordeones"></div>
+  </section>
+  <aside class="card interp" aria-labelledby="h-interp">
+    <p class="eyebrow">INTERPRETACIÓN DINÁMICA</p>
+    <h2 id="h-interp"></h2>
+    <div id="interp-cuerpo"></div>
+  </aside>
+</div>
+
+</main>
+
+<footer class="pie">
+  <p>Los datos de este módulo son <strong>sintéticos y simulados</strong> con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
+  <p id="pie-metodo"></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/backtesting.js"></script>
+</body></html>
