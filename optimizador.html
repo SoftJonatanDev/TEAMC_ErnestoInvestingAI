@@ -1,10 +1,228 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Optimizador: frontera de Markowitz, NSGA-II y NSGA-III · Ernesto Investing AI</title><link rel="stylesheet" href="css/styles.css"></head>
-<body data-page="optimizador"><main>
-<h1>Optimizador: frontera de Markowitz, NSGA-II y NSGA-III</h1>
-<div class="stub"><p><strong>Módulo por construir por su equipo.</strong> Dibujar la curva eficiente de Markowitz y los frentes de portafolios óptimos de NSGA-II (2 objetivos) y NSGA-III (3 objetivos), combinando los activos con consenso SUBE y proyección de regresión positiva.</p>
-<h2>Qué debe contener</h2><ul><li>Gráfico riesgo–retorno con la frontera de Markowitz y los frentes NSGA-II y NSGA-III superpuestos.</li><li>Para NSGA-III, color por CVaR 95 % (tercer objetivo).</li><li>Al hacer clic en un punto: composición del portafolio (pesos) y sus métricas.</li><li>Aviso visible de que NSGA-II/III están simulados.</li></ul>
-<p class="mut">Datos de entrada: <code>data/07_optimizador_markowitz_nsga.json</code>, <code>data/04_matriz_correlacion_covarianza.json</code>. Todos están simulados (patrones realistas).</p></div>
-<h2>Vista previa de los datos de entrada</h2><div id="prev"></div>
-<script src="js/common.js"></script><script>window.STUB={files:['07_optimizador_markowitz_nsga.json', '04_matriz_correlacion_covarianza.json']}</script><script src="js/stub.js"></script></main></body></html>
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Optimizador de portafolios: Markowitz, NSGA-II y NSGA-III</title>
+<style>
+  /* ---------- Tokens (mismos que regresion.html para mantener coherencia) ---------- */
+  :root {
+    --fondo: #f1f4f8;
+    --panel: #ffffff;
+    --tinta: #14202e;
+    --suave: #526071;
+    --linea: #d3dbe5;
+    --acento: #1f3fbf;
+    --mk: #1f3fbf;
+    --n2: #0f7c78;
+    --sube: #0a6b3d;
+    --baja: #a8201a;
+    --alerta-fondo: #fff4d6;
+    --alerta-borde: #9a6a00;
+    --radio: 6px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--tinta);
+    background: var(--fondo);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; line-height: 1.5; font-variant-numeric: tabular-nums; }
+  .pagina { max-width: 1280px; margin: 0 auto; padding: 20px 16px 48px; }
+  :focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; border-radius: 3px; }
+  .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  header h1 { margin: 0 0 4px; font-size: 1.6rem; letter-spacing: -0.01em; }
+  header p { margin: 0; color: var(--suave); max-width: 72ch; }
+
+  /* Aviso de simulación: debe verse sin buscarlo */
+  .aviso-sim {
+    margin: 14px 0 0; padding: 10px 14px; background: var(--alerta-fondo);
+    border: 2px solid var(--alerta-borde); border-radius: var(--radio); font-weight: 700;
+  }
+  .aviso-sim span { font-weight: 400; display: block; font-size: .88rem; color: #4a3500; margin-top: 2px; }
+
+  /* ---------- Controles ---------- */
+  .controles {
+    display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: flex-start;
+    margin: 18px 0 14px; padding: 14px 16px; background: var(--panel);
+    border: 1px solid var(--linea); border-radius: var(--radio);
+  }
+  .controles fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .controles legend { font-size: .85rem; font-weight: 700; color: var(--suave); padding: 0; margin-bottom: 4px; }
+  .controles label { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: .93rem; cursor: pointer; }
+  .campo { display: flex; flex-direction: column; gap: 4px; }
+  .campo label { font-size: .85rem; font-weight: 700; color: var(--suave); }
+  select { font: inherit; padding: 7px 10px; min-width: 160px; color: var(--tinta); background: #fff; border: 1px solid #98a6b8; border-radius: var(--radio); }
+  .muestra { flex: none; }
+
+  /* ---------- Gráfico + panel ---------- */
+  .zona { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 14px; align-items: start; }
+  figure.grafico { margin: 0; padding: 12px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); }
+  #grafico { width: 100%; height: 540px; border-radius: var(--radio); }
+  #grafico:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+  figcaption { margin-top: 8px; font-size: .88rem; color: var(--suave); }
+  .verificacion { margin: 6px 0 0; font-size: .85rem; color: var(--suave); }
+
+  .detalle { padding: 14px 16px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); position: sticky; top: 12px; }
+  .detalle:focus-visible { outline: 3px solid var(--acento); }
+  .detalle h2 { margin: 0 0 2px; font-size: 1.1rem; }
+  .detalle .sub { margin: 0 0 10px; color: var(--suave); font-size: .9rem; }
+  .vacio { color: var(--suave); font-size: .93rem; margin: 0; }
+  dl.metricas { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin: 0 0 12px; font-size: .93rem; }
+  dl.metricas dt { color: var(--suave); }
+  dl.metricas dd { margin: 0; font-weight: 700; text-align: right; }
+  .pesos-tit { margin: 10px 0 6px; font-size: .95rem; font-weight: 700; }
+  ul.pesos { list-style: none; margin: 0; padding: 0; }
+  ul.pesos li { display: grid; grid-template-columns: 54px 1fr 74px; align-items: center; gap: 8px; padding: 2px 0; font-size: .9rem; }
+  ul.pesos .tk { font-weight: 700; }
+  ul.pesos .pista { height: 14px; background: #e6ebf2; border-radius: 3px; overflow: hidden; }
+  ul.pesos .barra { height: 100%; background: var(--acento); }
+  ul.pesos .barra.tope { background: repeating-linear-gradient(45deg, #1f3fbf, #1f3fbf 4px, #0f2380 4px, #0f2380 8px); }
+  ul.pesos .val { text-align: right; }
+  .nota-barras { margin: 6px 0 0; font-size: .8rem; color: var(--suave); }
+  .chequeo { margin: 12px 0 0; padding: 8px 10px; border-radius: var(--radio); font-size: .88rem; border: 1px solid var(--linea); background: #f5f7fa; }
+  .chequeo.ok { border-color: var(--sube); }
+  .chequeo.mal { border-color: var(--baja); background: #fbe6e4; }
+  .chequeo p { margin: 0; }
+
+  /* ---------- Secciones ---------- */
+  section.bloque { margin-top: 22px; padding: 14px 18px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); }
+  section.bloque h2 { margin: 0 0 8px; font-size: 1.15rem; }
+  .explica { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 24px; }
+  .explica h3 { margin: 0 0 2px; font-size: 1rem; }
+  .explica p { margin: 0; font-size: .93rem; max-width: 62ch; }
+  .porque { margin-top: 14px; padding: 10px 14px; border-left: 4px solid var(--acento); background: #e7ecfb; border-radius: 0 var(--radio) var(--radio) 0; font-size: .93rem; }
+  .porque p { margin: 0 0 6px; } .porque p:last-child { margin: 0; }
+  ul.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 8px 0 0; padding: 0; }
+  ul.chips li { padding: 3px 12px; border: 1px solid #98a6b8; border-radius: 999px; font-weight: 700; font-size: .9rem; background: #f5f7fa; }
+  .criterio { margin: 0 0 6px; font-size: .95rem; }
+  .crudo { font-size: .82rem; color: var(--suave); margin: 4px 0 0; }
+  .crudo code { background: #eef1f6; padding: 1px 5px; border-radius: 3px; }
+
+  /* ---------- Tabla alternativa ---------- */
+  details summary { cursor: pointer; font-weight: 700; font-size: 1.15rem; }
+  details[open] summary { margin-bottom: 8px; }
+  .envoltura { overflow: auto; max-height: 460px; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  caption { text-align: left; font-size: .86rem; color: var(--suave); padding-bottom: 6px; }
+  th, td { padding: 6px 10px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { background: #f5f7fa; position: sticky; top: 0; z-index: 1; }
+  tr[aria-current="true"] { background: #e7ecfb; }
+  button.chico { font: inherit; font-size: .82rem; padding: 3px 10px; background: #fff; color: var(--tinta); border: 1px solid #98a6b8; border-radius: var(--radio); cursor: pointer; }
+  button.chico:hover { background: #e8ecf1; }
+
+  .error { padding: 14px; background: #fbe6e4; border: 1px solid var(--baja); border-radius: var(--radio); color: #5b1410; margin-top: 16px; }
+  footer { margin-top: 26px; font-size: .88rem; color: var(--suave); }
+
+  @media (max-width: 960px) {
+    .zona { grid-template-columns: 1fr; }
+    .detalle { position: static; }
+    #grafico { height: 420px; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+
+  <header>
+    <h1>Optimizador de portafolios</h1>
+    <p>Compara la frontera eficiente de Markowitz con los frentes de NSGA-II y NSGA-III. Selecciona un portafolio para ver sus pesos y métricas.</p>
+    <p class="aviso-sim" role="note">NSGA-II y NSGA-III simulados: no se ejecutó ningún algoritmo evolutivo
+      <span>Los puntos de ambos frentes provienen del archivo de datos; esta página no calcula ni optimiza nada.</span></p>
+  </header>
+
+  <div id="app" hidden>
+    <div class="controles" role="group" aria-label="Series visibles">
+      <fieldset>
+        <legend>Series en el gráfico</legend>
+        <label><input type="checkbox" id="chk-mk" checked>
+          <svg class="muestra" width="30" height="12" aria-hidden="true"><line x1="0" y1="6" x2="30" y2="6" stroke="#1f3fbf" stroke-width="2.5"/><rect x="11" y="3" width="6" height="6" fill="#1f3fbf"/></svg>
+          Curva de Markowitz</label>
+        <label><input type="checkbox" id="chk-n2" checked>
+          <svg class="muestra" width="30" height="12" aria-hidden="true"><polygon points="15,0 21,6 15,12 9,6" fill="#0f7c78"/></svg>
+          Frente NSGA-II (simulado)</label>
+        <label><input type="checkbox" id="chk-n3" checked>
+          <svg class="muestra" width="30" height="12" aria-hidden="true"><circle cx="15" cy="6" r="5" fill="#e07b39" stroke="#222" stroke-width="1"/></svg>
+          Frente NSGA-III (simulado), color por CVaR 95 %</label>
+      </fieldset>
+      <fieldset>
+        <legend>Curva de Markowitz</legend>
+        <label><input type="radio" name="modo-mk" value="e" checked> Solo activos elegibles</label>
+        <label><input type="radio" name="modo-mk" value="u"> Universo completo</label>
+        <label><input type="radio" name="modo-mk" value="ambas"> Ambas, para comparar</label>
+      </fieldset>
+      <div class="campo">
+        <label for="sel-locale">Formato de números</label>
+        <select id="sel-locale">
+          <option value="es-PE">Español (Perú)</option>
+          <option value="es-ES">Español (España)</option>
+          <option value="en-US">English (US)</option>
+          <option value="pt-BR">Português (Brasil)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="zona">
+      <figure class="grafico">
+        <div id="grafico" tabindex="0" role="application"
+             aria-label="Gráfico de dispersión riesgo y retorno. Flechas izquierda y derecha recorren los puntos de una serie, flechas arriba y abajo cambian de serie, Enter selecciona el punto y Escape cierra la información. Debajo hay una tabla con los mismos puntos."></div>
+        <figcaption id="leyenda"></figcaption>
+        <p class="verificacion" id="verif-global"></p>
+        <p class="solo-lector" id="anuncio" aria-live="polite"></p>
+      </figure>
+
+      <aside class="detalle" id="detalle" tabindex="-1" aria-labelledby="det-tit">
+        <h2 id="det-tit">Portafolio seleccionado</h2>
+        <div id="det-cuerpo"></div>
+      </aside>
+    </div>
+
+    <section class="bloque" aria-labelledby="tit-metodos">
+      <h2 id="tit-metodos">Qué optimiza cada método</h2>
+      <div class="explica">
+        <div>
+          <h3>Markowitz</h3>
+          <p>Para cada nivel de retorno esperado busca la combinación de activos con la menor volatilidad posible, con pesos que suman 100 % y un tope por activo. Al unir esos portafolios se obtiene la frontera eficiente. Tiene solución matemática exacta.</p>
+        </div>
+        <div>
+          <h3>NSGA-II</h3>
+          <p>Algoritmo genético multiobjetivo. Mantiene una población de portafolios, descarta los dominados (los que otro supera en retorno y en riesgo a la vez) y conserva los más separados entre sí para cubrir todo el frente. Objetivos: más retorno y menos volatilidad.</p>
+        </div>
+        <div>
+          <h3>NSGA-III</h3>
+          <p>Extiende NSGA-II a tres o más objetivos mediante puntos de referencia. Aquí suma el CVaR 95 % diario, la pérdida promedio en el 5 % de los peores días, que se ve como color: más oscuro significa más pérdida en la cola.</p>
+        </div>
+      </div>
+      <div class="porque">
+        <p><strong>Por qué NSGA queda algo por debajo de Markowitz.</strong> Markowitz resuelve el problema de forma exacta, así que su curva es el techo de lo alcanzable con esos supuestos. Un algoritmo evolutivo solo aproxima ese techo mediante búsqueda y, con tiempo finito, queda cerca pero ligeramente debajo.</p>
+        <p>En esta página, además, los frentes NSGA no se calcularon: el archivo de datos los construyó perturbando la frontera de Markowitz y filtrando por no dominancia.</p>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="tit-elegibles">
+      <h2 id="tit-elegibles">Activos elegibles</h2>
+      <p class="criterio" id="criterio"></p>
+      <ul class="chips" id="lista-elegibles" aria-label="Lista de activos elegibles"></ul>
+      <p class="crudo" id="params"></p>
+    </section>
+
+    <section class="bloque">
+      <details>
+        <summary>Tabla de puntos (alternativa al gráfico)</summary>
+        <p style="margin:0 0 8px;color:var(--suave);font-size:.9rem">Lista los puntos de las series visibles. Usa «Ver pesos» para abrir el detalle de cualquier portafolio con el teclado.</p>
+        <div class="envoltura"><table id="tabla-puntos"></table></div>
+      </details>
+    </section>
+  </div>
+
+  <div id="mensaje" role="status"></div>
+
+  <footer>
+    <p>NSGA-II y NSGA-III simulados: no se ejecutó ningún algoritmo evolutivo. Datos y proyecciones con fines académicos, no son asesoría de inversión.</p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/optimizador.js"></script>
+</body>
+</html>
