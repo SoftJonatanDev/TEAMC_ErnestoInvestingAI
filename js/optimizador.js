@@ -21,8 +21,11 @@
     n2:   { nombre: 'NSGA-II (simulado)', prefijo: 'N2', campo: 'nsga2_elegibles', color: '#0f7c78' },
     n3:   { nombre: 'NSGA-III (simulado)', prefijo: 'N3', campo: 'nsga3_elegibles', color: '#e07b39' }
   };
-  // Escala secuencial para el CVaR 95 %: claro = poca pérdida en cola, oscuro = mucha
-  var ESCALA_CVAR = ['#f2c14e', '#e07b39', '#b3361f', '#5c0f2e'];
+  // Escala temática del CVaR 95 %: el tamaño también codifica el valor de cada punto.
+  var ESCALAS_CVAR = {
+    light: ['#986b00', '#b35400', '#a3321c', '#5c0f2e'],
+    dark: ['#ffe082', '#ffad66', '#ff786e', '#ff9eb2']
+  };
 
   // ---------- Estado ----------
   var estado = {
@@ -35,6 +38,16 @@
   };
   var grafico = null;
   var $ = function (id) { return document.getElementById(id); };
+  var css = function (name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); };
+  function temaActual() {
+    return document.documentElement.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function colorSerie(k) {
+    if (k === 'mk_e') return css('--ac');
+    if (k === 'mk_u') return css('--ac2');
+    return css('--up');
+  }
 
   // ==========================================================================
   // Formato con Intl según el locale activo
@@ -106,10 +119,10 @@
     return document.querySelector('input[name="modo-mk"]:checked').value;
   }
   function esVisible(k) {
-    if (k === 'mk_e') return $('chk-mk').checked && modoMarkowitz() !== 'u';
-    if (k === 'mk_u') return $('chk-mk').checked && modoMarkowitz() !== 'e';
-    if (k === 'n2') return $('chk-n2').checked;
-    return $('chk-n3').checked;
+    if (k === 'mk_e') return $('chk-mk').getAttribute('aria-pressed') === 'true' && modoMarkowitz() !== 'u';
+    if (k === 'mk_u') return $('chk-mk').getAttribute('aria-pressed') === 'true' && modoMarkowitz() !== 'e';
+    if (k === 'n2') return $('chk-n2').getAttribute('aria-pressed') === 'true';
+    return $('chk-n3').getAttribute('aria-pressed') === 'true';
   }
   function clavesVisibles() { return ORDEN.filter(esVisible); }
 
@@ -122,7 +135,13 @@
     if ($('sel-locale').value !== estado.locale) { estado.locale = 'es-PE'; $('sel-locale').value = 'es-PE'; }
 
     // Interruptores: cualquier cambio redibuja gráfico y tabla
-    ['chk-mk', 'chk-n2', 'chk-n3'].forEach(function (id) { $(id).addEventListener('change', alCambiarSeries); });
+    ['chk-mk', 'chk-n2', 'chk-n3'].forEach(function (id) {
+      $(id).addEventListener('click', function () {
+        var btn = $(id);
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('aria-pressed') !== 'true'));
+        alCambiarSeries();
+      });
+    });
     document.querySelectorAll('input[name="modo-mk"]').forEach(function (r) { r.addEventListener('change', alCambiarSeries); });
     $('sel-locale').addEventListener('change', function (e) { estado.locale = e.target.value; actualizarTodo(); });
 
@@ -163,7 +182,7 @@
     pintarElegibles();
     pintarVerificacionGlobal();
     $('leyenda').textContent = 'Cada punto es un portafolio. Eje X: volatilidad anual; eje Y: retorno esperado anual. ' +
-      'En NSGA-III el color indica el CVaR 95 % diario (más oscuro, mayor pérdida en la cola). El círculo negro marca el portafolio seleccionado.';
+      'En NSGA-III el color y el tamaño indican el CVaR 95 % diario. El anillo de alto contraste marca el portafolio seleccionado.';
   }
 
   // ==========================================================================
@@ -189,9 +208,9 @@
         s = {
           id: k, name: def.nombre, type: 'line', symbol: 'rect', symbolSize: 7,
           data: pts.map(function (p) { return [p.vol, p.ret]; }),
-          lineStyle: { width: 2.5, color: def.color, type: def.linea },
-          itemStyle: { color: def.color },
-          emphasis: { scale: 1.9, itemStyle: { borderColor: '#000', borderWidth: 2 } },
+          lineStyle: { width: 2.5, color: colorSerie(k), type: def.linea },
+          itemStyle: { color: colorSerie(k) },
+          emphasis: { scale: 1.9, itemStyle: { borderColor: css('--fg'), borderWidth: 2 } },
           z: 3
         };
       } else if (k === 'n2') {
@@ -199,17 +218,22 @@
         s = {
           id: k, name: def.nombre, type: 'scatter', symbol: 'diamond', symbolSize: 12,
           data: pts.map(function (p) { return [p.vol, p.ret]; }),
-          itemStyle: { color: def.color, borderColor: '#073b39', borderWidth: 0.8 },
-          emphasis: { scale: 1.6, itemStyle: { borderColor: '#000', borderWidth: 3 } },
+          itemStyle: { color: colorSerie(k), borderColor: css('--panel'), borderWidth: 0.8 },
+          emphasis: { scale: 1.6, itemStyle: { borderColor: css('--fg'), borderWidth: 3 } },
           z: 4
         };
       } else {
         // NSGA-III: círculos; el color lo pone el visualMap según la dimensión 2 (CVaR 95 %)
         s = {
-          id: k, name: def.nombre, type: 'scatter', symbol: 'circle', symbolSize: 11,
+          id: k, name: def.nombre, type: 'scatter',           symbol: 'circle',
+          symbolSize: function (value) {
+            var cv = estado.series.n3.puntos.map(function (p) { return p.cvar; });
+            var min = Math.min.apply(null, cv), max = Math.max.apply(null, cv);
+            return max === min ? 13 : 8 + ((value[2] - min) / (max - min)) * 10;
+          },
           data: pts.map(function (p) { return [p.vol, p.ret, p.cvar]; }),
-          itemStyle: { borderColor: '#222', borderWidth: 0.8 },
-          emphasis: { scale: 1.6, itemStyle: { borderColor: '#000', borderWidth: 3 } },
+          itemStyle: { borderColor: css('--panel'), borderWidth: 0.8 },
+          emphasis: { scale: 1.6, itemStyle: { borderColor: css('--fg'), borderWidth: 3 } },
           z: 5
         };
       }
@@ -217,10 +241,10 @@
       series.push(s);
     });
 
-    // Marcador del portafolio seleccionado (anillo negro, no interactivo)
+    // Marcador del portafolio seleccionado (anillo de alto contraste, no interactivo)
     series.push({
       id: 'sel', name: 'Seleccionado', type: 'scatter', symbol: 'circle', symbolSize: 26, silent: true,
-      data: datosMarcador(), itemStyle: { color: 'rgba(0,0,0,0)', borderColor: '#000', borderWidth: 3 },
+      data: datosMarcador(), itemStyle: { color: 'rgba(0,0,0,0)', borderColor: css('--ac2'), borderWidth: 3 },
       tooltip: { show: false }, z: 10
     });
 
@@ -233,9 +257,9 @@
         min: Math.floor(Math.min.apply(null, cv) * 100) / 100,
         max: Math.ceil(Math.max.apply(null, cv) * 100) / 100,
         orient: 'horizontal', left: 'center', bottom: 6, itemWidth: 14, itemHeight: 220,
-        calculable: false, text: ['CVaR 95 % mayor', 'menor'], textStyle: { color: '#3f4b59' },
+        calculable: false, text: ['CVaR 95 % mayor', 'menor'], textStyle: { color: css('--mut') },
         formatter: function (v) { return fmt.pct2.format(v / 100); },
-        inRange: { color: ESCALA_CVAR }
+        inRange: { color: ESCALAS_CVAR[temaActual()] }
       };
     }
 
@@ -243,19 +267,25 @@
 
     grafico.setOption({
       animation: !sinAnimacion,
-      grid: { left: 70, right: 24, top: 20, bottom: visualMap ? 96 : 58 },
+      textStyle: { color: css('--fg') },
+      grid: { left: 70, right: 24, top: 20, bottom: visualMap ? 96 : 58, containLabel: true },
       xAxis: {
         type: 'value', scale: true, name: 'Volatilidad anual', nameLocation: 'middle', nameGap: 32,
-        axisLabel: { color: '#3f4b59', formatter: function (v) { return fmt.pct0.format(v / 100); } },
-        splitLine: { lineStyle: { color: '#e3e8ef' } }
+        nameTextStyle: { color: css('--mut') },
+        axisLabel: { color: css('--mut'), formatter: function (v) { return fmt.pct0.format(v / 100); } },
+        axisLine: { lineStyle: { color: css('--bd') } },
+        splitLine: { lineStyle: { color: css('--bd') } }
       },
       yAxis: {
         type: 'value', scale: true, name: 'Retorno esperado anual', nameLocation: 'middle', nameGap: 50,
-        axisLabel: { color: '#3f4b59', formatter: function (v) { return fmt.pct0.format(v / 100); } },
-        splitLine: { lineStyle: { color: '#e3e8ef' } }
+        nameTextStyle: { color: css('--mut') },
+        axisLabel: { color: css('--mut'), formatter: function (v) { return fmt.pct0.format(v / 100); } },
+        axisLine: { lineStyle: { color: css('--bd') } },
+        splitLine: { lineStyle: { color: css('--bd') } }
       },
       tooltip: {
-        trigger: 'item', confine: true,
+        trigger: 'item', confine: true, backgroundColor: css('--panel'),
+        borderColor: css('--bd'), textStyle: { color: css('--fg') },
         formatter: function (p) {
           var S = estado.series[p.seriesId];
           if (!S) return '';
@@ -322,10 +352,10 @@
 
     var html = '<p class="sub">' + S.def.nombre + ' · ' + p.id + '</p>';
     html += '<dl class="metricas">' +
-      '<dt>Retorno esperado anual</dt><dd>' + pctPunto(p.ret) + '</dd>' +
-      '<dt>Volatilidad anual</dt><dd>' + pctPunto(p.vol) + '</dd>' +
-      '<dt>Sharpe (tasa libre ' + pctPeso(estado.datos.tasa_libre_riesgo) + ')</dt><dd>' + fmt.sharpe.format(p.sharpe) + '</dd>' +
-      '<dt>CVaR 95 % diario</dt><dd>' + pctPunto(p.cvar) + '</dd></dl>';
+      '<div class="metrica"><dt>Retorno</dt><dd>' + pctPunto(p.ret) + '</dd></div>' +
+      '<div class="metrica"><dt>Volatilidad</dt><dd>' + pctPunto(p.vol) + '</dd></div>' +
+      '<div class="metrica"><dt>Sharpe</dt><dd>' + fmt.sharpe.format(p.sharpe) + '</dd></div>' +
+      '<div class="metrica"><dt>CVaR 95 %</dt><dd>' + pctPunto(p.cvar) + '</dd></div></dl>';
 
     html += '<p class="pesos-tit" id="pesos-tit">Pesos del portafolio</p><ul class="pesos" aria-labelledby="pesos-tit">';
     Object.keys(p.pesos)
@@ -409,6 +439,14 @@
       });
     });
   }
+
+  function pintarTema() {
+    if (grafico) dibujarGrafico();
+  }
+  window.onTheme = pintarTema;
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+    if (!document.documentElement.hasAttribute('data-theme') && grafico) pintarTema();
+  });
 
   // ==========================================================================
   // Teclado sobre el gráfico: ←/→ recorren puntos, ↑/↓ cambian de serie,

@@ -17,9 +17,6 @@
   var IDX_ULTIMO = N_HIST - 1; // posición del último cierre en el eje X
   var TOL_CENTAVO = 0.01;
 
-  var COLOR_MEDIANA = '#0d1b3d';
-  var COLOR_HISTORIA = '#4a5a6e';
-  var COLOR_BANDA = '#1f3fbf';
 
   // ---------- Estado ----------
   var estado = {
@@ -37,6 +34,11 @@
 
   var grafico = null;   // instancia de ECharts
   var $ = function (id) { return document.getElementById(id); };
+  var css = function (name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); };
+  function temaActual() {
+    return document.documentElement.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
 
   // ==========================================================================
   // Formato con Intl según el locale activo
@@ -99,7 +101,8 @@
   function arrancar() {
     // Solo activos presentes en ambos archivos
     var tickers = Object.keys(estado.reg.predicciones).filter(function (t) { return estado.hist.cierres[t]; });
-    estado.ticker = tickers[0];
+    var solicitado = (new URLSearchParams(location.search).get('ticker') || '').toUpperCase();
+    estado.ticker = tickers.find(function (t) { return t.toUpperCase() === solicitado; }) || tickers[0];
 
     asignarColores();
     seleccionarPorFamilia('todos');
@@ -116,10 +119,15 @@
     if ($('sel-locale').value !== estado.locale) { estado.locale = 'es-PE'; $('sel-locale').value = 'es-PE'; }
 
     // Eventos
-    sel.addEventListener('change', function () { estado.ticker = sel.value; actualizarTodo(); });
-    $('sel-familia').addEventListener('change', function (e) {
-      estado.familia = e.target.value;
+    sel.addEventListener('change', function () { estado.ticker = sel.value; sincronizarTickerURL(); actualizarTodo(); });
+    $('filtros-familia').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-familia]');
+      if (!b) return;
+      estado.familia = b.dataset.familia;
       seleccionarPorFamilia(estado.familia);
+      $('filtros-familia').querySelectorAll('button').forEach(function (boton) {
+        boton.setAttribute('aria-pressed', String(boton === b));
+      });
       actualizarTodo();
     });
     $('sel-locale').addEventListener('change', function (e) { estado.locale = e.target.value; actualizarTodo(); });
@@ -127,11 +135,11 @@
     $('chk-cono').addEventListener('change', function (e) { estado.cono = e.target.checked; dibujarGrafico(); });
     $('btn-todos').addEventListener('click', function () {
       estado.reg.modelos.forEach(function (m) { estado.visibles.add(m.modelo); });
-      construirListaModelos(); dibujarGrafico();
+      construirListaModelos(); dibujarGrafico(); pintarKPIs();
     });
     $('btn-ninguno').addEventListener('click', function () {
       estado.visibles.clear();
-      construirListaModelos(); dibujarGrafico();
+      construirListaModelos(); dibujarGrafico(); pintarKPIs();
     });
 
     $('app').hidden = false;
@@ -147,15 +155,26 @@
     actualizarTodo();
   }
 
+  function sincronizarTickerURL() {
+    try {
+      var url = new URL(location.href);
+      url.searchParams.set('ticker', estado.ticker);
+      history.replaceState(null, '', url);
+    } catch (e) {
+      // Si el entorno no permite modificar el historial, el selector sigue funcionando.
+    }
+  }
+
   // Un color por modelo: tonos azul-verdosos para ML, tonos violeta-magenta para DL
   function asignarColores() {
     var ml = estado.reg.modelos.filter(function (m) { return m.familia === 'ML'; });
     var dl = estado.reg.modelos.filter(function (m) { return m.familia === 'DL'; });
+    var luz = temaActual() === 'dark' ? 68 : 35;
     ml.forEach(function (m, i) {
-      estado.colores[m.modelo] = 'hsl(' + (170 + i * (50 / Math.max(ml.length - 1, 1))) + ', 62%, ' + (34 + (i % 3) * 7) + '%)';
+      estado.colores[m.modelo] = 'hsl(' + (170 + i * (50 / Math.max(ml.length - 1, 1))) + ', 68%, ' + (luz + (i % 3) * (temaActual() === 'dark' ? 3 : 6)) + '%)';
     });
     dl.forEach(function (m, i) {
-      estado.colores[m.modelo] = 'hsl(' + (265 + i * (80 / Math.max(dl.length - 1, 1))) + ', 58%, ' + (42 + (i % 3) * 6) + '%)';
+      estado.colores[m.modelo] = 'hsl(' + (265 + i * (80 / Math.max(dl.length - 1, 1))) + ', 68%, ' + (luz + (i % 3) * (temaActual() === 'dark' ? 3 : 6)) + '%)';
     });
   }
 
@@ -169,12 +188,29 @@
 
   function actualizarTodo() {
     crearFormatos();
+    asignarColores();
+    pintarKPIs();
     construirListaModelos();
     dibujarGrafico();
     pintarRetorno();
+    pintarCTA();
     construirTablaMetricas();
     construirTablaMediana();
     verificarActivo();
+  }
+
+  function pintarKPIs() {
+    var p = estado.reg.predicciones[estado.ticker];
+    $('kpi-precio').textContent = precio(p.precio_ultimo);
+    $('kpi-ticker').textContent = estado.ticker;
+    $('kpi-mediana').textContent = precio(p.ensamble_mediana[N_PRON - 1]);
+    $('kpi-fecha').textContent = fechaLarga(estado.reg.fechas_pronostico[N_PRON - 1]);
+    $('kpi-banda').textContent = precio(p.banda_p10[N_PRON - 1]) + ' – ' + precio(p.banda_p90[N_PRON - 1]);
+    $('kpi-modelos').textContent = estado.visibles.size + ' de ' + estado.reg.modelos.length + ' modelos visibles';
+  }
+
+  function pintarCTA() {
+    $('ctaTxt').textContent = 'Usa las señales de ' + estado.ticker + ' dentro de una asignación diversificada.';
   }
 
   // ==========================================================================
@@ -200,7 +236,7 @@
         chk.checked = estado.visibles.has(m.modelo);
         chk.addEventListener('change', function () {
           if (chk.checked) estado.visibles.add(m.modelo); else estado.visibles.delete(m.modelo);
-          dibujarGrafico();
+          dibujarGrafico(); pintarKPIs();
         });
         lab.appendChild(chk);
         lab.insertAdjacentHTML('beforeend', muestraLinea(estado.colores[m.modelo], g[0] === 'DL'));
@@ -268,7 +304,7 @@
       });
       series.push({
         name: 'Banda p10–p90', type: 'line', data: ancho, stack: 'banda', symbol: 'none', silent: true,
-        lineStyle: { opacity: 0 }, areaStyle: { color: COLOR_BANDA, opacity: 0.16 }, z: 1
+        lineStyle: { opacity: 0 }, areaStyle: { color: css('--ac'), opacity: 0.16 }, z: 1
       });
     }
 
@@ -277,7 +313,7 @@
       [['Cono inferior', p.cono_volatilidad_inf], ['Cono superior', p.cono_volatilidad_sup]].forEach(function (c) {
         series.push({
           name: c[0], type: 'line', data: rellenarPronostico(c[1], ancla), symbol: 'none', silent: true,
-          lineStyle: { width: 1.2, type: 'dotted', color: '#6b7a8d' }, z: 2
+          lineStyle: { width: 1.2, type: 'dotted', color: css('--mut') }, z: 2
         });
       });
     }
@@ -296,19 +332,21 @@
     });
 
     // 4) Historia
+    var medianaColor = css('--ac');
+    var historiaColor = css('--mut');
     series.push({
       name: 'Historia', type: 'line', data: historia, symbol: 'none',
-      lineStyle: { width: 2, color: COLOR_HISTORIA }, itemStyle: { color: COLOR_HISTORIA }, z: 4
+      lineStyle: { width: 2, color: historiaColor }, itemStyle: { color: historiaColor }, z: 4
     });
 
     // 5) Mediana del ensamble, destacada
     series.push({
       name: 'Mediana del ensamble', type: 'line', data: mediana, symbol: 'none',
-      lineStyle: { width: 3.2, color: COLOR_MEDIANA }, itemStyle: { color: COLOR_MEDIANA }, z: 6,
+      lineStyle: { width: 3.2, color: medianaColor }, itemStyle: { color: medianaColor }, z: 6,
       markLine: {
         silent: true, symbol: 'none', animation: false,
-        lineStyle: { color: '#8392a6', type: 'dashed', width: 1 },
-        label: { formatter: 'Último cierre', color: '#526071', position: 'insideEndTop' },
+        lineStyle: { color: css('--mut'), type: 'dashed', width: 1 },
+        label: { formatter: 'Último cierre', color: css('--fg'), position: 'insideEndTop' },
         data: [{ xAxis: IDX_ULTIMO }]
       }
     });
@@ -317,20 +355,24 @@
 
     grafico.setOption({
       animation: !sinAnimacion,
-      grid: { left: 64, right: 24, top: 24, bottom: 56 },
+      textStyle: { color: css('--fg') },
+      grid: { left: 64, right: 24, top: 24, bottom: 56, containLabel: true },
       xAxis: {
         type: 'category', data: d.fechas, boundaryGap: false,
-        axisLabel: { color: '#3f4b59', hideOverlap: true, formatter: function (v) { return fechaCorta(v); } },
-        axisLine: { lineStyle: { color: '#98a6b8' } }
+        axisLabel: { color: css('--mut'), hideOverlap: true, formatter: function (v) { return fechaCorta(v); } },
+        axisLine: { lineStyle: { color: css('--bd') } },
+        axisTick: { lineStyle: { color: css('--bd') } }
       },
       yAxis: {
         type: 'value', scale: true,
-        axisLabel: { color: '#3f4b59', formatter: function (v) { return precio(v); } },
-        splitLine: { lineStyle: { color: '#e3e8ef' } }
+        axisLabel: { color: css('--mut'), formatter: function (v) { return precio(v); } },
+        axisLine: { lineStyle: { color: css('--bd') } },
+        splitLine: { lineStyle: { color: css('--bd') } }
       },
       dataZoom: [{ type: 'inside', filterMode: 'none' }],
       tooltip: {
         trigger: 'axis', axisPointer: { type: 'cross' }, confine: true,
+        backgroundColor: css('--panel'), borderColor: css('--bd'), textStyle: { color: css('--fg') },
         formatter: function (params) { return textoTooltip(params, d); }
       },
       series: series
@@ -382,6 +424,16 @@
     el.textContent = pctSigno(r) + ' ' + flecha;
     el.setAttribute('aria-label', pctSigno(r) + ', proyección a la ' + palabra);
   }
+
+  function pintarTema() {
+    asignarColores();
+    dibujarGrafico();
+    construirListaModelos();
+  }
+  window.onTheme = pintarTema;
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+    if (!document.documentElement.hasAttribute('data-theme') && grafico) pintarTema();
+  });
 
   // ==========================================================================
   // Tabla de métricas por modelo (ordenable)
