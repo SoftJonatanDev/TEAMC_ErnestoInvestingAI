@@ -30,8 +30,392 @@ label{display:block;font-weight:600;margin:.5rem 0 .2rem}
 input,select{font:inherit;padding:.45rem .6rem;border:1px solid var(--bd);border-radius:8px;background:var(--panel);color:var(--fg);width:100%;max-width:20rem}
 .row{display:flex;gap:1rem;flex-wrap:wrap;align-items:end}
 .chart{height:22rem;width:100%}
-.stub{border:2px dashed var(--ac);border-radius:12px;padding:1rem;background:var(--panel)}
-pre{background:var(--hl);padding:.8rem;border-radius:8px;overflow:auto;font-size:.85rem;max-width:100%}.stub,.card{min-width:0}main{overflow-wrap:anywhere}
+
+pre{background:var(--hl);padding:.8rem;border-radius:8px;overflow:auto;font-size:.85rem;max-width:100%}.card{min-width:0}main{overflow-wrap:anywhere}
 .tag{display:inline-block;padding:.05rem .5rem;border-radius:999px;border:1px solid var(--bd);font-size:.8rem}
 .err{color:var(--dn);font-weight:600}
 @media (max-width:640px){main{padding:.75rem}.chart{height:18rem}}
+
+/* ===== Utilidades compartidas por todos los módulos ===== */
+.sr,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.bar select.idioma{width:auto;max-width:none;padding:.35rem .5rem}
+
+/* ===== Módulo: backtesting ===== */
+:where(body[data-page="backtesting"]) .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:where(body[data-page="backtesting"]) .eyebrow{margin:.5rem 0 0;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--ac)}
+:where(body[data-page="backtesting"]) .head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+:where(body[data-page="backtesting"]) .head h1{margin-top:.1rem}
+:where(body[data-page="backtesting"]) .cabecera-card{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
+:where(body[data-page="backtesting"]) .cabecera-card h2{margin:0}
+:where(body[data-page="backtesting"]) .cabecera-card p{margin:.1rem 0 0;font-size:.9rem}
+:where(body[data-page="backtesting"]) .stack{display:grid;gap:1rem;margin-top:1rem}
+:where(body[data-page="backtesting"]) .chart.sm{height:16rem}
+:where(body[data-page="backtesting"]) .toggles{display:flex;gap:.4rem;flex-wrap:wrap}
+:where(body[data-page="backtesting"]) .toggles button{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .65rem;font-size:.85rem;border-radius:999px}
+:where(body[data-page="backtesting"]) .toggles button[aria-pressed="true"]{background:var(--hl);border-color:var(--ac);font-weight:600}
+:where(body[data-page="backtesting"]) .toggles button[aria-pressed="false"]{color:var(--mut);text-decoration:line-through}
+:where(body[data-page="backtesting"]) .sw{display:inline-block;width:1.2rem;height:0;border-top:3px solid var(--c,currentColor);flex:none}
+:where(body[data-page="backtesting"]) .sw.ref{border-top-style:dashed}
+:where(body[data-page="backtesting"]) .tw{min-width:0}
+:where(body[data-page="backtesting"]) th button{background:transparent;border:0;padding:.1rem .15rem;font-weight:700;display:inline-flex;gap:.3rem;align-items:center;text-align:inherit;border-radius:4px}
+:where(body[data-page="backtesting"]) th button:hover{background:transparent;text-decoration:underline}
+:where(body[data-page="backtesting"]) th button .si::after{content:"↕";color:var(--mut);font-weight:400}
+:where(body[data-page="backtesting"]) th[aria-sort="ascending"] button .si::after{content:"▲";color:var(--ac)}
+:where(body[data-page="backtesting"]) th[aria-sort="descending"] button .si::after{content:"▼";color:var(--ac)}
+:where(body[data-page="backtesting"]) td.l .sw{margin-right:.45rem;vertical-align:middle}
+:where(body[data-page="backtesting"]) .lider td{background:var(--hl)}
+@supports (background:color-mix(in srgb,red,blue)){
+:where(body[data-page="backtesting"]) .lider td{background:color-mix(in srgb,var(--up) 12%,var(--panel))}
+}
+:where(body[data-page="backtesting"]) .lider td:first-child{box-shadow:inset 4px 0 0 var(--up)}
+:where(body[data-page="backtesting"]) .sup{display:inline-block;margin-left:.5rem;padding:.05rem .5rem;border-radius:999px;background:var(--up);color:var(--bg);font-size:.72rem;font-weight:700;letter-spacing:.04em}
+:where(body[data-page="backtesting"]) .dos{display:grid;gap:1rem;grid-template-columns:minmax(0,3fr) minmax(0,2fr);margin-top:1rem}
+@media (max-width:800px){
+:where(body[data-page="backtesting"]) .dos{grid-template-columns:minmax(0,1fr)}
+}
+:where(body[data-page="backtesting"]) details.reb{border:1px solid var(--bd);border-radius:10px;margin:.5rem 0;background:var(--panel)}
+:where(body[data-page="backtesting"]) details.reb>summary{cursor:pointer;padding:.55rem .8rem;display:flex;justify-content:space-between;gap:.75rem;font-weight:600;border-radius:10px}
+:where(body[data-page="backtesting"]) details.reb>summary:hover{background:var(--hl)}
+:where(body[data-page="backtesting"]) details.reb .cuerpo{padding:.2rem .8rem .8rem}
+:where(body[data-page="backtesting"]) .cart-w{margin:.5rem 0 0}
+:where(body[data-page="backtesting"]) .cart-w strong{display:block;font-size:.9rem}
+:where(body[data-page="backtesting"]) .cart-w ul{list-style:none;margin:.2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem}
+:where(body[data-page="backtesting"]) .cart-w li{border:1px solid var(--bd);border-radius:6px;padding:.05rem .45rem;font-size:.85rem}
+:where(body[data-page="backtesting"]) .interp{border-left:4px solid var(--ac)}
+:where(body[data-page="backtesting"]) .interp .eyebrow{margin:0}
+:where(body[data-page="backtesting"]) .interp h2{margin:.2rem 0 .6rem}
+:where(body[data-page="backtesting"]) .interp p{margin:.5rem 0}
+:where(body[data-page="backtesting"]) details.alt{margin-top:1rem}
+:where(body[data-page="backtesting"]) details.alt>summary{cursor:pointer;font-weight:600;padding:.2rem 0}
+:where(body[data-page="backtesting"]) .pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
+@media (max-width:640px){
+:where(body[data-page="backtesting"]) .toggles button{font-size:.8rem}
+}
+
+/* ===== Módulo: clasificacion ===== */
+:root{--upt:#07602f;--dnt:#9a1b14;--upbg:#dcf2e4;--dnbg:#fbe0dd;--onac:#fff}
+:root[data-theme="dark"]{--upt:#52d18a;--dnt:#ff8a80;--upbg:#133a26;--dnbg:#4a1e1c;--onac:#0e141b}
+@media (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--upt:#52d18a;--dnt:#ff8a80;--upbg:#133a26;--dnbg:#4a1e1c;--onac:#0e141b}
+}
+:where(body[data-page="clasificacion"]) nav a[aria-current="page"], :where(body[data-page="clasificacion"]) button.primary, :where(body[data-page="clasificacion"]) .btn.primary{color:var(--onac)}
+:where(body[data-page="clasificacion"]) nav a[aria-current="page"].nuevo::after{color:var(--onac)}
+:where(body[data-page="clasificacion"]) .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:where(body[data-page="clasificacion"]) .top-aviso{margin:.5rem 0 1rem;color:var(--fg)}
+:where(body[data-page="clasificacion"]) .ctrl{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+:where(body[data-page="clasificacion"]) .pills{display:inline-flex;gap:.25rem;flex-wrap:wrap;padding:.25rem;border:1px solid var(--bd);border-radius:999px;background:var(--panel)}
+:where(body[data-page="clasificacion"]) .pills button{border-radius:999px;border-color:transparent;background:transparent;padding:.35rem .9rem;font-size:.9rem}
+:where(body[data-page="clasificacion"]) .pills button[aria-pressed="true"]{background:var(--ac);color:var(--onac);border-color:var(--ac);font-weight:700}
+:where(body[data-page="clasificacion"]) .ctrl select{width:auto;min-width:11rem}
+:where(body[data-page="clasificacion"]) .kpis{display:grid;gap:1rem;grid-template-columns:1.4fr 1fr 1fr 1fr}
+:where(body[data-page="clasificacion"]) .kpis>*, :where(body[data-page="clasificacion"]) .dual>*, :where(body[data-page="clasificacion"]) .card{min-width:0}
+:where(body[data-page="clasificacion"]) .kpi .lbl{font-size:.78rem;color:var(--mut);margin:0}
+:where(body[data-page="clasificacion"]) .kpi .v{font-size:1.5rem;font-weight:700;margin:.25rem 0}
+:where(body[data-page="clasificacion"]) .kpi .sub{font-size:.85rem;color:var(--mut);margin:0}
+:where(body[data-page="clasificacion"]) .kpi .tit{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--ac);margin:0}
+:where(body[data-page="clasificacion"]) .dirup{color:var(--upt)}
+:where(body[data-page="clasificacion"]) .dirdn{color:var(--dnt)}
+:where(body[data-page="clasificacion"]) .split{display:flex;height:.6rem;border-radius:999px;overflow:hidden;background:var(--hl);margin:.5rem 0 .3rem}
+:where(body[data-page="clasificacion"]) .split .s{background:var(--up)}
+:where(body[data-page="clasificacion"]) .split .b{background:var(--dn)}
+:where(body[data-page="clasificacion"]) .cnt{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600}
+:where(body[data-page="clasificacion"]) .hm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+:where(body[data-page="clasificacion"]) .hm-head h2{margin:0}
+:where(body[data-page="clasificacion"]) .hm-head p{margin:0}
+:where(body[data-page="clasificacion"]) .leg{display:flex;gap:.9rem;font-size:.82rem;font-weight:600}
+:where(body[data-page="clasificacion"]) .leg i{display:inline-block;width:.8rem;height:.8rem;border-radius:3px;vertical-align:-1px;margin-right:.3rem}
+:where(body[data-page="clasificacion"]) .leg .lb i{background:var(--dnbg);border:1px solid var(--dnt)}
+:where(body[data-page="clasificacion"]) .leg .ls i{background:var(--upbg);border:1px solid var(--upt)}
+:where(body[data-page="clasificacion"]) .hm{margin-top:.75rem;max-height:30rem;overflow:auto;scroll-behavior:smooth;border:1px solid var(--bd);border-radius:10px;max-width:100%}
+:where(body[data-page="clasificacion"]) .hm table{width:max-content;min-width:100%;border-collapse:separate;border-spacing:0}
+:where(body[data-page="clasificacion"]) .hm th, :where(body[data-page="clasificacion"]) .hm td{padding:.3rem .35rem;border-bottom:1px solid var(--bd);text-align:center;background:var(--panel)}
+:where(body[data-page="clasificacion"]) .hm thead th{position:sticky;top:0;z-index:2;background:var(--hl);border-bottom:2px solid var(--bd)}
+:where(body[data-page="clasificacion"]) .hm tbody th{position:sticky;top:auto;left:0;z-index:1;text-align:left;min-width:10.5rem;font-weight:600;background:var(--panel);border-right:1px solid var(--bd)}
+:where(body[data-page="clasificacion"]) .hm thead th:first-child{left:0;z-index:3;text-align:left}
+:where(body[data-page="clasificacion"]) .hm th .fam{display:inline-block;margin-top:.15rem;font-size:.72rem;font-weight:700;padding:0 .4rem;border:1px solid var(--bd);border-radius:999px;color:var(--mut)}
+:where(body[data-page="clasificacion"]) .hm .th-b{display:block;width:100%;background:transparent;border:0;font-weight:700;font-size:.82rem;padding:.25rem .3rem;border-radius:6px;min-width:4.2rem}
+:where(body[data-page="clasificacion"]) .hm th.sel .th-b{background:var(--ac);color:var(--onac)}
+:where(body[data-page="clasificacion"]) .hm td.sel{background:var(--hl)}
+:where(body[data-page="clasificacion"]) .cell{display:block;width:100%;min-width:4.2rem;padding:.25rem .2rem;border-radius:6px;border:1px solid transparent;line-height:1.2;font-size:.82rem}
+:where(body[data-page="clasificacion"]) .cell b{display:block;font-size:.85rem}
+:where(body[data-page="clasificacion"]) .cell span{display:block;font-size:.7rem;font-weight:700}
+:where(body[data-page="clasificacion"]) .cell.u{background:var(--upbg);color:var(--upt)}
+:where(body[data-page="clasificacion"]) .cell.d{background:var(--dnbg);color:var(--dnt)}
+:where(body[data-page="clasificacion"]) .cell:hover{border-color:currentColor}
+:where(body[data-page="clasificacion"]) td.sel .cell{box-shadow:0 0 0 2px var(--ac)}
+:where(body[data-page="clasificacion"]) .sec-head{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin:1.5rem 0 .5rem}
+:where(body[data-page="clasificacion"]) .sec-head h2{margin:0}
+:where(body[data-page="clasificacion"]) .dual{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+:where(body[data-page="clasificacion"]) .dual h3{font-size:1rem;margin:0 0 .8rem}
+:where(body[data-page="clasificacion"]) .mrow{display:grid;grid-template-columns:5.5rem 1fr 4rem;gap:.6rem;align-items:center;margin:.45rem 0;font-size:.88rem}
+:where(body[data-page="clasificacion"]) .mrow .tr{height:.5rem;border-radius:999px;background:var(--hl);border:1px solid var(--bd);overflow:hidden}
+:where(body[data-page="clasificacion"]) .mrow .fl{height:100%;background:var(--ac)}
+:where(body[data-page="clasificacion"]) .mrow .pv{text-align:right;font-weight:700}
+:where(body[data-page="clasificacion"]) .nota{margin-top:1rem;padding:.6rem .8rem;background:var(--hl);border-radius:8px;color:var(--mut);font-size:.85rem}
+:where(body[data-page="clasificacion"]) .cm{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:.4rem;background:transparent;font-size:.85rem}
+:where(body[data-page="clasificacion"]) .cm th, :where(body[data-page="clasificacion"]) .cm td{border:0;background:transparent;text-align:center;padding:.2rem;position:static}
+:where(body[data-page="clasificacion"]) .cm th[scope="row"]{text-align:left;width:5.5rem}
+:where(body[data-page="clasificacion"]) .cm td{border-radius:8px;padding:.7rem .3rem}
+:where(body[data-page="clasificacion"]) .cm td b{display:block;font-size:1.25rem}
+:where(body[data-page="clasificacion"]) .cm td span{font-size:.78rem}
+:where(body[data-page="clasificacion"]) .cm td.ok{background:var(--upbg);color:var(--upt)}
+:where(body[data-page="clasificacion"]) .cm td.ko{background:var(--dnbg);color:var(--dnt)}
+:where(body[data-page="clasificacion"]) .cta{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+:where(body[data-page="clasificacion"]) .cta p{margin:0}
+:where(body[data-page="clasificacion"]) .cta a.btn{text-decoration:none;font-weight:700}
+@media (max-width:900px){
+:where(body[data-page="clasificacion"]) .kpis{grid-template-columns:1fr 1fr}
+:where(body[data-page="clasificacion"]) .dual{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+:where(body[data-page="clasificacion"]) .kpis{grid-template-columns:1fr}
+:where(body[data-page="clasificacion"]) .ctrl select{width:100%}
+:where(body[data-page="clasificacion"]) .mrow{grid-template-columns:4.6rem 1fr 3.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+:where(body[data-page="clasificacion"]) .hm{scroll-behavior:auto}
+}
+
+/* ===== Módulo: optimizador ===== */
+:root{--on-ac:#fff}
+:root[data-theme="dark"]{--on-ac:#0e141b}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--on-ac:#0e141b}
+}
+:where(body[data-page="optimizador"]) .btn.primary{background:var(--ac);border-color:var(--ac);color:var(--on-ac)}
+:where(body[data-page="optimizador"]) nav a[aria-current="page"]{color:var(--on-ac)}
+:where(body[data-page="optimizador"]) nav a[aria-current="page"].nuevo::after{color:var(--on-ac)}
+:where(body[data-page="optimizador"]) .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:where(body[data-page="optimizador"]) .head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+:where(body[data-page="optimizador"]) .head h1{margin-top:.1rem}
+:where(body[data-page="optimizador"]) .top-aviso{margin:.5rem 0 1rem}
+:where(body[data-page="optimizador"]) .controles{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+:where(body[data-page="optimizador"]) .controles .card{display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;width:100%}
+:where(body[data-page="optimizador"]) .controles fieldset{border:0;margin:0;padding:0;min-width:0}
+:where(body[data-page="optimizador"]) .controles legend{font-weight:700;color:var(--mut);margin-bottom:.35rem}
+:where(body[data-page="optimizador"]) .controles label{display:flex;align-items:center;gap:.45rem;margin:.25rem 0}
+:where(body[data-page="optimizador"]) .pills, :where(body[data-page="optimizador"]) .toggles{display:flex;gap:.35rem;flex-wrap:wrap}
+:where(body[data-page="optimizador"]) .pills button, :where(body[data-page="optimizador"]) .toggles button{border-radius:999px}
+:where(body[data-page="optimizador"]) .pills button[aria-pressed="true"], :where(body[data-page="optimizador"]) .toggles button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--on-ac,#0e141b);font-weight:700}
+:where(body[data-page="optimizador"]) .pills button[aria-pressed="false"], :where(body[data-page="optimizador"]) .toggles button[aria-pressed="false"]{color:var(--mut)}
+:where(body[data-page="optimizador"]) .campo{min-width:0;flex:0 1 13rem}
+:where(body[data-page="optimizador"]) .campo select{max-width:none}
+:where(body[data-page="optimizador"]) .zona{display:grid;grid-template-columns:minmax(0,1fr) minmax(17rem,22rem);gap:1rem;align-items:start}
+:where(body[data-page="optimizador"]) .grafico, :where(body[data-page="optimizador"]) .detalle{min-width:0}
+:where(body[data-page="optimizador"]) .grafico{margin:0}
+:where(body[data-page="optimizador"]) #grafico{width:100%;height:34rem}
+:where(body[data-page="optimizador"]) figcaption, :where(body[data-page="optimizador"]) .verificacion{font-size:.88rem;color:var(--mut)}
+:where(body[data-page="optimizador"]) .verificacion{margin:.5rem 0 0}
+:where(body[data-page="optimizador"]) .detalle{position:sticky;top:1rem}
+:where(body[data-page="optimizador"]) .detalle h2{margin:0 0 .2rem}
+:where(body[data-page="optimizador"]) .detalle .sub{margin:0 0 .75rem;color:var(--mut);font-size:.9rem}
+:where(body[data-page="optimizador"]) .vacio{color:var(--mut);font-size:.93rem;margin:0}
+:where(body[data-page="optimizador"]) .metricas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:0 0 .8rem}
+:where(body[data-page="optimizador"]) .metrica{min-width:0;padding:.5rem .6rem;border:1px solid var(--bd);border-radius:8px;background:var(--bg)}
+:where(body[data-page="optimizador"]) .metrica dt{font-size:.76rem;color:var(--mut)}
+:where(body[data-page="optimizador"]) .metrica dd{margin:.1rem 0 0;font-weight:700;overflow-wrap:anywhere}
+:where(body[data-page="optimizador"]) .pesos-tit{margin:.7rem 0 .35rem;font-weight:700}
+:where(body[data-page="optimizador"]) .pesos{list-style:none;margin:0;padding:0}
+:where(body[data-page="optimizador"]) .pesos li{display:grid;grid-template-columns:3rem minmax(2rem,1fr) 4.5rem;align-items:center;gap:.5rem;padding:.2rem 0;font-size:.88rem}
+:where(body[data-page="optimizador"]) .pesos .tk{font-weight:700}
+:where(body[data-page="optimizador"]) .pista{height:.65rem;background:var(--hl);border:1px solid var(--bd);border-radius:999px;overflow:hidden}
+:where(body[data-page="optimizador"]) .barra{height:100%;background:var(--ac)}
+:where(body[data-page="optimizador"]) .barra.tope{background:repeating-linear-gradient(45deg,var(--ac),var(--ac) 4px,var(--ac2) 4px,var(--ac2) 8px)}
+:where(body[data-page="optimizador"]) .val{text-align:right}
+:where(body[data-page="optimizador"]) .nota-barras, :where(body[data-page="optimizador"]) .chequeo{margin:.55rem 0 0;font-size:.82rem;color:var(--mut)}
+:where(body[data-page="optimizador"]) .chequeo{padding:.55rem .65rem;border:1px solid var(--bd);border-radius:8px;background:var(--hl);color:var(--fg)}
+:where(body[data-page="optimizador"]) .chequeo.ok{border-left:4px solid var(--up)}
+:where(body[data-page="optimizador"]) .chequeo.mal{border-left:4px solid var(--dn)}
+:where(body[data-page="optimizador"]) .chequeo p{margin:.1rem 0}
+:where(body[data-page="optimizador"]) .bloque{margin-top:1rem}
+:where(body[data-page="optimizador"]) .bloque h2{margin:0 0 .6rem}
+:where(body[data-page="optimizador"]) .explica{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+:where(body[data-page="optimizador"]) .explica h3{margin:0 0 .2rem;font-size:1rem}
+:where(body[data-page="optimizador"]) .explica p{margin:0;font-size:.9rem}
+:where(body[data-page="optimizador"]) .porque{margin-top:1rem;padding:.8rem 1rem;border-left:4px solid var(--ac);border-radius:0 8px 8px 0;background:var(--hl)}
+:where(body[data-page="optimizador"]) .porque p{margin:.2rem 0}
+:where(body[data-page="optimizador"]) .chips{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin:.5rem 0;padding:0}
+:where(body[data-page="optimizador"]) .chips li{padding:.15rem .6rem;border:1px solid var(--bd);border-radius:999px;background:var(--hl);font-weight:700}
+:where(body[data-page="optimizador"]) .crudo{font-size:.82rem;color:var(--mut)}
+:where(body[data-page="optimizador"]) .envoltura{min-width:0;max-width:100%;overflow:auto}
+:where(body[data-page="optimizador"]) .envoltura table{min-width:42rem}
+:where(body[data-page="optimizador"]) .envoltura th, :where(body[data-page="optimizador"]) .envoltura td{white-space:nowrap}
+:where(body[data-page="optimizador"]) .chico{font-size:.83rem}
+:where(body[data-page="optimizador"]) .cta{display:flex;justify-content:flex-end;margin-top:1rem}
+:where(body[data-page="optimizador"]) .cta a{display:inline-flex;align-items:center;justify-content:center;width:auto;text-decoration:none;font-weight:700}
+:where(body[data-page="optimizador"]) .error{margin:1rem 0;padding:.8rem;border:1px solid var(--dn);border-radius:8px;background:var(--hl);color:var(--fg)}
+:where(body[data-page="optimizador"]) .pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
+@media(max-width:900px){
+:where(body[data-page="optimizador"]) .zona{grid-template-columns:minmax(0,1fr)}
+:where(body[data-page="optimizador"]) .detalle{position:static}
+:where(body[data-page="optimizador"]) .explica{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:420px){
+:where(body[data-page="optimizador"]) .controles .card{gap:.9rem}
+:where(body[data-page="optimizador"]) .campo{flex-basis:100%}
+:where(body[data-page="optimizador"]) .pills button, :where(body[data-page="optimizador"]) .toggles button{font-size:.85rem;padding:.4rem .6rem}
+:where(body[data-page="optimizador"]) .metricas{gap:.35rem}
+:where(body[data-page="optimizador"]) .pesos li{grid-template-columns:2.8rem minmax(1.5rem,1fr) 4rem;gap:.35rem}
+:where(body[data-page="optimizador"]) .cta a{width:100%;text-align:center}
+:where(body[data-page="optimizador"]) #grafico{height:26rem}
+}
+@media(prefers-reduced-motion:reduce){
+:where(body[data-page="optimizador"]) *{scroll-behavior:auto!important;transition:none!important}
+}
+
+/* ===== Módulo: portafolios ===== */
+:root{--lv0:#0b4f9c;--lv1:#6d3fc0;--lv2:#b35400;--on-ac:#fff}
+:root[data-theme="dark"]{--lv0:#7db7ff;--lv1:#b49cff;--lv2:#ffa94d;--on-ac:#0e141b}
+@media (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--lv0:#7db7ff;--lv1:#b49cff;--lv2:#ffa94d;--on-ac:#0e141b}
+}
+:where(body[data-page="portafolios"]) nav a[aria-current="page"], :where(body[data-page="portafolios"]) .skip{color:var(--on-ac)}
+:where(body[data-page="portafolios"]) nav a[aria-current="page"].nuevo::after{color:var(--on-ac)}
+:where(body[data-page="portafolios"]) .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:where(body[data-page="portafolios"]) .pf-banner{display:flex;gap:.6rem;align-items:flex-start;color:var(--fg);margin:.5rem 0 1rem}
+:where(body[data-page="portafolios"]) .pf-banner svg{flex:none;margin-top:.15rem;color:var(--ac)}
+:where(body[data-page="portafolios"]) .pf-meta{margin:.2rem 0 .8rem;font-size:.9rem}
+:where(body[data-page="portafolios"]) .pf-grid{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
+@media (min-width:48rem){
+:where(body[data-page="portafolios"]) .pf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+:where(body[data-page="portafolios"]) .pf-card{--lv:var(--ac);position:relative;min-width:0;background:var(--panel);border:2px solid var(--bd);border-radius:12px;padding:1rem;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+:where(body[data-page="portafolios"]) .pf-card:nth-child(1){--lv:var(--lv0)}
+:where(body[data-page="portafolios"]) .pf-card:nth-child(2){--lv:var(--lv1)}
+:where(body[data-page="portafolios"]) .pf-card:nth-child(3){--lv:var(--lv2)}
+:where(body[data-page="portafolios"]) .pf-card:hover{border-color:var(--mut)}
+:where(body[data-page="portafolios"]) .pf-card[aria-pressed="true"]{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+:where(body[data-page="portafolios"]) .pf-card:focus-visible{outline:3px solid var(--ac);outline-offset:3px}
+:where(body[data-page="portafolios"]) .pf-check{display:none;position:absolute;top:.8rem;right:.8rem;color:var(--ac)}
+:where(body[data-page="portafolios"]) .pf-card[aria-pressed="true"] .pf-check{display:block}
+:where(body[data-page="portafolios"]) .pf-head{display:flex;gap:.6rem;align-items:center;padding-right:2rem}
+:where(body[data-page="portafolios"]) .pf-bar{flex:none;width:.3rem;align-self:stretch;min-height:2rem;border-radius:4px;background:var(--lv)}
+:where(body[data-page="portafolios"]) .pf-eyebrow{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+:where(body[data-page="portafolios"]) .pf-name{font-size:1.15rem;font-weight:700;line-height:1.2}
+:where(body[data-page="portafolios"]) .pf-dona{position:relative;height:11rem;margin:.4rem 0 .6rem}
+:where(body[data-page="portafolios"]) .pf-chart{position:absolute;inset:0}
+:where(body[data-page="portafolios"]) .pf-centro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;line-height:1.15}
+:where(body[data-page="portafolios"]) .pf-centro strong{font-size:1.3rem}
+:where(body[data-page="portafolios"]) .pf-centro span{font-size:.72rem;color:var(--mut)}
+:where(body[data-page="portafolios"]) .pf-mets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:0}
+:where(body[data-page="portafolios"]) .pf-met{min-width:0;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:.45rem .6rem}
+:where(body[data-page="portafolios"]) .pf-met dt{margin:0;font-size:.75rem;color:var(--mut)}
+:where(body[data-page="portafolios"]) .pf-met dd{margin:0;font-size:1.05rem;font-weight:700}
+:where(body[data-page="portafolios"]) .pf-leg{list-style:none;margin:.75rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem .85rem;font-size:.8rem}
+:where(body[data-page="portafolios"]) .pf-dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.3rem;vertical-align:baseline}
+:where(body[data-page="portafolios"]) .pf-detalle{margin-top:1rem;padding:1.1rem}
+:where(body[data-page="portafolios"]) .pf-det-cab{display:flex;gap:1rem;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:.8rem}
+:where(body[data-page="portafolios"]) .pf-det-cab>div{min-width:0;flex:1 1 16rem}
+:where(body[data-page="portafolios"]) .pf-det-tit{margin:0;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
+:where(body[data-page="portafolios"]) .pf-det-nombre{margin:.1rem 0 0;font-size:1.3rem;font-weight:700}
+:where(body[data-page="portafolios"]) .pf-det-desc{margin:.25rem 0 0;font-size:.88rem}
+:where(body[data-page="portafolios"]) .pf-ir{display:inline-flex;align-items:center;gap:.5rem;min-height:2.75rem;padding:.5rem 1rem;font-weight:700;background:var(--ac);color:var(--on-ac);border-color:var(--ac)}
+:where(body[data-page="portafolios"]) .pf-ir:hover{background:var(--ac);color:var(--on-ac);filter:brightness(.9)}
+:where(body[data-page="portafolios"]) .pf-toast{margin:.2rem 0 .8rem;padding:.6rem .9rem;border:1px solid var(--bd);border-left:4px solid var(--ac2);border-radius:8px;background:var(--hl);color:var(--fg);font-size:.92rem}
+:where(body[data-page="portafolios"]) .pf-toast.pf-toast-err{border-left-color:var(--dn)}
+:where(body[data-page="portafolios"]) .pf-toast:empty{padding:0;margin:0;border:0;height:0;overflow:hidden}
+:where(body[data-page="portafolios"]) .pf-toast a{color:var(--ac);font-weight:600}
+:where(body[data-page="portafolios"]) .pf-tw{max-height:none;overflow-x:auto;overflow-y:visible}
+:where(body[data-page="portafolios"]) .pf-tabla th, :where(body[data-page="portafolios"]) .pf-tabla td{text-align:left;vertical-align:top}
+:where(body[data-page="portafolios"]) .pf-tabla thead th{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+:where(body[data-page="portafolios"]) .pf-tabla tbody th{position:static;background:transparent;color:var(--fg);font-size:1rem}
+:where(body[data-page="portafolios"]) .pf-peso{display:flex;align-items:center;gap:.5rem;min-width:7rem}
+:where(body[data-page="portafolios"]) .pf-track{flex:1;min-width:3rem;height:.55rem;border-radius:999px;background:var(--hl);border:1px solid var(--bd);overflow:hidden}
+:where(body[data-page="portafolios"]) .pf-fill{display:block;height:100%;min-width:2px;background:var(--ac)}
+:where(body[data-page="portafolios"]) .pf-pct{min-width:3.8rem;font-variant-numeric:tabular-nums}
+:where(body[data-page="portafolios"]) .pf-sig{display:inline-flex;align-items:center;min-height:1.75rem;padding:0 .6rem;margin:.1rem .25rem .1rem 0;border:1px solid var(--bd);border-radius:999px;background:var(--hl);color:var(--ac);font-size:.78rem;font-weight:700;text-decoration:none}
+:where(body[data-page="portafolios"]) .pf-sig:hover{text-decoration:underline}
+:where(body[data-page="portafolios"]) .pf-alt{margin-top:1rem}
+:where(body[data-page="portafolios"]) .pf-alt summary{cursor:pointer;font-weight:700;min-height:1.75rem}
+:where(body[data-page="portafolios"]) .pf-alt p{margin:.6rem 0}
+:where(body[data-page="portafolios"]) .pf-alt table caption{caption-side:top;text-align:left;padding:.4rem .2rem;font-weight:600;color:var(--fg)}
+:where(body[data-page="portafolios"]) .pf-alt th, :where(body[data-page="portafolios"]) .pf-alt td{padding:.35rem .5rem;font-size:.85rem;overflow-wrap:normal;position:static}
+:where(body[data-page="portafolios"]) .pf-alt tfoot th, :where(body[data-page="portafolios"]) .pf-alt tfoot td{font-weight:700;border-top:2px solid var(--bd)}
+@media (max-width:640px){
+:where(body[data-page="portafolios"]) .pf-tabla thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+:where(body[data-page="portafolios"]) .pf-tabla, :where(body[data-page="portafolios"]) .pf-tabla tbody, :where(body[data-page="portafolios"]) .pf-tabla tr, :where(body[data-page="portafolios"]) .pf-tabla th, :where(body[data-page="portafolios"]) .pf-tabla td{display:block}
+:where(body[data-page="portafolios"]) .pf-tabla tr{padding:.6rem .7rem;border-bottom:1px solid var(--bd)}
+:where(body[data-page="portafolios"]) .pf-tabla tbody th{padding:0 0 .25rem;border:0;font-size:1.05rem}
+:where(body[data-page="portafolios"]) .pf-tabla td{display:grid;grid-template-columns:minmax(0,6.5rem) minmax(0,1fr);gap:.5rem;padding:.2rem 0;border:0}
+:where(body[data-page="portafolios"]) .pf-tabla td::before{content:attr(data-label);color:var(--mut);font-size:.78rem;font-weight:600}
+:where(body[data-page="portafolios"]) .pf-ir{width:100%;justify-content:center}
+:where(body[data-page="portafolios"]) .pf-alt th, :where(body[data-page="portafolios"]) .pf-alt td{padding:.3rem .3rem;font-size:.8rem}
+}
+@media (prefers-reduced-motion:reduce){
+:where(body[data-page="portafolios"]) *{transition:none!important}
+}
+
+/* ===== Módulo: regresion ===== */
+:where(body[data-page="regresion"]) .btn.primary{background:var(--ac);border-color:var(--ac);color:var(--on-ac)}
+:where(body[data-page="regresion"]) nav a[aria-current="page"]{color:var(--on-ac)}
+:where(body[data-page="regresion"]) nav a[aria-current="page"].nuevo::after{color:var(--on-ac)}
+:where(body[data-page="regresion"]) .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:where(body[data-page="regresion"]) .head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+:where(body[data-page="regresion"]) .head h1{margin-top:.1rem}
+:where(body[data-page="regresion"]) .top-aviso{margin:.5rem 0 1rem}
+:where(body[data-page="regresion"]) .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:1rem 0}
+:where(body[data-page="regresion"]) .kpi{min-width:0}
+:where(body[data-page="regresion"]) .kpi .lbl{margin:0;color:var(--mut);font-size:.82rem}
+:where(body[data-page="regresion"]) .kpi .v{margin:.2rem 0;font-size:1.35rem;font-weight:700;overflow-wrap:anywhere}
+:where(body[data-page="regresion"]) .kpi .sub{margin:0;color:var(--mut);font-size:.82rem}
+:where(body[data-page="regresion"]) .controles{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+:where(body[data-page="regresion"]) .controles .card{display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;flex:1}
+:where(body[data-page="regresion"]) .campo{min-width:0;flex:1 1 11rem}
+:where(body[data-page="regresion"]) .campo select{max-width:none}
+:where(body[data-page="regresion"]) .opciones{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+:where(body[data-page="regresion"]) .opciones label, :where(body[data-page="regresion"]) .modelos label{display:inline-flex;align-items:center;gap:.4rem}
+:where(body[data-page="regresion"]) .pills{display:flex;gap:.35rem;flex-wrap:wrap}
+:where(body[data-page="regresion"]) .pills button{border-radius:999px}
+:where(body[data-page="regresion"]) .pills button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--on-ac,#0e141b);font-weight:700}
+:where(body[data-page="regresion"]) .zona-grafico{display:grid;grid-template-columns:minmax(0,1fr) minmax(15rem,18rem);gap:1rem;align-items:start}
+:where(body[data-page="regresion"]) .grafico, :where(body[data-page="regresion"]) .modelos, :where(body[data-page="regresion"]) .tabla{min-width:0}
+:where(body[data-page="regresion"]) .grafico{margin:0}
+:where(body[data-page="regresion"]) #grafico{width:100%;height:28rem}
+:where(body[data-page="regresion"]) figcaption, :where(body[data-page="regresion"]) .verificacion{color:var(--mut);font-size:.88rem}
+:where(body[data-page="regresion"]) .verificacion{margin:.5rem 0 0}
+:where(body[data-page="regresion"]) .modelos{max-height:34rem;overflow:auto}
+:where(body[data-page="regresion"]) .modelos h2{margin:0 0 .6rem}
+:where(body[data-page="regresion"]) .mini-acciones{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem}
+:where(body[data-page="regresion"]) .mini-acciones button{font-size:.84rem}
+:where(body[data-page="regresion"]) .modelos fieldset{border:0;margin:0 0 .75rem;padding:0;min-width:0}
+:where(body[data-page="regresion"]) .modelos legend{font-weight:700;margin-bottom:.25rem}
+:where(body[data-page="regresion"]) .modelos label{display:flex;padding:.2rem 0;overflow-wrap:anywhere}
+:where(body[data-page="regresion"]) .modelos svg{flex:none}
+:where(body[data-page="regresion"]) .tabla{margin-top:1rem}
+:where(body[data-page="regresion"]) .tabla h2{margin:0 0 .35rem}
+:where(body[data-page="regresion"]) .tabla>p{margin:.1rem 0 .6rem;color:var(--mut);font-size:.9rem}
+:where(body[data-page="regresion"]) .envoltura{min-width:0;max-width:100%;overflow:auto}
+:where(body[data-page="regresion"]) .envoltura table{min-width:36rem}
+:where(body[data-page="regresion"]) .envoltura th, :where(body[data-page="regresion"]) .envoltura td{white-space:nowrap}
+:where(body[data-page="regresion"]) .envoltura th button{background:transparent;border:0;padding:.1rem .15rem;font:inherit;font-weight:700;color:inherit}
+:where(body[data-page="regresion"]) .envoltura th button:hover{text-decoration:underline}
+:where(body[data-page="regresion"]) .etq-familia{display:inline-block;padding:0 .5rem;border:1px solid var(--bd);border-radius:999px;font-size:.78rem;font-weight:700;color:var(--fg)}
+:where(body[data-page="regresion"]) .sube{color:var(--up)}
+:where(body[data-page="regresion"]) .baja{color:var(--dn)}
+:where(body[data-page="regresion"]) .etiqueta-retorno{display:inline-block;padding:.1rem .5rem;border:1px solid currentColor;border-radius:999px;font-size:1.05rem}
+:where(body[data-page="regresion"]) .etiqueta-retorno.sube{color:var(--up)}
+:where(body[data-page="regresion"]) .etiqueta-retorno.baja{color:var(--dn)}
+:where(body[data-page="regresion"]) .etiqueta-retorno.neutro{color:var(--fg)}
+:where(body[data-page="regresion"]) .cta{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+:where(body[data-page="regresion"]) .cta p{margin:0}
+:where(body[data-page="regresion"]) .cta a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700}
+:where(body[data-page="regresion"]) .pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
+:where(body[data-page="regresion"]) .error{margin:1rem 0;padding:.8rem;border:1px solid var(--dn);border-radius:8px;background:var(--hl);color:var(--fg)}
+@media(max-width:900px){
+:where(body[data-page="regresion"]) .zona-grafico{grid-template-columns:minmax(0,1fr)}
+:where(body[data-page="regresion"]) .modelos{max-height:none}
+}
+@media(max-width:700px){
+:where(body[data-page="regresion"]) .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:420px){
+:where(body[data-page="regresion"]) .kpis{grid-template-columns:minmax(0,1fr)}
+:where(body[data-page="regresion"]) .controles .card{align-items:stretch}
+:where(body[data-page="regresion"]) .opciones{display:grid;grid-template-columns:1fr}
+:where(body[data-page="regresion"]) .cta a{width:100%;text-align:center}
+:where(body[data-page="regresion"]) .grafico{padding:.65rem}
+:where(body[data-page="regresion"]) #grafico{height:22rem}
+}
+@media(prefers-reduced-motion:reduce){
+:where(body[data-page="regresion"]) *{scroll-behavior:auto!important;transition:none!important}
+}

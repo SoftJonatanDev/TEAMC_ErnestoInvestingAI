@@ -10,7 +10,7 @@
 
   /* ---------- Constantes ---------- */
   const ARCHIVO = '08_portafolios_3_niveles_riesgo.json';
-  const CLAVE_STORE = 'portafolio_seleccionado';   // clave de localStorage para Trading
+  const CLAVE_STORE = 'eia_pf';   // clave de localStorage para Trading
   const OTROS = 'Otros';                           // activos sin fila en detalle_activos (peso muy bajo)
   const NIVEL_POR_DEFECTO = 'Moderado';
 
@@ -48,7 +48,7 @@
   const reducirMovimiento = () => matchMedia('(prefers-reduced-motion:reduce)').matches;
   const fechaLarga = f => {
     const d = new Date(f + 'T12:00:00');
-    return isNaN(d) ? f : d.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
+    return isNaN(d) ? f : d.toLocaleDateString(document.documentElement.lang, { day: 'numeric', month: 'long', year: 'numeric' });
   };
   function colorDe(ticker) {
     const p = esOscuro() ? PALETAS.oscuro : PALETAS.claro;

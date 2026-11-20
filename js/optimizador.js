@@ -131,8 +131,6 @@
   // ==========================================================================
   function arrancar() {
     prepararSeries();
-    $('sel-locale').value = estado.locale;
-    if ($('sel-locale').value !== estado.locale) { estado.locale = 'es-PE'; $('sel-locale').value = 'es-PE'; }
 
     // Interruptores: cualquier cambio redibuja gráfico y tabla
     ['chk-mk', 'chk-n2', 'chk-n3'].forEach(function (id) {
@@ -143,7 +141,6 @@
       });
     });
     document.querySelectorAll('input[name="modo-mk"]').forEach(function (r) { r.addEventListener('change', alCambiarSeries); });
-    $('sel-locale').addEventListener('change', function (e) { estado.locale = e.target.value; actualizarTodo(); });
 
     $('app').hidden = false;
     $('mensaje').textContent = '';

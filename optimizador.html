@@ -5,77 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Optimizador de portafolios · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
-<style>
-:root{--on-ac:#fff}
-:root[data-theme="dark"]{--on-ac:#0e141b}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--on-ac:#0e141b}}
-.btn.primary{background:var(--ac);border-color:var(--ac);color:var(--on-ac)}
-nav a[aria-current="page"]{color:var(--on-ac)}
-nav a[aria-current="page"].nuevo::after{color:var(--on-ac)}
-.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
-.head h1{margin-top:.1rem}
-.top-aviso{margin:.5rem 0 1rem}
-.controles{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:1rem 0}
-.controles .card{display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;width:100%}
-.controles fieldset{border:0;margin:0;padding:0;min-width:0}
-.controles legend{font-weight:700;color:var(--mut);margin-bottom:.35rem}
-.controles label{display:flex;align-items:center;gap:.45rem;margin:.25rem 0}
-.pills,.toggles{display:flex;gap:.35rem;flex-wrap:wrap}
-.pills button,.toggles button{border-radius:999px}
-.pills button[aria-pressed="true"],.toggles button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--on-ac,#0e141b);font-weight:700}
-.pills button[aria-pressed="false"],.toggles button[aria-pressed="false"]{color:var(--mut)}
-.campo{min-width:0;flex:0 1 13rem}
-.campo select{max-width:none}
-.zona{display:grid;grid-template-columns:minmax(0,1fr) minmax(17rem,22rem);gap:1rem;align-items:start}
-.grafico,.detalle{min-width:0}
-.grafico{margin:0}
-#grafico{width:100%;height:34rem}
-figcaption,.verificacion{font-size:.88rem;color:var(--mut)}
-.verificacion{margin:.5rem 0 0}
-.detalle{position:sticky;top:1rem}
-.detalle h2{margin:0 0 .2rem}
-.detalle .sub{margin:0 0 .75rem;color:var(--mut);font-size:.9rem}
-.vacio{color:var(--mut);font-size:.93rem;margin:0}
-.metricas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:0 0 .8rem}
-.metrica{min-width:0;padding:.5rem .6rem;border:1px solid var(--bd);border-radius:8px;background:var(--bg)}
-.metrica dt{font-size:.76rem;color:var(--mut)}
-.metrica dd{margin:.1rem 0 0;font-weight:700;overflow-wrap:anywhere}
-.pesos-tit{margin:.7rem 0 .35rem;font-weight:700}
-.pesos{list-style:none;margin:0;padding:0}
-.pesos li{display:grid;grid-template-columns:3rem minmax(2rem,1fr) 4.5rem;align-items:center;gap:.5rem;padding:.2rem 0;font-size:.88rem}
-.pesos .tk{font-weight:700}
-.pista{height:.65rem;background:var(--hl);border:1px solid var(--bd);border-radius:999px;overflow:hidden}
-.barra{height:100%;background:var(--ac)}
-.barra.tope{background:repeating-linear-gradient(45deg,var(--ac),var(--ac) 4px,var(--ac2) 4px,var(--ac2) 8px)}
-.val{text-align:right}
-.nota-barras,.chequeo{margin:.55rem 0 0;font-size:.82rem;color:var(--mut)}
-.chequeo{padding:.55rem .65rem;border:1px solid var(--bd);border-radius:8px;background:var(--hl);color:var(--fg)}
-.chequeo.ok{border-left:4px solid var(--up)}
-.chequeo.mal{border-left:4px solid var(--dn)}
-.chequeo p{margin:.1rem 0}
-.bloque{margin-top:1rem}
-.bloque h2{margin:0 0 .6rem}
-.explica{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
-.explica h3{margin:0 0 .2rem;font-size:1rem}
-.explica p{margin:0;font-size:.9rem}
-.porque{margin-top:1rem;padding:.8rem 1rem;border-left:4px solid var(--ac);border-radius:0 8px 8px 0;background:var(--hl)}
-.porque p{margin:.2rem 0}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin:.5rem 0;padding:0}
-.chips li{padding:.15rem .6rem;border:1px solid var(--bd);border-radius:999px;background:var(--hl);font-weight:700}
-.crudo{font-size:.82rem;color:var(--mut)}
-.envoltura{min-width:0;max-width:100%;overflow:auto}
-.envoltura table{min-width:42rem}
-.envoltura th,.envoltura td{white-space:nowrap}
-.chico{font-size:.83rem}
-.cta{display:flex;justify-content:flex-end;margin-top:1rem}
-.cta a{display:inline-flex;align-items:center;justify-content:center;width:auto;text-decoration:none;font-weight:700}
-.error{margin:1rem 0;padding:.8rem;border:1px solid var(--dn);border-radius:8px;background:var(--hl);color:var(--fg)}
-.pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
-@media(max-width:900px){.zona{grid-template-columns:minmax(0,1fr)}.detalle{position:static}.explica{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:420px){.controles .card{gap:.9rem}.campo{flex-basis:100%}.pills button,.toggles button{font-size:.85rem;padding:.4rem .6rem}.metricas{gap:.35rem}.pesos li{grid-template-columns:2.8rem minmax(1.5rem,1fr) 4rem;gap:.35rem}.cta a{width:100%;text-align:center}#grafico{height:26rem}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-</style>
 </head>
 <body data-page="optimizador">
 <main>
@@ -104,15 +33,6 @@ figcaption,.verificacion{font-size:.88rem;color:var(--mut)}
           <button type="button" id="chk-n3" aria-pressed="true">NSGA-III</button>
         </div>
       </fieldset>
-      <div class="campo">
-        <label for="sel-locale">Formato de números</label>
-        <select id="sel-locale">
-          <option value="es-PE">Español (Perú)</option>
-          <option value="es-ES">Español (España)</option>
-          <option value="en-US">English (US)</option>
-          <option value="pt-BR">Português (Brasil)</option>
-        </select>
-      </div>
     </section>
 
     <div class="zona">

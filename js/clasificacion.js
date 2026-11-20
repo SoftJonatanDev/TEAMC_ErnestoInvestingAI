@@ -158,6 +158,7 @@
   function elegirTicker(t) {
     if (!ST.idx[t]) return;
     ST.ticker = t;
+    EIA.setTicker(t);
     $('#selTicker').value = t;
     try {   // mantiene la URL sincronizada para compartir/volver
       const u = new URL(location.href); u.searchParams.set('ticker', t); history.replaceState(null, '', u);
@@ -192,8 +193,9 @@
     ST.umbrales = derivarUmbrales(d.predicciones);
 
     // ?ticker=XXX (sin distinguir mayúsculas); si no existe, el primero disponible
-    const q = (new URLSearchParams(location.search).get('ticker') || '').toUpperCase();
+    const q = (new URLSearchParams(location.search).get('ticker') || EIA.ticker() || '').toUpperCase();
     ST.ticker = ST.tickers.find(t => t.toUpperCase() === q) || ST.tickers[0];
+    EIA.setTicker(ST.ticker);
     ST.modelo = d.modelos[0].modelo;
 
     renderPills(); renderTickerSelect(); renderKPIs(); renderHeatmap();

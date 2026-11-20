@@ -24,8 +24,8 @@
   const reducirMovimiento = () => matchMedia('(prefers-reduced-motion:reduce)').matches;
   const esFecha = s => /^\d{4}-\d{2}-\d{2}$/.test(s);
   const aFecha = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
-  const fechaLarga = s => esFecha(s) ? aFecha(s).toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Inicio';
-  const fechaCorta = s => esFecha(s) ? aFecha(s).toLocaleDateString('es-PE', { month: 'short', year: 'numeric' }) : 'Inicio';
+  const fechaLarga = s => esFecha(s) ? aFecha(s).toLocaleDateString(document.documentElement.lang, { day: '2-digit', month: 'short', year: 'numeric' }) : 'Inicio';
+  const fechaCorta = s => esFecha(s) ? aFecha(s).toLocaleDateString(document.documentElement.lang, { month: 'short', year: 'numeric' }) : 'Inicio';
   const lista = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1];
   const pp = x => fmt.n(Math.abs(x), 1) + ' pp';
   const b = s => '<strong>' + esc(s) + '</strong>';
@@ -339,6 +339,14 @@
     const n = D.periodo.sesiones;
 
     $('#subtitulo').textContent = `Compara perfiles y referencias durante ${n} sesiones sobre la historia sintética.`;
+    const pf = EIA.portafolio();   // portafolio elegido en el módulo Portafolios
+    if (pf && pf.nivel) {
+      const p = document.createElement('p'); p.className = 'mut'; p.id = 'pf-elegido';
+      p.append('Portafolio elegido en ');
+      const a = document.createElement('a'); a.href = 'portafolios.html'; a.textContent = 'Portafolios'; p.append(a);
+      const b = document.createElement('strong'); b.textContent = pf.nivel; p.append(': ', b, '.');
+      $('#subtitulo').after(p);
+    }
     $('#insignia').textContent = `Base ${D.base} · ${n} sesiones`;
     $('#sub-capital').textContent = `Valor acumulado con base ${D.base}`;
     $('#sub-met').textContent = `Calculadas desde las ${n} observaciones simuladas.`;

@@ -101,8 +101,9 @@
   function arrancar() {
     // Solo activos presentes en ambos archivos
     var tickers = Object.keys(estado.reg.predicciones).filter(function (t) { return estado.hist.cierres[t]; });
-    var solicitado = (new URLSearchParams(location.search).get('ticker') || '').toUpperCase();
+    var solicitado = (new URLSearchParams(location.search).get('ticker') || EIA.ticker() || '').toUpperCase();
     estado.ticker = tickers.find(function (t) { return t.toUpperCase() === solicitado; }) || tickers[0];
+    EIA.setTicker(estado.ticker);
 
     asignarColores();
     seleccionarPorFamilia('todos');
@@ -115,11 +116,9 @@
       sel.appendChild(o);
     });
     sel.value = estado.ticker;
-    $('sel-locale').value = estado.locale;
-    if ($('sel-locale').value !== estado.locale) { estado.locale = 'es-PE'; $('sel-locale').value = 'es-PE'; }
 
     // Eventos
-    sel.addEventListener('change', function () { estado.ticker = sel.value; sincronizarTickerURL(); actualizarTodo(); });
+    sel.addEventListener('change', function () { estado.ticker = sel.value; EIA.setTicker(estado.ticker); sincronizarTickerURL(); actualizarTodo(); });
     $('filtros-familia').addEventListener('click', function (e) {
       var b = e.target.closest('button[data-familia]');
       if (!b) return;
@@ -130,7 +129,6 @@
       });
       actualizarTodo();
     });
-    $('sel-locale').addEventListener('change', function (e) { estado.locale = e.target.value; actualizarTodo(); });
     $('chk-banda').addEventListener('change', function (e) { estado.banda = e.target.checked; dibujarGrafico(); });
     $('chk-cono').addEventListener('change', function (e) { estado.cono = e.target.checked; dibujarGrafico(); });
     $('btn-todos').addEventListener('click', function () {

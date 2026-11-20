@@ -5,67 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Regresión de precios a 30 sesiones · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
-<style>
-:root{--on-ac:#fff}
-:root[data-theme="dark"]{--on-ac:#0e141b}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--on-ac:#0e141b}}
-.btn.primary{background:var(--ac);border-color:var(--ac);color:var(--on-ac)}
-nav a[aria-current="page"]{color:var(--on-ac)}
-nav a[aria-current="page"].nuevo::after{color:var(--on-ac)}
-.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
-.head h1{margin-top:.1rem}
-.top-aviso{margin:.5rem 0 1rem}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:1rem 0}
-.kpi{min-width:0}
-.kpi .lbl{margin:0;color:var(--mut);font-size:.82rem}
-.kpi .v{margin:.2rem 0;font-size:1.35rem;font-weight:700;overflow-wrap:anywhere}
-.kpi .sub{margin:0;color:var(--mut);font-size:.82rem}
-.controles{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:1rem 0}
-.controles .card{display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;flex:1}
-.campo{min-width:0;flex:1 1 11rem}
-.campo select{max-width:none}
-.opciones{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
-.opciones label,.modelos label{display:inline-flex;align-items:center;gap:.4rem}
-.pills{display:flex;gap:.35rem;flex-wrap:wrap}
-.pills button{border-radius:999px}
-.pills button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--on-ac,#0e141b);font-weight:700}
-.zona-grafico{display:grid;grid-template-columns:minmax(0,1fr) minmax(15rem,18rem);gap:1rem;align-items:start}
-.grafico,.modelos,.tabla{min-width:0}
-.grafico{margin:0}
-#grafico{width:100%;height:28rem}
-figcaption,.verificacion{color:var(--mut);font-size:.88rem}
-.verificacion{margin:.5rem 0 0}
-.modelos{max-height:34rem;overflow:auto}
-.modelos h2{margin:0 0 .6rem}
-.mini-acciones{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem}
-.mini-acciones button{font-size:.84rem}
-.modelos fieldset{border:0;margin:0 0 .75rem;padding:0;min-width:0}
-.modelos legend{font-weight:700;margin-bottom:.25rem}
-.modelos label{display:flex;padding:.2rem 0;overflow-wrap:anywhere}
-.modelos svg{flex:none}
-.tabla{margin-top:1rem}
-.tabla h2{margin:0 0 .35rem}
-.tabla>p{margin:.1rem 0 .6rem;color:var(--mut);font-size:.9rem}
-.envoltura{min-width:0;max-width:100%;overflow:auto}
-.envoltura table{min-width:36rem}
-.envoltura th,.envoltura td{white-space:nowrap}
-.envoltura th button{background:transparent;border:0;padding:.1rem .15rem;font:inherit;font-weight:700;color:inherit}
-.envoltura th button:hover{text-decoration:underline}
-.etq-familia{display:inline-block;padding:0 .5rem;border:1px solid var(--bd);border-radius:999px;font-size:.78rem;font-weight:700;color:var(--fg)}
-.sube{color:var(--up)}.baja{color:var(--dn)}
-.etiqueta-retorno{display:inline-block;padding:.1rem .5rem;border:1px solid currentColor;border-radius:999px;font-size:1.05rem}
-.etiqueta-retorno.sube{color:var(--up)}.etiqueta-retorno.baja{color:var(--dn)}.etiqueta-retorno.neutro{color:var(--fg)}
-.cta{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}
-.cta p{margin:0}
-.cta a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700}
-.pie{max-width:78rem;margin:0 auto;padding:0 1rem 2rem;color:var(--mut);font-size:.9rem}
-.error{margin:1rem 0;padding:.8rem;border:1px solid var(--dn);border-radius:8px;background:var(--hl);color:var(--fg)}
-@media(max-width:900px){.zona-grafico{grid-template-columns:minmax(0,1fr)}.modelos{max-height:none}}
-@media(max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:420px){.kpis{grid-template-columns:minmax(0,1fr)}.controles .card{align-items:stretch}.opciones{display:grid;grid-template-columns:1fr}.cta a{width:100%;text-align:center}.grafico{padding:.65rem}#grafico{height:22rem}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-</style>
 </head>
 <body data-page="regresion">
 <main>
@@ -102,15 +41,6 @@ figcaption,.verificacion{color:var(--mut);font-size:.88rem}
             <button type="button" data-familia="ML" aria-pressed="false">Solo ML</button>
             <button type="button" data-familia="DL" aria-pressed="false">Solo DL</button>
           </div>
-        </div>
-        <div class="campo">
-          <label for="sel-locale">Formato de números y fechas</label>
-          <select id="sel-locale">
-            <option value="es-PE">Español (Perú)</option>
-            <option value="es-ES">Español (España)</option>
-            <option value="en-US">English (US)</option>
-            <option value="pt-BR">Português (Brasil)</option>
-          </select>
         </div>
         <div class="opciones">
           <label><input type="checkbox" id="chk-banda" checked> Banda p10–p90</label>

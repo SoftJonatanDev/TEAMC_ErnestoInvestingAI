@@ -343,6 +343,9 @@ Se utilizan, entre otras, las siguientes claves de `localStorage`:
 - `eia_theme`: tema visual.
 - `eia_watch`: watchlist del usuario.
 - `eia_port`: efectivo y posiciones del trading simulado.
+- `eia_lang`: idioma de la interfaz (`es-PE` o `en-US`).
+- `eia_ticker`: último activo seleccionado (compartido entre Dashboard, Trading, Clasificación y Regresión).
+- `eia_pf`: portafolio elegido en Portafolios (lo leen Trading y Backtesting).
 
 ### Prototipo React
 
@@ -520,6 +523,40 @@ El diseño de los módulos permite seguir un proceso académico de extremo a ext
 8. Evaluar los portafolios mediante backtesting y benchmarks.
 9. Comparar el desempeño simulado en el Leaderboard.
 
+## Integración entre módulos (P07)
+
+Todo el sitio comparte un único `css/styles.css` y un único `js/common.js`. Ese archivo construye en las 9 páginas la misma barra de navegación, el enlace «Saltar al contenido», el tema claro/oscuro, el selector de idioma y el aviso de datos sintéticos.
+
+| Estado compartido | Quién lo escribe | Quién lo usa |
+|---|---|---|
+| Activo seleccionado (`eia_ticker`) | Dashboard, Trading, Clasificación, Regresión | los mismos; también llega por `?ticker=` |
+| Portafolio elegido (`eia_pf`) | Portafolios («Llevar a Trading») | Trading (resumen de pesos) y Backtesting (aviso del perfil elegido) |
+| Watchlist (`eia_watch`) | Watchlist | Dashboard (marca ★) y Trading (grupo «Mi watchlist») |
+| Efectivo y posiciones (`eia_port`) | Trading | Leaderboard |
+
+Enlaces cruzados: Watchlist → Clasificación → Regresión → Optimizador.
+
+**Idioma ES-PE / EN-US (bonificación).** El selector de la barra superior cambia el formato de números y fechas con `Intl` en todos los módulos, y traduce la barra de navegación, el aviso y los mensajes del armazón. El contenido propio de cada módulo sigue en español.
+
+## Pruebas
+
+`tests/smoke.mjs` abre las 9 páginas a 1280 y a 390 px y reporta errores de consola, desborde horizontal y elementos clave; también comprueba el estado compartido y el cambio de idioma.
+
+```bash
+npm i -D playwright && npx playwright install chromium
+python -m http.server 8000                 # en otra terminal
+node tests/smoke.mjs                       # o BASE=https://<usuario>.github.io/<repo>/ node tests/smoke.mjs
+```
+
+Con `OFFLINE=1` se sustituye ECharts por un doble vacío (solo para entornos sin Internet): en ese modo no se verifican los gráficos.
+
+## Despliegue en GitHub Pages
+
+1. Subir los cambios a la rama `main`.
+2. En GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` / `(root)` → Save**.
+3. Esperar uno o dos minutos y abrir `https://softjonatandev.github.io/TEAMC_ErnestoInvestingAI/` (confirmar la URL exacta en la misma pantalla de Settings → Pages).
+4. Ejecutar `BASE=<esa URL> node tests/smoke.mjs` y recorrer el sitio desde el celular.
+
 ## Limitaciones conocidas
 
 Este repositorio representa un **prototipo académico** y no una plataforma financiera de producción.
@@ -531,7 +568,7 @@ Este repositorio representa un **prototipo académico** y no una plataforma fina
 - La persistencia se limita al navegador.
 - La aplicación estática depende de un CDN para ECharts.
 - `figma-src/` todavía utiliza datos demo embebidos en lugar de consumir directamente `data/`.
-- Actualmente no se incluye una suite de pruebas automatizadas.
+- Las pruebas automatizadas se limitan al script de humo `tests/smoke.mjs` (sin pruebas unitarias).
 - Actualmente no se incluye un pipeline de integración continua.
 
 ## Desarrollo
