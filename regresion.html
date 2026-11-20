@@ -1,10 +1,206 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Regresión de precios a 30 sesiones · Ernesto Investing AI</title><link rel="stylesheet" href="css/styles.css"></head>
-<body data-page="regresion"><main>
-<h1>Regresión de precios a 30 sesiones</h1>
-<div class="stub"><p><strong>Módulo por construir por su equipo.</strong> Proyectar 30 precios diarios futuros por activo con 18 regresores (11 de ML y 7 de DL), la mediana del ensamble y la banda p10–p90.</p>
-<h2>Qué debe contener</h2><ul><li>Gráfico: historia reciente + 30 sesiones proyectadas por modelo y el ensamble con su banda.</li><li>Selector de activo y de modelo (todos, solo ML, solo DL).</li><li>Tabla de métricas por modelo (MAPE, MAE, RMSE, mejora frente a la persistencia).</li><li>Etiqueta de retorno proyectado a 30 sesiones coloreada por signo.</li></ul>
-<p class="mut">Datos de entrada: <code>data/06_regresores_precio_30d.json</code>, <code>data/02_precios_sinteticos_504d.json</code>. Todos están simulados (patrones realistas).</p></div>
-<h2>Vista previa de los datos de entrada</h2><div id="prev"></div>
-<script src="js/common.js"></script><script>window.STUB={files:['06_regresores_precio_30d.json', '02_precios_sinteticos_504d.json']}</script><script src="js/stub.js"></script></main></body></html>
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regresión de precios a 30 sesiones</title>
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --fondo: #f1f4f8;
+    --panel: #ffffff;
+    --tinta: #14202e;
+    --suave: #526071;
+    --linea: #d3dbe5;
+    --acento: #1f3fbf;
+    --sube: #0a6b3d;
+    --sube-fondo: #e2f3ea;
+    --baja: #a8201a;
+    --baja-fondo: #fbe6e4;
+    --neutro: #3f4b59;
+    --neutro-fondo: #e8ecf1;
+    --radio: 6px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--tinta);
+    background: var(--fondo);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; line-height: 1.5; font-variant-numeric: tabular-nums; }
+  .pagina { max-width: 1240px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  :focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; border-radius: 3px; }
+  .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Cabecera ---------- */
+  header h1 { margin: 0 0 4px; font-size: 1.6rem; letter-spacing: -0.01em; }
+  header p { margin: 0; color: var(--suave); max-width: 70ch; }
+  .aviso {
+    margin: 14px 0 0; padding: 8px 12px; border-left: 4px solid var(--acento);
+    background: #e7ecfb; font-weight: 600; font-size: .92rem; border-radius: 0 var(--radio) var(--radio) 0;
+  }
+
+  /* ---------- Controles ---------- */
+  .controles {
+    display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end;
+    margin: 20px 0 14px; padding: 14px 16px; background: var(--panel);
+    border: 1px solid var(--linea); border-radius: var(--radio);
+  }
+  .campo { display: flex; flex-direction: column; gap: 4px; }
+  .campo label, .campo .rotulo { font-size: .85rem; font-weight: 600; color: var(--suave); }
+  select {
+    font: inherit; padding: 7px 10px; min-width: 150px; color: var(--tinta);
+    background: #fff; border: 1px solid #98a6b8; border-radius: var(--radio);
+  }
+  .opciones { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding-bottom: 6px; }
+  .opciones label { display: inline-flex; gap: 6px; align-items: center; font-size: .92rem; }
+
+  /* Etiqueta de retorno: color + símbolo + texto (nunca solo color) */
+  .retorno { margin-left: auto; text-align: right; }
+  .retorno .rotulo { display: block; font-size: .85rem; font-weight: 600; color: var(--suave); }
+  .etiqueta-retorno {
+    display: inline-block; margin-top: 2px; padding: 4px 14px; border-radius: 999px;
+    font-size: 1.5rem; font-weight: 700; border: 2px solid currentColor;
+  }
+  .etiqueta-retorno.sube { color: var(--sube); background: var(--sube-fondo); }
+  .etiqueta-retorno.baja { color: var(--baja); background: var(--baja-fondo); }
+  .etiqueta-retorno.neutro { color: var(--neutro); background: var(--neutro-fondo); }
+
+  /* ---------- Gráfico + lista de modelos ---------- */
+  .zona-grafico { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 14px; align-items: start; }
+  figure.grafico { margin: 0; padding: 12px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); }
+  #grafico { width: 100%; height: 480px; }
+  figcaption { margin-top: 6px; font-size: .88rem; color: var(--suave); }
+  .modelos { padding: 12px 14px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); max-height: 560px; overflow: auto; }
+  .modelos h2 { margin: 0 0 8px; font-size: 1rem; }
+  .modelos fieldset { border: 0; margin: 0 0 10px; padding: 0; }
+  .modelos legend { font-weight: 700; font-size: .9rem; padding: 0; margin-bottom: 4px; }
+  .modelos label { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: .92rem; cursor: pointer; }
+  .modelos svg { flex: none; }
+  .mini-acciones { display: flex; gap: 8px; margin-bottom: 8px; }
+  button.chico {
+    font: inherit; font-size: .82rem; padding: 4px 10px; background: #fff; color: var(--tinta);
+    border: 1px solid #98a6b8; border-radius: var(--radio); cursor: pointer;
+  }
+  button.chico:hover { background: var(--neutro-fondo); }
+
+  /* ---------- Tablas ---------- */
+  section.tabla { margin-top: 22px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); }
+  section.tabla h2 { margin: 0 0 4px; font-size: 1.15rem; }
+  section.tabla > p { margin: 0 0 10px; color: var(--suave); font-size: .9rem; }
+  .envoltura { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  caption { text-align: left; font-size: .88rem; color: var(--suave); padding-bottom: 6px; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { background: #f5f7fa; font-weight: 700; }
+  th button {
+    all: unset; cursor: pointer; font-weight: 700; padding: 2px 4px; border-radius: 3px;
+  }
+  th button:hover { text-decoration: underline; }
+  th button:focus-visible { outline: 3px solid var(--acento); }
+  tbody tr:hover { background: #f5f8fc; }
+  td.sube { color: var(--sube); } td.baja { color: var(--baja); }
+  .etq-familia { display: inline-block; padding: 0 8px; border-radius: 999px; font-size: .78rem; font-weight: 700; border: 1px solid #98a6b8; }
+  details summary { cursor: pointer; font-weight: 700; font-size: 1.15rem; }
+  details summary:focus-visible { outline: 3px solid var(--acento); }
+  details[open] summary { margin-bottom: 8px; }
+
+  .verificacion { margin-top: 10px; font-size: .85rem; color: var(--suave); }
+  .error { padding: 14px; background: var(--baja-fondo); border: 1px solid var(--baja); border-radius: var(--radio); color: #5b1410; }
+  footer { margin-top: 26px; font-size: .88rem; color: var(--suave); }
+
+  @media (max-width: 920px) {
+    .zona-grafico { grid-template-columns: 1fr; }
+    .modelos { max-height: none; }
+    .retorno { margin-left: 0; text-align: left; }
+    #grafico { height: 380px; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+
+  <header>
+    <h1>Regresión de precios a 30 sesiones</h1>
+    <p>Compara 18 modelos de aprendizaje automático (ML) y profundo (DL) sobre las últimas 120 sesiones de historia, con la mediana del ensamble y su banda p10–p90.</p>
+    <p class="aviso" role="note">Datos sintéticos · pronóstico simulado, no es asesoría de inversión</p>
+  </header>
+
+  <div id="app" hidden>
+    <!-- Controles principales -->
+    <div class="controles" role="group" aria-label="Controles del gráfico">
+      <div class="campo">
+        <label for="sel-activo">Activo</label>
+        <select id="sel-activo"></select>
+      </div>
+      <div class="campo">
+        <label for="sel-familia">Familia de modelos</label>
+        <select id="sel-familia">
+          <option value="todos">Todos</option>
+          <option value="ML">Solo ML</option>
+          <option value="DL">Solo DL</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="sel-locale">Formato de números y fechas</label>
+        <select id="sel-locale">
+          <option value="es-PE">Español (Perú)</option>
+          <option value="es-ES">Español (España)</option>
+          <option value="en-US">English (US)</option>
+          <option value="pt-BR">Português (Brasil)</option>
+        </select>
+      </div>
+      <div class="opciones">
+        <label><input type="checkbox" id="chk-banda" checked> Banda p10–p90</label>
+        <label><input type="checkbox" id="chk-cono"> Cono de volatilidad</label>
+      </div>
+      <div class="retorno">
+        <span class="rotulo" id="rot-retorno">Retorno proyectado a 30 sesiones</span>
+        <span id="etiqueta-retorno" class="etiqueta-retorno neutro" aria-labelledby="rot-retorno"></span>
+      </div>
+    </div>
+
+    <div class="zona-grafico">
+      <figure class="grafico">
+        <div id="grafico" role="img" aria-label="Gráfico de líneas con la historia y la proyección de precios"></div>
+        <figcaption id="resumen" aria-live="polite"></figcaption>
+        <p class="verificacion" id="verificacion"></p>
+      </figure>
+
+      <aside class="modelos" aria-labelledby="tit-modelos">
+        <h2 id="tit-modelos">Modelos en el gráfico</h2>
+        <div class="mini-acciones">
+          <button type="button" class="chico" id="btn-todos">Marcar todos</button>
+          <button type="button" class="chico" id="btn-ninguno">Quitar todos</button>
+        </div>
+        <div id="lista-modelos"></div>
+        <p style="font-size:.82rem;color:var(--suave);margin:6px 0 0">ML: línea continua · DL: línea discontinua. La mediana del ensamble siempre se muestra.</p>
+      </aside>
+    </div>
+
+    <section class="tabla" aria-labelledby="tit-metricas">
+      <h2 id="tit-metricas">Métricas por modelo</h2>
+      <p>Ordena con los encabezados. MAPE, MAE y RMSE: menor es mejor. R² y mejora vs persistencia: mayor es mejor.</p>
+      <div class="envoltura"><table id="tabla-metricas"></table></div>
+    </section>
+
+    <section class="tabla">
+      <details>
+        <summary>Tabla de precios de la mediana (30 sesiones)</summary>
+        <p>Misma información del gráfico en formato de tabla, para lectores de pantalla y consulta exacta.</p>
+        <div class="envoltura"><table id="tabla-mediana"></table></div>
+      </details>
+    </section>
+  </div>
+
+  <div id="mensaje" role="status"></div>
+
+  <footer>
+    <p>Datos sintéticos · pronóstico simulado, no es asesoría de inversión</p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/regresion.js"></script>
+</body>
+</html>
