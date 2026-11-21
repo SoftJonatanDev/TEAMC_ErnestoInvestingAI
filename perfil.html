@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="cuenta.perfil.titulo_documento">Perfil · Ernesto Investing AI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :where(body[data-page="perfil"]) .account-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+    :where(body[data-page="perfil"]) .account-grid>*{min-width:0}
+    :where(body[data-page="perfil"]) .account-actions{display:flex;justify-content:flex-end;gap:.75rem;flex-wrap:wrap}
+    :where(body[data-page="perfil"]) .account-actions a,.account-actions button{text-decoration:none}
+    :where(body[data-page="perfil"]) .account-warning{border-inline-start:4px solid var(--warn)}
+    :where(body[data-page="perfil"]) .account-table th,.account-table td{text-align:start}
+    :where(body[data-page="perfil"]) .skip{inset-inline-start:-999px}
+    :where(body[data-page="perfil"]) footer.pie{max-inline-size:78rem;margin-inline:auto;padding-inline:1rem;padding-block:1rem 2rem}
+  </style>
+</head>
+<body data-page="perfil">
+<main>
+  <h1 data-i18n="cuenta.perfil.titulo">Perfil del inversor simulado</h1>
+  <p data-i18n="cuenta.perfil.identificador">Inversor Equipo C · Modo Simulación</p>
+  <p class="aviso account-warning" role="note" data-i18n="cuenta.perfil.advertencia">Cuenta educativa simulada · los datos se almacenan localmente en su navegador</p>
+
+  <section class="account-grid" aria-label="Indicadores de cuenta" data-i18n-aria="cuenta.perfil.indicadores">
+    <article class="card kpi"><h2 data-i18n="cuenta.perfil.efectivo">Efectivo disponible</h2><div class="v" id="perfil-cash">US$ 0.00</div></article>
+    <article class="card kpi"><h2 data-i18n="cuenta.perfil.posiciones">Valor de posiciones</h2><div class="v" id="perfil-posiciones">US$ 0.00</div></article>
+    <article class="card kpi"><h2 data-i18n="cuenta.perfil.watchlist">Activos en watchlist</h2><div class="v" id="perfil-watch">0</div></article>
+    <article class="card kpi"><h2 data-i18n="cuenta.perfil.riesgo">Perfil de riesgo</h2><div class="v" id="perfil-riesgo" data-i18n="cuenta.perfil.sin_riesgo">No seleccionado</div></article>
+  </section>
+
+  <section class="card" aria-labelledby="perfil-pos-titulo">
+    <h2 id="perfil-pos-titulo" data-i18n="cuenta.perfil.resumen">Resumen de posiciones y portafolio activo</h2>
+    <p data-i18n="cuenta.perfil.portafolio_activo">Portafolio activo:</p>
+    <p id="perfil-portafolio" class="mut" data-i18n="cuenta.perfil.sin_portafolio">Ninguno</p>
+    <div class="tw" tabindex="0" role="region" aria-label="Tabla de posiciones actuales" data-i18n-aria="cuenta.perfil.tabla_posiciones">
+      <table class="account-table">
+        <caption class="sr-only" data-i18n="cuenta.perfil.caption_posiciones">Posiciones actuales del portafolio simulado</caption>
+        <thead><tr><th scope="col" data-i18n="cuenta.perfil.activo">Activo</th><th scope="col" data-i18n="cuenta.perfil.cantidad">Cantidad</th><th scope="col" data-i18n="cuenta.perfil.costo">Costo promedio</th><th scope="col" data-i18n="cuenta.perfil.ultimo">Último</th><th scope="col" data-i18n="cuenta.perfil.pnl">P&amp;L</th></tr></thead>
+        <tbody id="perfil-posiciones-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="account-actions">
+    <a class="btn" href="trading.html" data-i18n="cuenta.perfil.ir_trading">Ir a Trading</a>
+    <a class="btn" href="portafolios.html" data-i18n="cuenta.perfil.ir_portafolios">Ir a Portafolios</a>
+    <button type="button" id="perfil-reset" data-i18n="cuenta.perfil.restablecer">Restablecer datos locales de simulación</button>
+  </div>
+  <div id="perfil-live" role="status" aria-live="polite" data-i18n="cuenta.perfil.estado"></div>
+</main>
+<footer class="pie"><p data-i18n="cuenta.perfil.footer">Los datos de esta pantalla son simulados y locales al navegador; no constituyen asesoría de inversión.</p></footer>
+<script src="js/common.js"></script>
+<script src="js/cuenta.js"></script>
+</body>
+</html>
