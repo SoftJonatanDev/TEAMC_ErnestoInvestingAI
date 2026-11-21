@@ -59,15 +59,26 @@
     const selected = read('eia_pf') || read('portafolio_seleccionado');
     const risk = typeof selected === 'string' ? selected : selected && selected.nivel ? selected.nivel : '';
     const riskNode = document.querySelector('#perfil-riesgo');
-    riskNode.textContent = risk || 'No seleccionado';
-    if (!risk) riskNode.setAttribute('data-i18n', 'cuenta.perfil.sin_riesgo');
-    document.querySelector('#perfil-portafolio').textContent = risk || 'Ninguno';
-    document.querySelector('#perfil-posiciones-tbody').innerHTML = rows || '<tr><td colspan="5" data-i18n="cuenta.perfil.sin_posiciones">No hay posiciones registradas.</td></tr>';
+    const riskKey = { Conservador: 'conservative', Moderado: 'moderate', Agresivo: 'aggressive' }[risk];
+    if (riskKey && window.I18N) {
+      riskNode.textContent = window.I18N.t(riskKey);
+      riskNode.removeAttribute('data-i18n');
+    }
+    const portfolioNode = document.querySelector('#perfil-portafolio');
+    if (riskKey && window.I18N) {
+      portfolioNode.textContent = window.I18N.t(riskKey);
+      portfolioNode.removeAttribute('data-i18n');
+    }
+    document.querySelector('#perfil-posiciones-tbody').innerHTML = rows ||
+      '<tr><td colspan="5">' + (window.I18N ? window.I18N.t('cuenta.perfil.sin_posiciones') : 'No hay posiciones registradas.') + '</td></tr>';
 
     document.querySelector('#perfil-reset').addEventListener('click', () => {
-      if (!window.confirm('¿Restablecer los datos locales de la simulación?')) return;
+      const confirmation = window.I18N ? window.I18N.t('cuenta.perfil.confirmar_restablecer') :
+        '¿Restablecer los datos locales de la simulación?';
+      if (!window.confirm(confirmation)) return;
       ['eia_port', 'eia_watch', 'eia_pf', 'eia_ticker', 'portafolio_seleccionado'].forEach((key) => localStorage.removeItem(key));
-      document.querySelector('#perfil-live').textContent = 'Datos locales de simulación restablecidos.';
+      document.querySelector('#perfil-live').textContent = window.I18N ?
+        window.I18N.t('cuenta.perfil.datos_restablecidos') : 'Datos locales de simulación restablecidos.';
       location.reload();
     });
   }
@@ -82,6 +93,13 @@
     const theme = read('eia_theme') || (document.documentElement.getAttribute('data-theme') || 'light');
     const themeControl = document.querySelector('input[name="eia-theme"][value="' + theme + '"]');
     if (themeControl) themeControl.checked = true;
+    const pseudoButton = document.querySelector('#eia-pseudo-button');
+    if (pseudoButton) {
+      pseudoButton.setAttribute('aria-pressed', String(window.I18N && window.I18N.state().pseudo));
+      pseudoButton.addEventListener('click', () => {
+        if (window.EIA) window.EIA.setPseudo(!window.I18N.state().pseudo);
+      });
+    }
 
     const preview = () => {
       const selectedLocale = localeSelect.value;
@@ -94,11 +112,18 @@
       document.querySelector('#eia-market-preview').textContent = formatter.format(date);
     };
     localeSelect.addEventListener('change', () => {
+      if (window.I18N) window.I18N.set({ locale: localeSelect.value, tz: tzSelect.value });
       document.documentElement.lang = localeSelect.value;
       document.documentElement.dir = localeSelect.value === 'ar-EG' ? 'rtl' : 'ltr';
+      if (window.I18N) window.I18N.apply();
+      if (window.EIA) window.EIA.setLocale(localeSelect.value);
       preview();
     });
-    tzSelect.addEventListener('change', preview);
+    tzSelect.addEventListener('change', () => {
+      if (window.I18N) window.I18N.set({ tz: tzSelect.value });
+      if (window.EIA) window.EIA.setTimeZone(tzSelect.value);
+      preview();
+    });
     document.querySelectorAll('input[name="eia-theme"]').forEach((control) => {
       control.addEventListener('change', () => {
         if (window.EIA) window.EIA.setTheme(control.value);
@@ -111,6 +136,14 @@
       write('eia_tz', tzSelect.value);
       write('eia_theme', themeChoice ? themeChoice.value : 'light');
       write('eia_lang', localeSelect.value);
+      const pseudo = window.I18N ? window.I18N.state().pseudo : false;
+      write('eia_pseudo', pseudo ? '1' : '0');
+      if (window.I18N) window.I18N.set({ locale: localeSelect.value, tz: tzSelect.value, pseudo });
+      if (window.EIA) {
+        window.EIA.setLocale(localeSelect.value);
+        window.EIA.setTimeZone(tzSelect.value);
+        window.EIA.setPseudo(pseudo);
+      }
       document.documentElement.dataset.timezone = tzSelect.value;
       if (window.EIA) window.EIA.setTheme(themeChoice ? themeChoice.value : 'light');
       else document.documentElement.setAttribute('data-theme', themeChoice ? themeChoice.value : 'light');
@@ -118,7 +151,8 @@
       document.documentElement.lang = localeSelect.value;
       const quickLocale = document.querySelector('#idioma');
       if (quickLocale) quickLocale.value = localeSelect.value;
-      document.querySelector('#eia-settings-live').textContent = 'Preferencias guardadas en este navegador.';
+      document.querySelector('#eia-settings-live').textContent = window.I18N ?
+        window.I18N.t('cuenta.configuracion.estado') : 'Preferencias guardadas en este navegador.';
     });
     preview();
   }
@@ -136,9 +170,11 @@
         timeZone: window.EIA ? window.EIA.timeZone() : undefined
       }).format(anchor);
       document.querySelector('#about-date').dateTime = data.fecha_ancla_precios;
-      document.querySelector('#about-real').textContent = data.que_es_real;
-      document.querySelector('#about-synthetic').textContent = data.que_es_sintetico;
-      document.querySelector('#about-generacion').textContent = 'Fecha de generación: ' +
+      document.querySelector('#about-real').textContent = window.I18N ?
+        window.I18N.t('cuenta.acerca.real') : data.que_es_real;
+      document.querySelector('#about-synthetic').textContent = window.I18N ?
+        window.I18N.t('cuenta.acerca.sintetico') : data.que_es_sintetico;
+      document.querySelector('#about-generacion').textContent =
         new Intl.DateTimeFormat(locale(), {
           dateStyle: 'long',
           timeZone: window.EIA ? window.EIA.timeZone() : undefined

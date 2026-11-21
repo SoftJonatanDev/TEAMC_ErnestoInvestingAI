@@ -3,39 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Clasificación binaria de tendencia · Ernesto Investing AI</title>
+<title data-i18n="clasif_title">Clasificación binaria de tendencia · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="clasificacion">
 <main>
-  <h1>Clasificación binaria de tendencia</h1>
-  <p class="aviso top-aviso"><strong>Datos sintéticos · clasificación simulada.</strong> No constituye asesoría de inversión.</p>
+  <h1 data-i18n="clasif_title">Clasificación binaria de tendencia</h1>
+  <p class="aviso top-aviso" data-i18n="clasif_notice">Datos sintéticos · clasificación simulada. No constituye asesoría de inversión.</p>
 
   <!-- 2. Barra de controles -->
   <div class="ctrl">
-    <div class="pills" id="pills" role="group" aria-label="Filtrar modelos por familia"></div>
+    <div class="pills" id="pills" role="group" data-i18n-aria="filter_models" aria-label="Filtrar modelos por familia"></div>
     <div>
-      <label for="selTicker" class="sr">Activo</label>
+      <label for="selTicker" class="sr" data-i18n="asset">Activo</label>
       <select id="selTicker"></select>
     </div>
   </div>
 
   <!-- 3. KPIs (aria-live para anunciar cambios) -->
-  <section class="kpis" id="kpis" aria-label="Resumen de consenso"></section>
+  <section class="kpis" id="kpis" aria-label="Resumen de consenso" data-i18n-aria="consensus"></section>
 
   <!-- 4. Mapa de calor -->
   <section class="card" style="margin-top:1rem" aria-labelledby="hmTit">
     <div class="hm-head">
-      <div><h2 id="hmTit">Mapa de calor</h2><p class="mut" id="hmSub"></p></div>
-      <div class="leg" aria-hidden="true"><span class="lb"><i></i>▼ BAJA</span><span class="ls"><i></i>▲ SUBE</span></div>
+      <div><h2 id="hmTit" data-i18n="heatmap">Mapa de calor</h2><p class="mut" id="hmSub"></p></div>
+      <div class="leg" aria-hidden="true"><span class="lb"><i></i>▼ <span data-i18n="down">BAJA</span></span><span class="ls"><i></i>▲ <span data-i18n="up">SUBE</span></span></div>
     </div>
-    <div class="hm" id="hm" role="region" aria-label="Mapa de calor de probabilidades; desplazable" tabindex="0"></div>
+    <div class="hm" id="hm" role="region" aria-label="Mapa de calor de probabilidades; desplazable" data-i18n-aria="heatmap_region" tabindex="0"></div>
   </section>
 
   <!-- 5. Métricas del modelo -->
   <div class="sec-head">
-    <h2 id="mTit">Métricas específicas del modelo</h2>
-    <div><label for="selModelo" class="sr">Modelo</label><select id="selModelo"></select></div>
+    <h2 id="mTit" data-i18n="model_metrics">Métricas específicas del modelo</h2>
+    <div><label for="selModelo" class="sr" data-i18n="model">Modelo</label><select id="selModelo"></select></div>
   </div>
   <div class="dual">
     <section class="card" aria-labelledby="tMet"><h3 id="tMet"></h3><div id="met"></div><p class="nota" id="notaMet"></p></section>
@@ -43,15 +43,16 @@
   </div>
 
   <!-- 6. Navegación contextual -->
-  <section class="card cta" aria-label="Siguiente paso">
+  <section class="card cta" aria-label="Siguiente paso" data-i18n-aria="next_step">
     <p id="ctaTxt"></p>
-    <a class="btn primary" id="ctaBtn" href="regresion.html">Ver regresión →</a>
+    <a class="btn primary" id="ctaBtn" href="regresion.html" data-i18n="view_regression">Ver regresión →</a>
   </section>
 
   <!-- Regiones aria-live para lectores de pantalla -->
   <div class="sr" role="status" aria-live="polite" id="liveA"></div>
   <div class="sr" role="status" aria-live="polite" id="liveM"></div>
 </main>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/clasificacion.js"></script>
 </body>

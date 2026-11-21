@@ -26,9 +26,9 @@
       <select id="eia-locale">
         <option value="es-PE" data-i18n="cuenta.configuracion.locale_es">Español (Perú)</option>
         <option value="en-US" data-i18n="cuenta.configuracion.locale_en">English (US)</option>
-        <option value="ar-EG" data-i18n="cuenta.configuracion.locale_ar">العربية (مصر) — [Borrador]</option>
-        <option value="ja-JP" data-i18n="cuenta.configuracion.locale_ja">日本語 — [Borrador]</option>
-        <option value="qu-PE" data-i18n="cuenta.configuracion.locale_qu">Runasimi (Quechua) — [Borrador]</option>
+        <option value="ar-EG" data-i18n="cuenta.configuracion.locale_ar">العربية (مصر)</option>
+        <option value="ja-JP" data-i18n="cuenta.configuracion.locale_ja">日本語</option>
+        <option value="qu-PE" data-i18n="cuenta.configuracion.locale_qu">Runasimi (Quechua)</option>
       </select>
       <p class="mut" data-i18n="cuenta.configuracion.nota_idioma">Las traducciones a árabe, japonés y quechua se marcan como borrador. Cambiar de idioma adapta formatos de fecha y número sin convertir divisas (se mantiene US$).</p>
     </section>
@@ -51,13 +51,18 @@
         <label><input type="radio" name="eia-theme" value="light"><span data-i18n="cuenta.configuracion.tema_claro">Tema claro</span></label>
       </fieldset>
     </section>
+    <section class="card">
+      <h2 data-i18n="pseudo_control">Pseudolocalización</h2>
+      <button type="button" id="eia-pseudo-button" aria-pressed="false" data-i18n="pseudo">Pseudo</button>
+    </section>
   </div>
   <div class="settings-actions">
     <button type="button" class="primary" id="eia-save" data-i18n="cuenta.configuracion.guardar">Guardar preferencias</button>
   </div>
-  <div id="eia-settings-live" role="status" aria-live="polite" data-i18n="cuenta.configuracion.estado"></div>
+  <div id="eia-settings-live" role="status" aria-live="polite"></div>
 </main>
 <footer class="pie"><p data-i18n="cuenta.configuracion.footer">Las preferencias se guardan únicamente en este navegador.</p></footer>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/cuenta.js"></script>
 </body>

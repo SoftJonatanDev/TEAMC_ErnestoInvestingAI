@@ -1,25 +1,26 @@
 <!doctype html>
 <html lang="es-PE"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trading simulado · Ernesto Investing AI</title><link rel="stylesheet" href="css/styles.css"></head>
+<title data-i18n="trade_title">Trading simulado · Ernesto Investing AI</title><link rel="stylesheet" href="css/styles.css"></head>
 <body data-page="trading"><main>
-<h1>Trading simulado</h1>
-<p class="mut">Órdenes a mercado al último precio sintético. El efectivo y las posiciones se guardan en este navegador.</p>
+<h1 data-i18n="trade_title">Trading simulado</h1>
+<p class="mut" data-i18n="trade_intro">Órdenes a mercado al último precio sintético. El efectivo y las posiciones se guardan en este navegador.</p>
 <p id="pfsel" class="aviso" hidden></p>
-<div class="grid"><div class="card"><h2 style="margin-top:0">Orden</h2><form id="f" novalidate><label for="t">Activo</label><select id="t"></select><label for="s">Lado</label><select id="s"><option value="C">Comprar</option><option value="V">Vender</option></select><label for="q">Cantidad</label><input id="q" type="number" min="1" step="1" value="10" aria-describedby="msg"><p id="msg" role="status" class="mut"></p><button class="primary" type="submit">Enviar orden</button> <button type="button" id="rs">Reiniciar demo</button></form></div>
-<div class="card kpi"><div class="mut">Efectivo</div><div class="v" id="cash"></div><div class="mut" style="margin-top:.6rem">Valor del portafolio</div><div class="v" id="nav"></div></div></div>
-<h2>Posiciones</h2><div class="tw"><table><thead><tr><th scope="col">Ticker</th><th scope="col">Cant.</th><th scope="col">Costo prom.</th><th scope="col">Último</th><th scope="col">P&amp;L</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="grid"><div class="card"><h2 style="margin-top:0" data-i18n="order_title">Orden</h2><form id="f" novalidate><label for="t" data-i18n="asset">Activo</label><select id="t"></select><label for="s" data-i18n="side">Lado</label><select id="s"><option value="C" data-i18n="buy">Comprar</option><option value="V" data-i18n="sell">Vender</option></select><label for="q" data-i18n="qty">Cantidad</label><input id="q" type="number" min="1" step="1" value="10" aria-describedby="msg"><p id="msg" role="status" class="mut"></p><button class="primary" type="submit" data-i18n="place_order">Enviar orden</button> <button type="button" id="rs" data-i18n="reset_demo">Reiniciar demo</button></form></div>
+<div class="card kpi"><div class="mut" data-i18n="cash">Efectivo</div><div class="v" id="cash"></div><div class="mut" style="margin-top:.6rem" data-i18n="portfolio">Valor del portafolio</div><div class="v" id="nav"></div></div></div>
+<h2 data-i18n="positions">Posiciones</h2><div class="tw"><table><thead><tr><th scope="col" data-i18n="ticker">Ticker</th><th scope="col" data-i18n="qty">Cant.</th><th scope="col" data-i18n="avg_cost">Costo prom.</th><th scope="col" data-i18n="last">Último</th><th scope="col" data-i18n="pnl">P&amp;L</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script>
 let D,S;
 window.init=async()=>{ D=await loadJSON("10_dashboard_mercado.json"); const w=await loadJSON("11_watchlist_alertas_portafolio_demo.json"); S=store("eia_port")||JSON.parse(JSON.stringify(w.portafolio_demo));
  const WL=(EIA.watch()||w.watchlist_inicial).filter(t=>D.some(d=>d.ticker===t)), RS=D.map(d=>d.ticker).filter(t=>!WL.includes(t)), op=a=>a.map(t=>`<option>${t}</option>`).join("");
- $("#t").innerHTML=(WL.length?`<optgroup label="Mi watchlist">${op(WL)}</optgroup>`:"")+`<optgroup label="Resto del universo">${op(RS)}</optgroup>`; {const s0=EIA.ticker(); if(s0&&D.some(d=>d.ticker===s0)) $("#t").value=s0;}
- const pf=EIA.portafolio(); if(pf&&pf.nivel&&pf.pesos){ const top=Object.entries(pf.pesos).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k,v])=>k+" "+(v*100).toFixed(1)+" %").join(", "); const el=$("#pfsel"); el.textContent="Portafolio elegido en Portafolios: "+pf.nivel+". Mayores pesos: "+top+". "; const a=document.createElement("a"); a.href="portafolios.html"; a.textContent="Cambiar portafolio"; el.appendChild(a); el.hidden=false; } $("#f").onsubmit=e=>{e.preventDefault();orden()}; $("#rs").onclick=()=>{S=JSON.parse(JSON.stringify(w.portafolio_demo));store("eia_port",S);render("Demo reiniciada.")}; render(); };
+ $("#t").innerHTML=(WL.length?`<optgroup label="${I18N.t("my_watch")}">${op(WL)}</optgroup>`:"")+`<optgroup label="${I18N.t("market_universe")}">${op(RS)}</optgroup>`; {const s0=EIA.ticker(); if(s0&&D.some(d=>d.ticker===s0)) $("#t").value=s0;}
+ const pf=EIA.portafolio(); if(pf&&pf.nivel&&pf.pesos){ const top=Object.entries(pf.pesos).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k,v])=>k+" "+(v*100).toFixed(1)+" %").join(", "); const el=$("#pfsel"); el.textContent=I18N.t("selected_portfolio",{level:pf.nivel,weights:top})+" "; const a=document.createElement("a"); a.href="portafolios.html"; a.textContent=I18N.t("change_portfolio"); el.appendChild(a); el.hidden=false; } $("#f").onsubmit=e=>{e.preventDefault();orden()}; $("#rs").onclick=()=>{S=JSON.parse(JSON.stringify(w.portafolio_demo));store("eia_port",S);render(I18N.t("demo_reset"))}; render(); };
 const px=t=>D.find(d=>d.ticker===t).ultimo;
-function orden(){ const t=$("#t").value,q=parseInt($("#q").value,10),lado=$("#s").value; if(!(q>=1)) return render("Ingrese una cantidad entera mayor o igual a 1.",1); const p=px(t),pos=S.posiciones.find(x=>x.ticker===t);
- if(lado==="C"){ if(q*p>S.efectivo) return render("Efectivo insuficiente para esa orden.",1); S.efectivo-=q*p; if(pos){pos.costo=(pos.costo*pos.cantidad+q*p)/(pos.cantidad+q);pos.cantidad+=q}else S.posiciones.push({ticker:t,cantidad:q,costo:p}); }
- else{ if(!pos||pos.cantidad<q) return render("No tiene esa cantidad para vender.",1); pos.cantidad-=q; S.efectivo+=q*p; S.posiciones=S.posiciones.filter(x=>x.cantidad>0); }
- EIA.setTicker(t); store("eia_port",S); render(`Orden ejecutada: ${lado==="C"?"compra":"venta"} de ${q} ${t} a ${fmt.usd(p)}.`); }
+function orden(){ const t=$("#t").value,q=parseInt($("#q").value,10),lado=$("#s").value; if(!(q>=1)) return render(I18N.t("qty_error"),1); const p=px(t),pos=S.posiciones.find(x=>x.ticker===t);
+ if(lado==="C"){ if(q*p>S.efectivo) return render(I18N.t("insufficient_cash"),1); S.efectivo-=q*p; if(pos){pos.costo=(pos.costo*pos.cantidad+q*p)/(pos.cantidad+q);pos.cantidad+=q}else S.posiciones.push({ticker:t,cantidad:q,costo:p}); }
+ else{ if(!pos||pos.cantidad<q) return render(I18N.t("insufficient_shares"),1); pos.cantidad-=q; S.efectivo+=q*p; S.posiciones=S.posiciones.filter(x=>x.cantidad>0); }
+ EIA.setTicker(t); store("eia_port",S); render(I18N.t("order_success",{side:I18N.t(lado==="C"?"buy":"sell"),shares:I18N.t("shares",{n:q}),price:fmt.usd(p)})); }
 function render(msg,err){ $("#msg").textContent=msg||""; $("#msg").className=err?"err":"mut"; let nav=S.efectivo;
  $("#tb").innerHTML=S.posiciones.map(x=>{const p=px(x.ticker),pl=(p-x.costo)*x.cantidad;nav+=p*x.cantidad;return `<tr><th scope="row">${x.ticker}</th><td>${x.cantidad}</td><td>${fmt.n(x.costo)}</td><td>${fmt.n(p)}</td><td class="${fmt.cls(pl)}">${fmt.usd(pl)}</td></tr>`}).join(""); $("#cash").textContent=fmt.usd(S.efectivo); $("#nav").textContent=fmt.usd(nav); }
 </script></main></body></html>

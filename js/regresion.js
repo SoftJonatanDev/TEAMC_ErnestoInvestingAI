@@ -437,23 +437,26 @@
   // Tabla de métricas por modelo (ordenable)
   // ==========================================================================
   var COLUMNAS = [
-    { clave: 'modelo', titulo: 'Modelo', tipo: 'texto' },
-    { clave: 'familia', titulo: 'Familia', tipo: 'texto' },
+    { clave: 'modelo', titulo: function () { return I18N.t('model'); }, tipo: 'texto' },
+    { clave: 'familia', titulo: function () { return I18N.t('model_family'); }, tipo: 'texto' },
     { clave: 'mape_30d_pct', titulo: 'MAPE', tipo: 'pct' },
     { clave: 'mae_relativo_pct', titulo: 'MAE', tipo: 'pct' },
     { clave: 'rmse_relativo_pct', titulo: 'RMSE', tipo: 'pct' },
     { clave: 'r2_retornos_30d', titulo: 'R²', tipo: 'num3' },
-    { clave: 'mejora_vs_persistencia_pct', titulo: 'Mejora vs persistencia', tipo: 'pctSigno' }
+    { clave: 'mejora_vs_persistencia_pct', titulo: function () { return I18N.t('improvement_vs_persistence'); }, tipo: 'pctSigno' }
   ];
+  var tituloColumna = function (columna) {
+    return typeof columna.titulo === 'function' ? columna.titulo() : columna.titulo;
+  };
 
   function construirTablaMetricas() {
     var tabla = $('tabla-metricas');
     var o = estado.orden;
-    var filas = estado.reg.modelos.slice().sort(function (a, b) {
-      var x = a[o.clave], y = b[o.clave];
-      var c = typeof x === 'string' ? x.localeCompare(y, estado.locale) : x - y;
-      return o.dir === 'asc' ? c : -c;
-    });
+    var valorOrden = estado.reg.modelos.length ? estado.reg.modelos[0][o.clave] : null;
+    var filas = typeof valorOrden === 'string'
+      ? I18N.sort(estado.reg.modelos, function (modelo) { return String(modelo[o.clave]); })
+      : estado.reg.modelos.slice().sort(function (a, b) { return a[o.clave] - b[o.clave]; });
+    if (o.dir !== 'asc') filas.reverse();
 
     var html = '<caption>Métricas de los 18 modelos a 30 sesiones (' + filas.length + ' filas).</caption><thead><tr>';
     COLUMNAS.forEach(function (c) {
@@ -461,7 +464,7 @@
       var aria = activa ? (o.dir === 'asc' ? 'ascending' : 'descending') : 'none';
       var flecha = activa ? (o.dir === 'asc' ? ' ▲' : ' ▼') : '';
       html += '<th scope="col" aria-sort="' + aria + '"><button type="button" data-clave="' + c.clave + '">' +
-        c.titulo + flecha + '</button></th>';
+        tituloColumna(c) + flecha + '</button></th>';
     });
     html += '</tr></thead><tbody>';
     filas.forEach(function (m) {

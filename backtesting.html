@@ -1,47 +1,47 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Backtesting de portafolios · Ernesto Investing AI</title>
+<title data-i18n="backtesting_title">Backtesting de portafolios · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css"></head>
 <body data-page="backtesting"><main>
 
-<p class="eyebrow">EVALUACIÓN HISTÓRICA</p>
+<p class="eyebrow" data-i18n="history_evaluation">EVALUACIÓN HISTÓRICA</p>
 <div class="head">
   <div>
-    <h1>Backtesting</h1>
-    <p class="mut" id="subtitulo">Cargando datos…</p>
+    <h1 data-i18n="backtesting_title">Backtesting</h1>
+    <p class="mut" id="subtitulo" data-i18n="loading_data">Cargando datos…</p>
   </div>
   <span class="tag" id="insignia"></span>
 </div>
 
-<p class="aviso" role="note"><strong>Backtesting sobre historia sintética · desempeño pasado no garantiza desempeño futuro.</strong></p>
+<p class="aviso" role="note" data-i18n="backtesting_notice">Backtesting sobre historia sintética · desempeño pasado no garantiza desempeño futuro.</p>
 
 <div class="stack">
   <!-- Tarjeta 1: curvas de capital -->
   <section class="card" aria-labelledby="h-capital">
     <div class="cabecera-card">
-      <div><h2 id="h-capital">Curvas de capital</h2><p class="mut" id="sub-capital">Valor acumulado con base 100</p></div>
-      <div class="toggles" id="toggles" role="group" aria-label="Series visibles en ambos gráficos"></div>
+      <div><h2 id="h-capital" data-i18n="capital_curves">Curvas de capital</h2><p class="mut" id="sub-capital" data-i18n="base_100">Valor acumulado con base 100</p></div>
+      <div class="toggles" id="toggles" role="group" aria-label="Series visibles en ambos gráficos" data-i18n-aria="visible_charts"></div>
     </div>
-    <div id="graf-capital" class="chart" role="img" aria-label="Gráfico de curvas de capital"></div>
+    <div id="graf-capital" class="chart" role="img" aria-label="Gráfico de curvas de capital" data-i18n-aria="capital_chart"></div>
   </section>
 
   <!-- Tarjeta 2: drawdown -->
   <section class="card" aria-labelledby="h-dd">
     <div class="cabecera-card">
-      <div><h2 id="h-dd">Drawdown</h2><p class="mut">Caída porcentual desde el máximo previo</p></div>
+      <div><h2 id="h-dd" data-i18n="drawdown">Drawdown</h2><p class="mut" data-i18n="drawdown_description">Caída porcentual desde el máximo previo</p></div>
     </div>
-    <div id="graf-dd" class="chart" role="img" aria-label="Gráfico de drawdown"></div>
+    <div id="graf-dd" class="chart" role="img" aria-label="Gráfico de drawdown" data-i18n-aria="drawdown_chart"></div>
   </section>
 
   <!-- Tarjeta 3: métricas -->
   <section class="card" aria-labelledby="h-met">
     <div class="cabecera-card">
-      <h2 id="h-met">Métricas comparativas derivadas</h2>
+      <h2 id="h-met" data-i18n="derived_metrics">Métricas comparativas derivadas</h2>
       <p class="mut" id="sub-met"></p>
     </div>
     <div class="tw">
       <table id="tabla-met">
-        <caption class="sr">Métricas por estrategia. Cada encabezado es un botón que ordena la tabla.</caption>
+        <caption class="sr" data-i18n="strategy_metrics_caption">Métricas por estrategia. Cada encabezado es un botón que ordena la tabla.</caption>
         <thead><tr id="fila-th"></tr></thead>
         <tbody id="cuerpo-met"></tbody>
       </table>
@@ -57,8 +57,8 @@
     <table>
       <caption id="alt-cap" class="sr"></caption>
       <thead><tr>
-        <th scope="col" class="l">Serie</th><th scope="col" class="l">Tipo</th>
-        <th scope="col">Valor inicial</th><th scope="col">Valor final</th><th scope="col">Variación</th>
+        <th scope="col" class="l" data-i18n="series">Serie</th><th scope="col" class="l" data-i18n="type">Tipo</th>
+        <th scope="col" data-i18n="initial_value">Valor inicial</th><th scope="col" data-i18n="final_value">Valor final</th><th scope="col" data-i18n="variation">Variación</th>
       </tr></thead>
       <tbody id="alt-cuerpo"></tbody>
     </table>
@@ -68,12 +68,12 @@
 <!-- Sección inferior en dos columnas -->
 <div class="dos">
   <section class="card" aria-labelledby="h-reb">
-    <h2 id="h-reb" style="margin-top:0">Rebalanceos y pesos por fecha</h2>
+    <h2 id="h-reb" style="margin-top:0" data-i18n="rebalance_weights">Rebalanceos y pesos por fecha</h2>
     <p class="mut" id="turnover" style="margin:.2rem 0 .6rem;font-size:.9rem"></p>
     <div id="acordeones"></div>
   </section>
   <aside class="card interp" aria-labelledby="h-interp">
-    <p class="eyebrow">INTERPRETACIÓN DINÁMICA</p>
+    <p class="eyebrow" data-i18n="dynamic_interpretation">INTERPRETACIÓN DINÁMICA</p>
     <h2 id="h-interp"></h2>
     <div id="interp-cuerpo"></div>
   </aside>
@@ -82,11 +82,12 @@
 </main>
 
 <footer class="pie">
-  <p>Los datos de este módulo son <strong>sintéticos y simulados</strong> con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
+  <p data-i18n="synthetic_notice">Los datos de este módulo son sintéticos y simulados con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
   <p id="pie-metodo"></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/backtesting.js"></script>
 </body></html>

@@ -3,77 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Regresión de precios a 30 sesiones · Ernesto Investing AI</title>
+<title data-i18n="reg_title">Regresión de precios a 30 sesiones · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="regresion">
 <main>
   <div class="head">
     <div>
-      <h1>Regresión de precios a 30 sesiones</h1>
-      <p class="mut">Compara los 18 modelos de aprendizaje automático (ML) y profundo (DL) sobre las últimas 120 sesiones históricas, con la mediana del ensamble y su banda p10–p90.</p>
+      <h1 data-i18n="reg_title">Regresión de precios a 30 sesiones</h1>
+      <p class="mut" data-i18n="reg_description">Compara los 18 modelos de aprendizaje automático (ML) y profundo (DL) sobre las últimas 120 sesiones históricas, con la mediana del ensamble y su banda p10–p90.</p>
     </div>
   </div>
-  <p class="aviso top-aviso" role="note"><strong>Datos sintéticos · pronóstico simulado · no es asesoría de inversión.</strong></p>
+  <p class="aviso top-aviso" role="note" data-i18n="forecast_notice">Datos sintéticos · pronóstico simulado · no es asesoría de inversión.</p>
 
   <div id="app" hidden>
-    <section class="kpis" id="kpis" aria-label="Resumen del pronóstico" aria-live="polite">
+    <section class="kpis" id="kpis" aria-label="Resumen del pronóstico" data-i18n-aria="forecast_summary" aria-live="polite">
       <article class="card kpi">
-        <p class="lbl" id="rot-retorno">Retorno proyectado a 30 sesiones</p>
+        <p class="lbl" id="rot-retorno" data-i18n="projected_return">Retorno proyectado a 30 sesiones</p>
         <p class="v"><span id="etiqueta-retorno" class="etiqueta-retorno neutro" aria-labelledby="rot-retorno"></span></p>
         <p class="sub" id="kpi-modelos"></p>
       </article>
-      <article class="card kpi"><p class="lbl">Precio actual</p><p class="v" id="kpi-precio"></p><p class="sub" id="kpi-ticker"></p></article>
-      <article class="card kpi"><p class="lbl">Mediana día 30</p><p class="v" id="kpi-mediana"></p><p class="sub" id="kpi-fecha"></p></article>
-      <article class="card kpi"><p class="lbl">Banda p10–p90</p><p class="v" id="kpi-banda"></p><p class="sub">Intervalo de pronóstico al día 30</p></article>
+      <article class="card kpi"><p class="lbl" data-i18n="current_price">Precio actual</p><p class="v" id="kpi-precio"></p><p class="sub" id="kpi-ticker"></p></article>
+      <article class="card kpi"><p class="lbl" data-i18n="median_day_30">Mediana día 30</p><p class="v" id="kpi-mediana"></p><p class="sub" id="kpi-fecha"></p></article>
+      <article class="card kpi"><p class="lbl" data-i18n="forecast_band">Banda p10–p90</p><p class="v" id="kpi-banda"></p><p class="sub" data-i18n="forecast_interval">Intervalo de pronóstico al día 30</p></article>
     </section>
 
     <div class="controles">
       <section class="card" aria-label="Filtros y opciones">
         <div class="campo">
-          <label for="sel-activo">Activo</label>
+          <label for="sel-activo" data-i18n="asset">Activo</label>
           <select id="sel-activo"></select>
         </div>
         <div class="campo">
-          <span class="rotulo">Familia de modelos</span>
-          <div class="pills" id="filtros-familia" role="group" aria-label="Filtrar por familia de modelos">
-            <button type="button" data-familia="todos" aria-pressed="true">Todos los modelos</button>
-            <button type="button" data-familia="ML" aria-pressed="false">Solo ML</button>
-            <button type="button" data-familia="DL" aria-pressed="false">Solo DL</button>
+          <span class="rotulo" data-i18n="model_family">Familia de modelos</span>
+          <div class="pills" id="filtros-familia" role="group" aria-label="Filtrar por familia de modelos" data-i18n-aria="filter_models">
+            <button type="button" data-familia="todos" aria-pressed="true" data-i18n="all_models">Todos los modelos</button>
+            <button type="button" data-familia="ML" aria-pressed="false" data-i18n="only_ml">Solo ML</button>
+            <button type="button" data-familia="DL" aria-pressed="false" data-i18n="only_dl">Solo DL</button>
           </div>
         </div>
         <div class="opciones">
-          <label><input type="checkbox" id="chk-banda" checked> Banda p10–p90</label>
-          <label><input type="checkbox" id="chk-cono"> Cono de volatilidad</label>
+          <label><input type="checkbox" id="chk-banda" checked> <span data-i18n="forecast_band">Banda p10–p90</span></label>
+          <label><input type="checkbox" id="chk-cono"> <span data-i18n="volatility_cone">Cono de volatilidad</span></label>
         </div>
       </section>
     </div>
 
     <div class="zona-grafico">
       <figure class="card grafico">
-        <div id="grafico" role="img" aria-label="Gráfico de líneas con historia y proyección de precios"></div>
+        <div id="grafico" role="img" aria-label="Gráfico de líneas con historia y proyección de precios" data-i18n-aria="chart_history_forecast"></div>
         <figcaption id="resumen" aria-live="polite"></figcaption>
         <p class="verificacion" id="verificacion" aria-live="polite"></p>
       </figure>
       <aside class="card modelos" aria-labelledby="tit-modelos">
-        <h2 id="tit-modelos">Modelos en el gráfico</h2>
+        <h2 id="tit-modelos" data-i18n="models_chart">Modelos en el gráfico</h2>
         <div class="mini-acciones">
-          <button type="button" id="btn-todos">Marcar todos</button>
-          <button type="button" id="btn-ninguno">Quitar todos</button>
+          <button type="button" id="btn-todos" data-i18n="mark_all">Marcar todos</button>
+          <button type="button" id="btn-ninguno" data-i18n="unmark_all">Quitar todos</button>
         </div>
         <div id="lista-modelos"></div>
-        <p class="mut" style="font-size:.82rem;margin:.4rem 0 0">ML: línea continua · DL: línea discontinua. La mediana del ensamble siempre se muestra.</p>
+        <p class="mut" style="font-size:.82rem;margin:.4rem 0 0" data-i18n="model_line_note">ML: línea continua · DL: línea discontinua. La mediana del ensamble siempre se muestra.</p>
       </aside>
     </div>
 
     <section class="card tabla" aria-labelledby="tit-metricas">
-      <h2 id="tit-metricas">Métricas por modelo</h2>
-      <p>Ordena con los encabezados. MAPE, MAE y RMSE: menor es mejor. R² y mejora vs persistencia: mayor es mejor.</p>
-      <div class="envoltura" role="region" aria-label="Métricas por modelo; tabla desplazable" tabindex="0"><table id="tabla-metricas"></table></div>
+      <h2 id="tit-metricas" data-i18n="metrics_by_model">Métricas por modelo</h2>
+      <p data-i18n="metrics_sort">Ordena con los encabezados. MAPE, MAE y RMSE: menor es mejor. R² y mejora vs persistencia: mayor es mejor.</p>
+      <div class="envoltura" role="region" aria-label="Métricas por modelo; tabla desplazable" data-i18n-aria="metrics_by_model" tabindex="0"><table id="tabla-metricas"></table></div>
     </section>
     <section class="card tabla">
       <details>
-        <summary>Tabla de precios de la mediana (30 sesiones)</summary>
+        <summary data-i18n="median_prices">Tabla de precios de la mediana (30 sesiones)</summary>
         <p class="mut">Misma información del gráfico en formato de tabla para consulta exacta.</p>
         <div class="envoltura" role="region" aria-label="Precios de la mediana; tabla desplazable" tabindex="0"><table id="tabla-mediana"></table></div>
       </details>
@@ -81,15 +81,16 @@
 
     <section class="card cta" aria-label="Siguiente paso">
       <p id="ctaTxt" aria-live="polite"></p>
-      <a class="btn primary" href="optimizador.html">Ir al Optimizador →</a>
+      <a class="btn primary" href="optimizador.html" data-i18n="go_optimizer">Ir al Optimizador →</a>
     </section>
   </div>
   <div id="mensaje" role="status" aria-live="polite"></div>
 </main>
 <footer class="pie">
-  <p>Los datos de este módulo son <strong>sintéticos y simulados</strong> con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
+  <p data-i18n="synthetic_notice">Los datos de este módulo son sintéticos y simulados con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/regresion.js"></script>
 </body>

@@ -156,19 +156,20 @@
 
   /* ---------- Tabla de métricas ordenable ---------- */
   const COLUMNAS = [
-    { id: 'nombre', t: 'Estrategia', v: s => s.nombre, texto: true },
-    { id: 'ret', t: 'Retorno total', v: s => s.m.retorno_total_pct, f: s => `<span class="${fmt.cls(s.m.retorno_total_pct)}">${fmt.pct(s.m.retorno_total_pct)}</span>` },
+    { id: 'nombre', t: () => I18N.t('strategy'), v: s => s.nombre, texto: true },
+    { id: 'ret', t: () => I18N.t('total_return'), v: s => s.m.retorno_total_pct, f: s => `<span class="${fmt.cls(s.m.retorno_total_pct)}">${fmt.pct(s.m.retorno_total_pct)}</span>` },
     { id: 'cagr', t: 'CAGR', v: s => s.m.cagr_pct, f: s => `<span class="${fmt.cls(s.m.cagr_pct)}">${fmt.pct(s.m.cagr_pct)}</span>` },
-    { id: 'vol', t: 'Volatilidad', v: s => s.m.volatilidad_anual_pct, f: s => fmt.n(s.m.volatilidad_anual_pct) + ' %' },
+    { id: 'vol', t: () => I18N.t('volatility'), v: s => s.m.volatilidad_anual_pct, f: s => fmt.n(s.m.volatilidad_anual_pct) + ' %' },
     { id: 'sharpe', t: 'Sharpe', v: s => s.m.sharpe, f: s => `<span class="${fmt.cls(s.m.sharpe)}">${fmt.n(s.m.sharpe)}</span>` },
-    { id: 'dd', t: 'Máx. Drawdown', v: s => s.m.max_drawdown_pct, f: s => `<span class="dn">${fmt.n(s.m.max_drawdown_pct)} %</span>` },
+    { id: 'dd', t: () => I18N.t('max_drawdown'), v: s => s.m.max_drawdown_pct, f: s => `<span class="dn">${fmt.n(s.m.max_drawdown_pct)} %</span>` },
     { id: 'calmar', t: 'Calmar', v: s => s.m.calmar, f: s => `<span class="${fmt.cls(s.m.calmar)}">${fmt.n(s.m.calmar)}</span>` },
-    { id: 'meses', t: 'Meses positivos', v: s => s.m.meses_positivos_pct, f: s => fmt.n(s.m.meses_positivos_pct, 1) + ' %' }
+    { id: 'meses', t: () => I18N.t('positive_months'), v: s => s.m.meses_positivos_pct, f: s => fmt.n(s.m.meses_positivos_pct, 1) + ' %' }
   ];
+  const tituloColumna = col => typeof col.t === 'function' ? col.t() : col.t;
 
   function construirEncabezados() {
     $('#fila-th').innerHTML = COLUMNAS.map(c =>
-      `<th scope="col" aria-sort="none" data-col="${c.id}"${c.texto ? ' class="l"' : ''}><button type="button">${esc(c.t)}<span class="si" aria-hidden="true"></span></button></th>`).join('');
+      `<th scope="col" aria-sort="none" data-col="${c.id}"${c.texto ? ' class="l"' : ''}><button type="button">${esc(tituloColumna(c))}<span class="si" aria-hidden="true"></span></button></th>`).join('');
     $('#fila-th').addEventListener('click', e => {
       const th = e.target.closest('th[data-col]');
       if (!th) return;
@@ -177,7 +178,10 @@
       orden.dir = orden.col === col.id ? (orden.dir === 'ascending' ? 'descending' : 'ascending') : (col.texto ? 'ascending' : 'descending');
       orden.col = col.id;
       pintarTabla();
-      $('#estado-orden').textContent = `Tabla ordenada por ${col.t}, orden ${orden.dir === 'ascending' ? 'ascendente' : 'descendente'}.`;
+      $('#estado-orden').textContent = I18N.t('table_sorted', {
+        column: tituloColumna(col),
+        direction: I18N.t(orden.dir === 'ascending' ? 'ascending' : 'descending')
+      });
     });
   }
 
@@ -185,13 +189,17 @@
     // Líder dinámico: mayor retorno total
     const lider = porMax(series, s => s.m.retorno_total_pct);
     const col = COLUMNAS.find(c => c.id === orden.col);
-    const filas = [...series];
+    let filas = [...series];
     if (col) {
-      filas.sort((x, y) => {
-        const a = col.v(x), c = col.v(y);
-        const r = col.texto ? String(a).localeCompare(String(c), 'es') : a - c;
-        return r === 0 ? x.idx - y.idx : (orden.dir === 'ascending' ? r : -r);
-      });
+      if (col.texto) {
+        filas = I18N.sort(filas, x => String(col.v(x)));
+        if (orden.dir === 'descending') filas.reverse();
+      } else {
+        filas.sort((x, y) => {
+          const r = col.v(x) - col.v(y);
+          return r === 0 ? x.idx - y.idx : (orden.dir === 'ascending' ? r : -r);
+        });
+      }
     }
     // aria-sort en los encabezados
     document.querySelectorAll('#fila-th th').forEach(th => th.setAttribute('aria-sort', th.dataset.col === orden.col ? orden.dir : 'none'));

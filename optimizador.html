@@ -3,31 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Optimizador de portafolios · Ernesto Investing AI</title>
+<title data-i18n="optimizer_title">Optimizador de portafolios · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="optimizador">
 <main>
   <div class="head">
     <div>
-      <h1>Optimizador de portafolios</h1>
-      <p class="mut">Compara la frontera de Markowitz con los frentes NSGA-II y NSGA-III. Selecciona un portafolio para ver sus pesos y métricas.</p>
+      <h1 data-i18n="optimizer_title">Optimizador de portafolios</h1>
+      <p class="mut" data-i18n="optimizer_intro">Compara la frontera de Markowitz con los frentes NSGA-II y NSGA-III. Selecciona un portafolio para ver sus pesos y métricas.</p>
     </div>
   </div>
-  <p class="aviso top-aviso" role="note"><strong>NSGA-II y NSGA-III simulados: no se ejecutó ningún algoritmo evolutivo.</strong> Los puntos de los frentes simulados provienen del archivo de datos.</p>
+  <p class="aviso top-aviso" role="note" data-i18n="optimizer_notice">NSGA-II y NSGA-III simulados: no se ejecutó ningún algoritmo evolutivo. Los puntos de los frentes simulados provienen del archivo de datos.</p>
 
   <div id="app" hidden>
-    <section class="controles card" aria-label="Controles del gráfico">
+    <section class="controles card" aria-label="Controles del gráfico" data-i18n-aria="chart_controls">
       <fieldset>
-        <legend>Universo de Markowitz</legend>
-        <div class="pills" role="group" aria-label="Seleccionar universo de activos">
-          <label><input type="radio" name="modo-mk" value="u"> Universo completo</label>
-          <label><input type="radio" name="modo-mk" value="e" checked> Solo elegibles</label>
+        <legend data-i18n="markowitz_universe">Universo de Markowitz</legend>
+        <div class="pills" role="group" aria-label="Seleccionar universo de activos" data-i18n-aria="markowitz_universe">
+          <label><input type="radio" name="modo-mk" value="u"> <span data-i18n="all_universe">Universo completo</span></label>
+          <label><input type="radio" name="modo-mk" value="e" checked> <span data-i18n="eligible_only">Solo elegibles</span></label>
         </div>
       </fieldset>
       <fieldset>
-        <legend>Series visibles</legend>
-        <div class="toggles" id="toggles" role="group" aria-label="Mostrar u ocultar series">
+        <legend data-i18n="visible_series">Series visibles</legend>
+        <div class="toggles" id="toggles" role="group" aria-label="Mostrar u ocultar series" data-i18n-aria="toggle_series">
           <button type="button" id="chk-mk" aria-pressed="true">Markowitz</button>
           <button type="button" id="chk-n2" aria-pressed="true">NSGA-II</button>
           <button type="button" id="chk-n3" aria-pressed="true">NSGA-III</button>
@@ -37,51 +37,52 @@
 
     <div class="zona">
       <figure class="card grafico">
-        <div id="grafico" tabindex="0" role="application" aria-label="Gráfico de dispersión riesgo y retorno. Flechas izquierda y derecha recorren puntos, arriba y abajo cambian de serie, Enter selecciona y Escape cierra la información."></div>
+        <div id="grafico" tabindex="0" role="application" aria-label="Gráfico de dispersión riesgo y retorno. Flechas izquierda y derecha recorren puntos, arriba y abajo cambian de serie, Enter selecciona y Escape cierra la información." data-i18n-aria="scatter_chart"></div>
         <figcaption id="leyenda"></figcaption>
         <p class="verificacion" id="verif-global" aria-live="polite"></p>
         <p class="sr" id="anuncio" aria-live="polite"></p>
       </figure>
       <aside class="card detalle" id="detalle" tabindex="-1" aria-labelledby="det-tit">
-        <h2 id="det-tit">Punto seleccionado</h2>
+        <h2 id="det-tit" data-i18n="selected_point">Punto seleccionado</h2>
         <div id="det-cuerpo" aria-live="polite" aria-atomic="true"></div>
       </aside>
     </div>
 
     <section class="card bloque" aria-labelledby="tit-metodos">
-      <h2 id="tit-metodos">Qué optimiza cada método</h2>
+      <h2 id="tit-metodos" data-i18n="optimize_methods">Qué optimiza cada método</h2>
       <div class="explica">
-        <div><h3>Markowitz</h3><p>Para cada nivel de retorno esperado busca la combinación de activos con menor volatilidad posible, con pesos que suman 100 % y un tope por activo.</p></div>
-        <div><h3>NSGA-II</h3><p>Algoritmo genético multiobjetivo que aproxima la frontera buscando más retorno y menos volatilidad. Aquí está simulado; no se ejecutó.</p></div>
-        <div><h3>NSGA-III</h3><p>Frente simulado con CVaR 95 % diario, que representa la pérdida promedio en el 5 % de los peores días y se muestra mediante color y tamaño de punto.</p></div>
+        <div><h3>Markowitz</h3><p data-i18n="markowitz_description">Para cada nivel de retorno esperado busca la combinación de activos con menor volatilidad posible, con pesos que suman 100 % y un tope por activo.</p></div>
+        <div><h3>NSGA-II</h3><p data-i18n="nsga2_description">Algoritmo genético multiobjetivo que aproxima la frontera buscando más retorno y menos volatilidad. Aquí está simulado; no se ejecutó.</p></div>
+        <div><h3>NSGA-III</h3><p data-i18n="nsga3_description">Frente simulado con CVaR 95 % diario, que representa la pérdida promedio en el 5 % de los peores días y se muestra mediante color y tamaño de punto.</p></div>
       </div>
       <div class="porque">
-        <p><strong>Nota metodológica.</strong> Los frentes NSGA-II y NSGA-III están precalculados en el archivo de datos; esta página no ejecuta algoritmos evolutivos.</p>
+        <p data-i18n="method_note">Nota metodológica. Los frentes NSGA-II y NSGA-III están precalculados en el archivo de datos; esta página no ejecuta algoritmos evolutivos.</p>
       </div>
     </section>
     <section class="card bloque" aria-labelledby="tit-elegibles">
-      <h2 id="tit-elegibles">Activos elegibles</h2>
+      <h2 id="tit-elegibles" data-i18n="eligible_assets">Activos elegibles</h2>
       <p class="criterio" id="criterio"></p>
-      <ul class="chips" id="lista-elegibles" aria-label="Lista de activos elegibles"></ul>
+      <ul class="chips" id="lista-elegibles" aria-label="Lista de activos elegibles" data-i18n-aria="eligible_assets_list"></ul>
       <p class="crudo" id="params"></p>
     </section>
     <section class="card bloque">
       <details>
-        <summary>Tabla de puntos (alternativa al gráfico)</summary>
-        <p class="mut" style="margin:.3rem 0 .6rem;font-size:.9rem">Lista los puntos de las series visibles. Usa «Ver pesos» para consultar un portafolio.</p>
-        <div class="envoltura" role="region" aria-label="Tabla de puntos; tabla desplazable" tabindex="0"><table id="tabla-puntos"></table></div>
+        <summary data-i18n="points_table">Tabla de puntos (alternativa al gráfico)</summary>
+        <p class="mut" style="margin:.3rem 0 .6rem;font-size:.9rem" data-i18n="points_table_help">Lista los puntos de las series visibles. Usa «Ver pesos» para consultar un portafolio.</p>
+        <div class="envoltura" role="region" aria-label="Tabla de puntos; tabla desplazable" data-i18n-aria="points_table" tabindex="0"><table id="tabla-puntos"></table></div>
       </details>
     </section>
     <section class="card cta" aria-label="Siguiente paso">
-      <a class="btn primary" href="portafolios.html">Comparar portafolios →</a>
+      <a class="btn primary" href="portafolios.html" data-i18n="compare_portfolios">Comparar portafolios →</a>
     </section>
   </div>
   <div id="mensaje" role="status" aria-live="polite"></div>
 </main>
 <footer class="pie">
-  <p>Los datos son sintéticos y simulados con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
+  <p data-i18n="synthetic_notice">Los datos son sintéticos y simulados con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/optimizador.js"></script>
 </body>

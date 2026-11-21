@@ -1,80 +1,236 @@
-/* Ernesto Investing AI - Núcleo compartido de los módulos.
-   Material educativo; datos SINTÉTICOS.
-   Aquí viven: navegación, tema claro/oscuro, idioma (ES-PE / EN-US con Intl) y estado compartido. */
-
-const PAGES=[
- ["index.html","dashboard"],["watchlist.html","watchlist"],["trading.html","trading"],["leaderboard.html","leaderboard"],
- ["clasificacion.html","clasificacion",1],["regresion.html","regresion",1],["optimizador.html","optimizador",1],["portafolios.html","portafolios",1],["backtesting.html","backtesting",1],
- ["perfil.html","perfil"],["configuracion.html","configuracion"],["ayuda.html","ayuda"],["acerca.html","acerca"]];
-const LOCALES=["es-PE","en-US","ar-EG","ja-JP","qu-PE"];
-const TIMEZONES=["America/Lima","America/New_York","Africa/Cairo","Asia/Tokyo","UTC"];
-
-/* Textos del armazón (barra superior, aviso, errores). El contenido de cada módulo sigue en español. */
-const I18N={
- "es-PE":{skip:"Saltar al contenido",navLabel:"Módulos del sistema",tema:"Tema",temaTitulo:"Cambiar tema claro/oscuro",idioma:"Idioma",
-  pages:{dashboard:"Dashboard",watchlist:"Watchlist y alertas",trading:"Trading simulado",leaderboard:"Leaderboard",clasificacion:"Clasificación",regresion:"Regresión 30 días",optimizador:"Optimizador",portafolios:"Portafolios",backtesting:"Backtesting",perfil:"Perfil",configuracion:"Configuración",ayuda:"Ayuda",acerca:"Acerca de"},
-  aviso:"Material educativo con datos <strong>sintéticos</strong> (patrones realistas, precios anclados al cierre del 11-nov-2026). No son precios reales ni asesoría de inversión. Los pronósticos, clasificaciones, NSGA-II/III y backtesting de este prototipo están <strong>simulados</strong>.",
-  err:"Abra el sitio desde un servidor (GitHub Pages o <code>python -m http.server</code>), no con doble clic."},
- "en-US":{skip:"Skip to content",navLabel:"System modules",tema:"Theme",temaTitulo:"Switch light/dark theme",idioma:"Language",
-  pages:{dashboard:"Dashboard",watchlist:"Watchlist & alerts",trading:"Simulated trading",leaderboard:"Leaderboard",clasificacion:"Classification",regresion:"30-day regression",optimizador:"Optimizer",portafolios:"Portfolios",backtesting:"Backtesting",perfil:"Profile",configuracion:"Settings",ayuda:"Help",acerca:"About"},
-  aviso:"Educational material with <strong>synthetic</strong> data (realistic patterns, prices anchored to the 11-Nov-2026 close). These are not real prices or investment advice. Forecasts, classifications, NSGA-II/III and backtesting in this prototype are <strong>simulated</strong>. Module content is shown in Spanish.",
-  err:"Open the site from a server (GitHub Pages or <code>python -m http.server</code>), not by double-clicking the file."}
-};
-const $=(s,r=document)=>r.querySelector(s);
-function store(k,v){ try{ if(v===undefined){const s=localStorage.getItem(k);return s?JSON.parse(s):null} localStorage.setItem(k,JSON.stringify(v)) }catch(e){ return null } }
-const LOC=()=>{const l=store("eia_locale"),legacy=store("eia_lang");return LOCALES.includes(l)?l:(LOCALES.includes(legacy)?legacy:"es-PE")};
-const TZ=()=>{const z=store("eia_tz");return TIMEZONES.includes(z)?z:"America/Lima"};
-const TXT=()=>I18N[LOC()]||I18N["es-PE"];
-
-/* Formato numérico con Intl según el idioma elegido en la barra superior. */
-const fmt={
-  n:(x,d=2)=>Number(x).toLocaleString(LOC(),{minimumFractionDigits:d,maximumFractionDigits:d}),
-  pct:(x,d=2)=>(x>=0?"+":"")+Number(x).toLocaleString(LOC(),{minimumFractionDigits:d,maximumFractionDigits:d})+(LOC()==="en-US"?"%":" %"),
-  usd:x=>"US$ "+Number(x).toLocaleString(LOC(),{minimumFractionDigits:2,maximumFractionDigits:2}),
-  cls:x=>x>0?"up":(x<0?"dn":"mut")};
-
-/* Estado compartido entre módulos (todo en localStorage, solo en este navegador):
-   eia_theme · eia_locale · eia_tz · eia_ticker (activo seleccionado) · eia_pf (portafolio elegido)
-   eia_watch (watchlist) · eia_port (efectivo y posiciones del trading simulado) */
-const EIA={
-  lang:LOC,
-  timeZone:TZ,
-  formatDate(date,options={}){ return new Intl.DateTimeFormat(LOC(),{timeZone:TZ(),...options}).format(date); },
-  setLang(l){ if(LOCALES.includes(l)){const changed=l!==LOC();store("eia_locale",l);store("eia_lang",l);if(changed)location.reload();} },
-  setTheme(t){if(t==="dark"||t==="light"){applyTheme(t);store("eia_theme",t);const b=$("#tema");if(b)b.setAttribute("aria-pressed",t==="dark");if(window.onTheme)window.onTheme(t);}},
-  ticker:()=>store("eia_ticker"),
-  setTicker(t){ if(t) store("eia_ticker",String(t).toUpperCase()); },
-  portafolio:()=>store("eia_pf"),
-  setPortafolio(r){ store("eia_pf",r); },
-  watch:()=>store("eia_watch"),
-  trading:()=>store("eia_port")
-};
-window.EIA=EIA;
-
-const cache={};
-async function loadJSON(name){ if(cache[name]) return cache[name];
-  const r=await fetch("data/"+name); if(!r.ok) throw new Error("No se pudo leer data/"+name+" ("+r.status+")"); return cache[name]=await r.json(); }
-function applyTheme(t){ if(t==="dark"||t==="light") document.documentElement.setAttribute("data-theme",t); }
-
-function buildShell(){
-  document.documentElement.lang=LOC();
-  document.documentElement.dir=LOC()==="ar-EG"?"rtl":"ltr";
-  document.documentElement.dataset.timezone=TZ();
-  applyTheme(store("eia_theme"));
-  const t=TXT(), page=document.body.dataset.page;
-  const nav=PAGES.map(p=>`<li><a href="${p[0]}" ${p[1]===page?'aria-current="page"':''} class="${p[2]?'nuevo':''}">${t.pages[p[1]]}</a></li>`).join("");
-  const localeNames={"es-PE":"Español (Perú)","en-US":"English (US)","ar-EG":"العربية (مصر) — [Borrador]","ja-JP":"日本語 — [Borrador]","qu-PE":"Runasimi (Quechua) — [Borrador]"};
-  const opts=LOCALES.map(l=>`<option value="${l}" ${l===LOC()?"selected":""}>${localeNames[l]}</option>`).join("");
-  document.body.insertAdjacentHTML("afterbegin",`<a class="skip" href="#contenido">${t.skip}</a>
-  <header class="top"><div class="bar"><a class="brand" href="index.html">Ernesto <span>Investing AI</span></a>
-  <nav aria-label="${t.navLabel}"><ul>${nav}</ul></nav><span class="sp"></span>
-  <label class="sr-only" for="idioma">${t.idioma}</label><select id="idioma" class="idioma">${opts}</select>
-  <button id="tema" type="button" aria-pressed="false" title="${t.temaTitulo}">${t.tema}</button></div></header>`);
-  $("#idioma").addEventListener("change",e=>EIA.setLang(e.target.value));
-  const dark0=document.documentElement.getAttribute("data-theme")==="dark"||(!document.documentElement.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme:dark)").matches);
-  $("#tema").setAttribute("aria-pressed",dark0);
-  $("#tema").addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");EIA.setTheme(cur==="dark"?"light":"dark")});
-  const m=$("main"); if(m){m.id="contenido";m.insertAdjacentHTML("beforeend",`<p class="aviso" style="margin-top:2rem">${t.aviso}</p>`)}
+/* Ernesto Investing AI - navegación, preferencias compartidas y formato regional. */
+const PAGES = [
+  ["index.html", "nav_dash", "dashboard"], ["watchlist.html", "nav_watch", "watchlist"],
+  ["trading.html", "nav_trade", "trading"], ["leaderboard.html", "nav_lead", "leaderboard"],
+  ["clasificacion.html", "nav_clasif", "clasificacion", 1], ["regresion.html", "nav_reg", "regresion", 1],
+  ["optimizador.html", "nav_opt", "optimizador", 1], ["portafolios.html", "nav_port", "portafolios", 1],
+  ["backtesting.html", "nav_back", "backtesting", 1], ["perfil.html", "nav_perfil", "perfil"],
+  ["configuracion.html", "nav_config", "configuracion"], ["ayuda.html", "nav_ayuda", "ayuda"],
+  ["acerca.html", "nav_acerca", "acerca"]
+];
+const LOCALES = ["es-PE", "en-US", "ar-EG", "ja-JP", "qu-PE"];
+const TIMEZONES = ["America/Lima", "America/New_York", "Africa/Cairo", "Asia/Tokyo", "UTC"];
+const $ = (selector, root = document) => root.querySelector(selector);
+function store(key, value) {
+  try {
+    if (value === undefined) {
+      const saved = localStorage.getItem(key);
+      return saved === null ? null : JSON.parse(saved);
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+    return value;
+  } catch (_) {
+    return null;
+  }
 }
-function showError(e){ const m=$("main"); m.insertAdjacentHTML("afterbegin",`<p class="err" role="alert">${e.message}. ${TXT().err}</p>`)}
-document.addEventListener("DOMContentLoaded",()=>{buildShell(); if(window.init) Promise.resolve(window.init()).catch(showError)});
+const locale = () => LOCALES.includes(I18N.state().locale) ? I18N.state().locale : "es-PE";
+const timeZone = () => TIMEZONES.includes(I18N.state().tz) ? I18N.state().tz : "America/Lima";
+
+const fmt = {
+  n: (value, digits = 2) => I18N.num(Number(value), { minimumFractionDigits: digits, maximumFractionDigits: digits }),
+  pct: (value, digits = 2) => I18N.pct(Number(value) / 100, { minimumFractionDigits: digits, maximumFractionDigits: digits }),
+  usd: value => I18N.money(Number(value), "USD", { currencyDisplay: "code" }),
+  cls: value => value > 0 ? "up" : value < 0 ? "dn" : "mut"
+};
+const fmtMoney = (value) => fmt.usd(value);
+const fmtPct = (value, digits) => fmt.pct(value, digits);
+const fmtDate = (date, options) => I18N.dt(date, options);
+window.fmtMoney = fmtMoney;
+window.fmtPct = fmtPct;
+window.fmtDate = fmtDate;
+
+const EIA = {
+  lang: locale,
+  timeZone,
+  t: (key, vars) => I18N.t(key, vars),
+  num: (value, options) => I18N.num(value, options),
+  money: (value, currency = "USD", options) => I18N.money(value, currency, options),
+  pct: (value, options) => I18N.pct(value, options),
+  dt: (value, options) => I18N.dt(value, options),
+  sort: (items, selector) => I18N.sort(items, selector),
+  state: () => I18N.state(),
+  setLang(next) {
+    if (!LOCALES.includes(next)) return;
+    store("eia_locale", next);
+    store("eia_lang", next);
+    I18N.set({ locale: next });
+    I18N.apply();
+    location.reload();
+  },
+  setLocale(next) {
+    if (!LOCALES.includes(next)) return;
+    store("eia_locale", next);
+    store("eia_lang", next);
+    I18N.set({ locale: next });
+    I18N.apply();
+    refreshRegionalShell();
+  },
+  setTimeZone(next) {
+    if (!TIMEZONES.includes(next)) return;
+    store("eia_tz", next);
+    I18N.set({ tz: next });
+    refreshRegionalShell();
+  },
+  setPseudo(enabled) {
+    store("eia_pseudo", enabled ? "1" : "0");
+    I18N.set({ pseudo: !!enabled });
+    I18N.apply();
+    refreshRegionalShell();
+  },
+  refreshPreferences: refreshRegionalShell,
+  setTheme(theme) {
+    if (theme !== "dark" && theme !== "light") return;
+    applyTheme(theme);
+    store("eia_theme", theme);
+    const button = $("#tema");
+    if (button) button.setAttribute("aria-pressed", theme === "dark");
+    if (window.onTheme) window.onTheme(theme);
+  },
+  ticker: () => store("eia_ticker"),
+  setTicker(ticker) { if (ticker) store("eia_ticker", String(ticker).toUpperCase()); },
+  portafolio: () => store("eia_pf"),
+  setPortafolio(value) { store("eia_pf", value); },
+  watch: () => store("eia_watch"),
+  trading: () => store("eia_port")
+};
+window.EIA = EIA;
+
+const cache = {};
+async function loadJSON(name) {
+  if (cache[name]) return cache[name];
+  const response = await fetch("data/" + name);
+  if (!response.ok) throw new Error("No se pudo leer data/" + name + " (" + response.status + ")");
+  cache[name] = await response.json();
+  return cache[name];
+}
+function applyTheme(theme) {
+  if (theme === "dark" || theme === "light") document.documentElement.setAttribute("data-theme", theme);
+}
+function marketCloseText() {
+  const target = $("#market-close");
+  if (target) target.textContent = I18N.t("market_close", { time: I18N.dt(I18N.FIXTURE_UTC) });
+}
+function draftNotice() {
+  const notice = $("#draft-notice");
+  if (!notice) return;
+  const draft = ["ar-EG", "ja-JP", "qu-PE"].includes(locale());
+  notice.hidden = !draft;
+}
+function refreshRegionalShell() {
+  document.documentElement.lang = locale();
+  document.documentElement.dir = I18N.dir();
+  document.documentElement.dataset.timezone = timeZone();
+  const quick = $("#idioma");
+  if (quick) quick.value = locale();
+  const settingsLocale = $("#eia-locale");
+  if (settingsLocale) settingsLocale.value = locale();
+  const settingsTimezone = $("#eia-tz");
+  if (settingsTimezone) settingsTimezone.value = timeZone();
+  const pseudo = I18N.state().pseudo;
+  const button = $("#i18n-pseudo");
+  if (button) button.setAttribute("aria-pressed", String(pseudo));
+  const settingsPseudo = $("#eia-pseudo-button");
+  if (settingsPseudo) settingsPseudo.setAttribute("aria-pressed", String(pseudo));
+  I18N.apply();
+  draftNotice();
+  marketCloseText();
+}
+
+function buildShell() {
+  const currentPage = document.body.dataset.page;
+  const nav = PAGES.map(([href, key, page, isNew]) =>
+    `<li><a href="${href}" data-i18n="${key}" ${page === currentPage ? 'aria-current="page"' : ""} class="${isNew ? "nuevo" : ""}"></a></li>`
+  ).join("");
+  const labels = {
+    "es-PE": "Español (Perú)", "en-US": "English (US)", "ar-EG": "العربية (مصر)",
+    "ja-JP": "日本語", "qu-PE": "Runasimi (Quechua)"
+  };
+  const options = LOCALES.map(value => `<option value="${value}">${labels[value]}</option>`).join("");
+  document.body.insertAdjacentHTML("afterbegin", `
+    <a class="skip" href="#contenido" data-i18n="skip"></a>
+    <header class="top"><div class="bar">
+      <a class="brand" href="index.html">Ernesto <span>Investing AI</span></a>
+      <nav data-i18n-aria="nav_label"><ul>${nav}</ul></nav><span class="sp"></span>
+      <label class="sr-only" for="idioma" data-i18n="lang_label"></label>
+      <select id="idioma" class="idioma" aria-label="Idioma">${options}</select>
+      <button id="i18n-pseudo" type="button" aria-pressed="false" data-i18n="pseudo" data-i18n-title="pseudo_title"></button>
+      <button id="tema" type="button" aria-pressed="false" data-i18n="theme" data-i18n-title="theme_title"></button>
+    </div></header>
+    <p id="draft-notice" class="aviso" role="note" data-i18n="draft_notice" hidden></p>`);
+
+  const skipLink = $(".skip");
+  skipLink.style.position = "fixed";
+  skipLink.style.insetInlineStart = "1rem";
+  skipLink.style.insetBlockStart = "-999px";
+  skipLink.addEventListener("focus", () => { skipLink.style.insetBlockStart = "1rem"; });
+  skipLink.addEventListener("blur", () => { skipLink.style.insetBlockStart = "-999px"; });
+
+  const main = $("main");
+  if (main) {
+    main.id = "contenido";
+    main.insertAdjacentHTML("beforeend", `
+      <p class="aviso" style="margin-top:2rem" data-i18n="synthetic_notice"></p>
+      <p class="mut" id="market-close" role="status" aria-live="polite"></p>`);
+  }
+  I18N.apply();
+  refreshRegionalShell();
+  const theme = store("eia_theme");
+  applyTheme(theme);
+  const prefersDark = matchMedia("(prefers-color-scheme:dark)").matches;
+  $("#tema").setAttribute("aria-pressed", theme ? theme === "dark" : prefersDark);
+  $("#idioma").addEventListener("change", event => EIA.setLang(event.target.value));
+  $("#i18n-pseudo").addEventListener("click", () => EIA.setPseudo(!I18N.state().pseudo));
+  $("#tema").addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || (prefersDark ? "dark" : "light");
+    EIA.setTheme(current === "dark" ? "light" : "dark");
+  });
+}
+function showError(error) {
+  const main = $("main");
+  if (main) {
+    const notice = document.createElement("p");
+    notice.className = "err";
+    notice.setAttribute("role", "alert");
+    notice.textContent = error.message + ". " + I18N.t("load_error");
+    main.prepend(notice);
+  }
+}
+async function initializeI18n() {
+  const locales = ["es-PE", "en-US", "ar-EG", "ja-JP", "qu-PE"];
+  const dictionaries = await Promise.all(locales.map(async code => {
+    const response = await fetch("locales/" + code + ".json");
+    if (!response.ok) throw new Error("No se pudo cargar locales/" + code + ".json (" + response.status + ")");
+    return [code, await response.json()];
+  }));
+  const loaded = {};
+  dictionaries.forEach(([code, dictionary]) => { loaded[code] = dictionary; });
+  I18N.load(loaded);
+
+  const params = new URLSearchParams(location.search);
+  const savedLocale = store("eia_locale") || store("eia_lang") || "es-PE";
+  const requestedLocale = params.get("locale");
+  const selectedLocale = LOCALES.includes(requestedLocale) ? requestedLocale :
+    (LOCALES.includes(savedLocale) ? savedLocale : "es-PE");
+  const savedTimezone = store("eia_tz");
+  const selectedTimezone = TIMEZONES.includes(savedTimezone) ? savedTimezone : "America/Lima";
+  const savedPseudo = store("eia_pseudo");
+  const requestedPseudo = params.get("pseudo");
+  const pseudo = requestedPseudo === "1" ? true : requestedPseudo === "0" ? false :
+    (savedPseudo === true || savedPseudo === "1" || savedPseudo === 1);
+  I18N.set({ locale: selectedLocale, tz: selectedTimezone, pseudo });
+  document.documentElement.lang = selectedLocale;
+  document.documentElement.dir = selectedLocale === "ar-EG" ? "rtl" : "ltr";
+  store("eia_locale", selectedLocale);
+  store("eia_tz", selectedTimezone);
+  store("eia_pseudo", pseudo ? "1" : "0");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    await initializeI18n();
+    buildShell();
+    if (window.init) await window.init();
+  } catch (error) {
+    showError(error);
+  }
+});

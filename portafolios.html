@@ -3,46 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portafolios de 3 niveles de riesgo · Ernesto Investing AI</title>
+<title data-i18n="portfolios_title">Portafolios de 3 niveles de riesgo · Ernesto Investing AI</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="portafolios">
 <main>
-  <h1>Portafolios de 3 niveles de riesgo</h1>
+  <h1 data-i18n="portfolios_title">Portafolios de 3 niveles de riesgo</h1>
 
   <!-- 1. Aviso superior -->
   <p class="aviso pf-banner" id="pf-banner">
     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-    <span>Composiciones basadas en señales sintéticas de Clasificación y Regresión. No son recomendaciones de inversión.</span>
+    <span data-i18n="portfolios_notice">Composiciones basadas en señales sintéticas de Clasificación y Regresión. No son recomendaciones de inversión.</span>
   </p>
   <p class="mut pf-meta" id="pf-meta"></p>
   <div id="pf-errores"></div>
 
   <!-- 2. Tarjetas de nivel (las rellena js/portafolios.js desde el JSON) -->
-  <div class="pf-grid" id="pf-tarjetas" role="group" aria-label="Niveles de riesgo. Seleccione uno para ver su detalle"></div>
+  <div class="pf-grid" id="pf-tarjetas" role="group" aria-label="Niveles de riesgo. Seleccione uno para ver su detalle" data-i18n-aria="risk_levels"></div>
 
   <!-- 3. Panel inferior: detalle del nivel seleccionado -->
   <section class="card pf-detalle" aria-labelledby="det-titulo">
     <div class="pf-det-cab">
       <div>
-        <h2 class="pf-det-tit" id="det-titulo">Detalle seleccionado</h2>
+        <h2 class="pf-det-tit" id="det-titulo" data-i18n="selected_detail">Detalle seleccionado</h2>
         <p class="pf-det-nombre" id="det-nombre" aria-live="polite" aria-atomic="true"></p>
         <p class="mut pf-det-desc" id="det-desc"></p>
       </div>
-      <button type="button" class="pf-ir" id="btn-trading">Llevar a Trading <span aria-hidden="true">→</span></button>
+      <button type="button" class="pf-ir" id="btn-trading"><span data-i18n="carry_trading">Llevar a Trading</span> <span aria-hidden="true">→</span></button>
     </div>
     <!-- 4. Notificación accesible (debe existir vacía desde la carga para que se anuncie) -->
     <div class="pf-toast" id="pf-toast" role="status" aria-live="polite" aria-atomic="true"></div>
-    <div class="tw pf-tw" role="region" aria-label="Tabla de detalle del portafolio seleccionado" tabindex="0">
+    <div class="tw pf-tw" role="region" aria-label="Tabla de detalle del portafolio seleccionado" data-i18n-aria="portfolio_detail_region" tabindex="0">
       <table class="pf-tabla">
         <caption class="sr-only" id="det-caption"></caption>
         <thead>
           <tr>
-            <th scope="col">Activo</th>
-            <th scope="col">Peso</th>
-            <th scope="col">Grupo</th>
-            <th scope="col">Razón de inclusión</th>
-            <th scope="col">Señales relacionadas</th>
+            <th scope="col" data-i18n="asset">Activo</th>
+            <th scope="col" data-i18n="weight">Peso</th>
+            <th scope="col" data-i18n="group">Grupo</th>
+            <th scope="col" data-i18n="reason">Razón de inclusión</th>
+            <th scope="col" data-i18n="related_signals">Señales relacionadas</th>
           </tr>
         </thead>
         <tbody id="det-cuerpo"></tbody>
@@ -52,9 +52,9 @@
 
   <!-- 5. Tabla alternativa de pesos para lectores de pantalla -->
   <details class="card pf-alt" id="pf-alt">
-    <summary>Tabla alternativa de pesos por activo y nivel</summary>
-    <p class="mut">Misma información que los gráficos de dona, en formato de tabla.</p>
-    <div class="tw pf-tw" role="region" aria-label="Tabla de pesos por activo y nivel de riesgo" tabindex="0">
+    <summary data-i18n="alternative_weights">Tabla alternativa de pesos por activo y nivel</summary>
+    <p class="mut" data-i18n="same_chart_table">Misma información que los gráficos de dona, en formato de tabla.</p>
+    <div class="tw pf-tw" role="region" aria-label="Tabla de pesos por activo y nivel de riesgo" data-i18n-aria="weights_region" tabindex="0">
       <table id="alt-tabla"></table>
     </div>
   </details>
@@ -62,6 +62,7 @@
 
 <!-- ECharts 5.5.1 (única librería adicional) -->
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/common.js"></script>
 <script src="js/portafolios.js"></script>
 </body>

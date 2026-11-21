@@ -192,9 +192,10 @@
   // Tabla alternativa: matriz activo × nivel con los pesos completos del JSON
   function pintarAlternativa() {
     const ns = datos.niveles;
-    const filas = tickers
+    const alfabeto = I18N.sort(tickers, t => t);
+    const filas = alfabeto
       .map(t => ({ t, w: ns.map(n => n.pesos[t] || 0) }))
-      .sort((a, b) => suma(b.w) - suma(a.w) || a.t.localeCompare(b.t));
+      .sort((a, b) => suma(b.w) - suma(a.w));
     $('#alt-tabla').innerHTML =
       `<caption>Peso de cada activo por nivel de riesgo, datos al ${esc(fechaLarga(datos.fecha))}</caption>
        <thead><tr><th scope="col">Activo</th>${ns.map(n => `<th scope="col">${esc(n.nivel)}</th>`).join('')}</tr></thead>
@@ -245,7 +246,7 @@
     if (!datos || !Array.isArray(datos.niveles) || !datos.niveles.length) {
       throw new Error('El archivo data/' + ARCHIVO + ' no contiene niveles de portafolio');
     }
-    tickers = [...new Set(datos.niveles.flatMap(n => Object.keys(n.pesos)))].sort();
+    tickers = I18N.sort([...new Set(datos.niveles.flatMap(n => Object.keys(n.pesos)))], t => t);
     modelos = datos.niveles.map(modelar);
 
     $('#pf-meta').textContent = 'Datos al ' + fechaLarga(datos.fecha);

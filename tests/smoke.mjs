@@ -1,5 +1,5 @@
 /* Pruebas de humo del sitio integrado (Semana 13 · P07).
-   Abre las 9 páginas a 1280 px y a 390 px y reporta: errores de consola, errores de página,
+   Abre las 13 páginas a 1280 px y a 375 px y reporta: errores de consola, errores de página,
    solicitudes fallidas, desborde horizontal y elementos clave. Además verifica el estado
    compartido entre módulos y el selector de idioma.
 
@@ -16,7 +16,8 @@ const OFFLINE = process.env.OFFLINE === '1';
 const PAGES = [
   ['index.html', '#kpis .card'], ['watchlist.html', '#tb tr'], ['trading.html', '#f'], ['leaderboard.html', '#tb tr'],
   ['clasificacion.html', '#selTicker'], ['regresion.html', '#sel-activo'], ['optimizador.html', '#grafico'],
-  ['portafolios.html', '#btn-trading'], ['backtesting.html', '#tabla-met']
+  ['portafolios.html', '#btn-trading'], ['backtesting.html', '#tabla-met'], ['perfil.html', '#perfil-cash'],
+  ['configuracion.html', '#eia-save'], ['ayuda.html', 'details'], ['acerca.html', '#about-semilla']
 ];
 const ECHARTS_STUB = `window.echarts={init(){const c={setOption(){},resize(){},dispose(){},on(){},off(){},clear(){},dispatchAction(){},getZr(){return{on(){},off(){}}},getWidth(){return 800},getHeight(){return 400},isDisposed(){return false}};return c},registerTheme(){},graphic:{}}`;
 
@@ -34,7 +35,7 @@ async function nuevaPagina(ancho) {
   return { ctx, page, errores };
 }
 
-for (const ancho of [1280, 390]) {
+for (const ancho of [1280, 375]) {
   for (const [url, clave] of PAGES) {
     const { ctx, page, errores } = await nuevaPagina(ancho);
     await page.goto(BASE + url, { waitUntil: 'networkidle' });
@@ -48,7 +49,7 @@ for (const ancho of [1280, 390]) {
     const motivo = [];
     if (errores.length) motivo.push(errores.join(' | ').slice(0, 160));
     if (info.desborde > 1) motivo.push(`desborde horizontal ${info.desborde}px`);
-    if (info.nav !== 9) motivo.push(`nav con ${info.nav} enlaces`);
+    if (info.nav !== 13) motivo.push(`nav con ${info.nav} enlaces`);
     if (!info.skip) motivo.push('sin «Saltar al contenido»');
     if (!info.h1) motivo.push('sin h1');
     if (!info.aviso) motivo.push('sin aviso sintético');
