@@ -13,6 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description="Abrir Ernesto Investing AI en tu navegador.")
     parser.add_argument("--port", type=int, default=8000, help="Puerto inicial (8000 por defecto).")
     parser.add_argument("--no-browser", action="store_true", help="No abrir el navegador automaticamente.")
+    parser.add_argument("--multimodal", action="store_true", help="Abrir directamente camara y voz.")
     args = parser.parse_args()
     if not 1024 <= args.port <= 65525:
         parser.error("Usa un puerto entre 1024 y 65525.")
@@ -28,7 +29,7 @@ def main():
                 raise
     if server is None:
         parser.exit(1, "No hay un puerto libre. Prueba: python iniciar.py --port 9000\n")
-    url = "http://127.0.0.1:{}/".format(server.server_port)
+    url = "http://127.0.0.1:{}/".format(server.server_port) + ("interaccion.html" if args.multimodal else "")
     print("\nERNESTO INVESTING AI | Simulacion academica", flush=True)
     print("Abre: " + url, flush=True)
     print("Deja esta ventana abierta. Ctrl+C para detener.\n", flush=True)

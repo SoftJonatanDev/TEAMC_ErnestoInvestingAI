@@ -1,0 +1,70 @@
+[
+  {
+    "test": "No click until pointing posture arms the engine",
+    "passed": true
+  },
+  {
+    "test": "Short index/thumb pinch emits exactly one click",
+    "passed": true
+  },
+  {
+    "test": "Held moving pinch starts drag and releases without click",
+    "passed": true
+  },
+  {
+    "test": "Tracking loss cancels a pressed pinch without click",
+    "passed": true
+  },
+  {
+    "test": "Lost tracking cannot leave the cursor visible",
+    "passed": true
+  },
+  {
+    "test": "Open palm pauses and held index resumes",
+    "passed": true
+  },
+  {
+    "test": "Fist stops reading and cancels gesture",
+    "passed": true
+  },
+  {
+    "test": "Two fingers vertical travel chooses scroll only",
+    "passed": true
+  },
+  {
+    "test": "Two fingers horizontal travel chooses pan only",
+    "passed": true
+  },
+  {
+    "test": "Spreading INDEX AND MIDDLE emits zoom in (factor below one)",
+    "passed": true
+  },
+  {
+    "test": "Bringing the same two fingers together emits zoom out",
+    "passed": true
+  },
+  {
+    "test": "A chosen scroll is not also turned into zoom",
+    "passed": true
+  },
+  {
+    "test": "Cursor mapping respects calibration and mirror",
+    "passed": true
+  },
+  {
+    "test": "Invalid / missing landmark arrays are rejected",
+    "passed": true
+  },
+  {
+    "test": "Open-hand geometry classifies as palm",
+    "passed": true
+  },
+  {
+    "test": "Normalized finger separation is invariant to uniform hand scale",
+    "passed": true
+  },
+  {
+    "test": "World coordinates remove camera depth scaling from zoom measure",
+    "passed": true
+  }
+]

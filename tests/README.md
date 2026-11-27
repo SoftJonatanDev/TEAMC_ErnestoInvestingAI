@@ -55,3 +55,32 @@ sincronizacion de capital/drawdown. No sustituye el motor grafico.
 Se actualizo la asercion de periodo en offline_flows.py: ahora espera 504 puntos
 cargados y una ventana visible de 20 al seleccionar 1M, en lugar de eliminar datos.
 Los reportes de esta entrega se conservan en docs/qa/ con prefijo graficas-.
+
+
+## Camara y voz (v3.0)
+
+La aplicacion no necesita Node ni Playwright para ejecutarse. Estos comandos
+son exclusivamente para reproducir pruebas de desarrollo:
+
+```bash
+node tests/multimodal_gestures.cjs
+node tests/multimodal_devices.cjs
+python tests/multimodal_http.py
+python tests/multimodal_browser.py
+python tests/multimodal_interaction.py
+```
+
+Los dos scripts Node usan solo modulos nativos. La prueba HTTP usa Python
+estandar. Las pruebas del navegador usan las dependencias de requirements.txt.
+Admiten CHROMIUM_PATH, chromium/chromium-browser en PATH o el Chromium de
+Playwright instalado por `python -m playwright install chromium`.
+
+`multimodal_harness.py` carga el codigo real del host y las pantallas, pero
+sustituye el transporte debido a la restriccion de HTTP del navegador del entorno.
+`multimodal_devices.cjs` usa dobles de camara/voz; no acredita inferencia del
+modelo, webcam fisica ni audio audible. `multimodal_interaction.py` conecta
+caracteristicas gestuales sinteticas al adaptador real de graficas/formularios.
+
+Consulta docs/VALIDACION_MULTIMODAL.md para los resultados exactos, los limites
+de estas pruebas y la lista de verificaciones manuales. Las evidencias finales
+entregadas estan en docs/qa/multimodal/; ejecutar pruebas genera test-results/.

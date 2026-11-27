@@ -1,0 +1,105 @@
+[
+  {
+    "test": "Clasificacion comparte el activo elegido",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Clasificacion enlaza el mismo activo a Regresion",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Regresion recibe NVDA",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Filtro de familia DL",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Quitar modelos no destruye el grafico",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Seleccion multiple de modelos",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cono de volatilidad visible",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Optimizador muestra un punto de ejemplo inicial",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Seleccion del optimizador mediante teclado",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Ocultar NSGA-III actualiza el grafico",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Portafolio elegido guardado",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Trading muestra perfil guardado",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Elegir perfil no ejecuta compras automaticamente",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting conserva aviso del perfil",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Ocultar una serie modifica capital y drawdown",
+    "passed": true,
+    "detail": {
+      "before": 7,
+      "after": 6
+    }
+  },
+  {
+    "test": "Graficos de capital y drawdown renderizados",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Interacciones analiticas sin excepciones JS",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "Menu movil visible",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Fondo inerte durante navegacion movil",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Escape restaura interaccion movil",
+    "passed": true,
+    "detail": null
+  }
+]

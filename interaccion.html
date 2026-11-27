@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es-PE" class="mm-root" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Ernesto: control gestual por cámara y lector contextual opcional."><title>Ernesto | Cámara y voz</title><link rel="icon" href="assets/favicon.svg"><link rel="stylesheet" href="css/premium.css"><link rel="stylesheet" href="css/multimodal.css"></head>
+<body class="mm-host">
+<a class="mm-skip" href="#mm-panel">Ir a controles de asistencia</a>
+<iframe id="mm-app" title="Ernesto Investing AI: aplicación interactiva" allow="camera 'none'; microphone 'none'"></iframe>
+<div id="mm-loading" class="mm-loading"><strong>Abriendo tu espacio de trabajo...</strong><p>La cámara y la voz están apagadas inicialmente.</p></div>
+<div id="mm-highlight" class="mm-highlight" hidden></div>
+<div id="mm-cursor" class="mm-cursor" aria-hidden="true" hidden><span></span><small id="mm-gesture-label">Apuntar</small></div>
+<div id="mm-notice" class="mm-notice" role="status" hidden></div>
+<aside id="mm-preview" class="mm-preview" aria-label="Vista local de la cámara" hidden>
+ <div class="mm-preview-bar"><span><i class="mm-live-dot"></i> CÁMARA LOCAL</span><button id="mm-preview-hide" class="icon-btn" aria-label="Ocultar vista previa">&minus;</button></div>
+ <div class="mm-video-wrap"><video id="mm-video" autoplay muted playsinline></video><canvas id="mm-skeleton" width="640" height="480" aria-hidden="true"></canvas><span id="mm-tracking-badge">Buscando mano</span></div>
+ <div class="mm-preview-footer"><span id="mm-fps">Sin seguimiento</span><span>Sin grabación</span></div>
+</aside>
+<aside id="mm-panel" class="mm-panel" role="region" aria-labelledby="mm-panel-title" tabindex="-1">
+ <header class="mm-panel-header"><span class="mm-orb" aria-hidden="true">e<span></span></span><div><h1 id="mm-panel-title">Ernesto Assist</h1><p>Manos libres. Datos claros.</p></div><button id="mm-panel-close" class="icon-btn" aria-label="Minimizar asistente">&times;</button></header>
+ <div class="mm-tabs" role="tablist" aria-label="Opciones de asistencia"><button role="tab" id="mm-tab-voice" aria-controls="mm-voice-panel" aria-selected="true" data-tab="voice">Asistente</button><button role="tab" id="mm-tab-camera" aria-controls="mm-camera-panel" aria-selected="false" data-tab="camera">Cámara</button><button role="tab" id="mm-tab-guide" aria-controls="mm-guide-panel" aria-selected="false" data-tab="guide">Gestos</button></div>
+ <div class="mm-panel-body">
+  <section id="mm-voice-panel" role="tabpanel" aria-labelledby="mm-tab-voice">
+   <div class="mm-context"><span class="eyebrow">LECTOR CONTEXTUAL</span><p id="mm-current-page">Tu espacio de trabajo</p><span class="mm-badge">Sin micrófono</span></div>
+   <p class="mm-intro">Escucha lo que estás viendo. El asistente utiliza el texto y los datos de la aplicación, sin inventar resultados.</p>
+   <button id="mm-voice-enable" class="primary full-width">Activar voz</button>
+   <p id="mm-voice-status" class="mm-status" role="status">Voz apagada</p>
+   <div class="mm-read-actions"><button id="mm-read-summary">Resumen de pantalla</button><button id="mm-read-page">Leer contenido completo</button><button id="mm-read-selection">Leer selección / elemento</button><button id="mm-read-chart">Describir gráfica</button></div>
+   <label for="mm-chart-choice">Gráfica para describir</label><select id="mm-chart-choice"><option value="">Se detectará al abrir un módulo</option></select>
+   <div class="mm-playback"><button id="mm-pause-voice" disabled>Pausar lectura</button><button id="mm-stop-voice">Detener</button></div>
+   <div class="mm-transcript"><div class="mm-transcript-header"><span id="mm-transcript-title">Texto del asistente</span><span id="mm-reading-progress"></span></div><p id="mm-transcript" tabindex="0">Activa la voz o pulsa una opción para preparar el texto. También funciona sin cámara.</p><p id="mm-current-sentence" hidden></p></div>
+   <details class="mm-settings"><summary>Preferencias de lectura</summary><label for="mm-voice-choice">Voz disponible en este dispositivo</label><select id="mm-voice-choice"><option>No hay voces cargadas</option></select><label class="mm-check"><input id="mm-remote" type="checkbox">Permitir voces remotas</label><p class="mm-small">Por defecto solo se usan voces locales. Una voz remota puede enviar el texto al proveedor del navegador; requiere tu autorización.</p>
+    <label for="mm-rate">Velocidad <output id="mm-rate-value">1.0x</output></label><input id="mm-rate" type="range" min="0.6" max="1.6" step="0.1" value="1">
+    <label for="mm-pitch">Tono <output id="mm-pitch-value">1.0</output></label><input id="mm-pitch" type="range" min="0.7" max="1.3" step="0.1" value="1">
+    <label for="mm-volume">Volumen <output id="mm-volume-value">85%</output></label><input id="mm-volume" type="range" min="0" max="1" step="0.05" value="0.85">
+    <label class="mm-check"><input id="mm-hover-read" type="checkbox">Leer al señalar durante 2 segundos</label><label class="mm-check"><input id="mm-auto-read" type="checkbox">Leer resumen al cambiar de módulo</label><label class="mm-check"><input id="mm-notify-read" type="checkbox">Leer confirmaciones y alertas</label><p class="mm-small">La lectura automática nunca hace clic ni confirma operaciones. Esc cancela voz y pausa gestos.</p>
+   </details>
+  </section>
+  <section id="mm-camera-panel" role="tabpanel" aria-labelledby="mm-tab-camera" hidden>
+   <div class="mm-context"><span class="eyebrow">INTERACCIÓN SIN CONTACTO</span><h2>Tu mano es el control.</h2><p>Una cámara. Una sola mano. Ratón y teclado siempre disponibles.</p></div>
+   <button id="mm-camera-enable" class="primary full-width">Activar cámara</button><p id="mm-camera-status" class="mm-status" role="status">Cámara apagada. No se capturan imágenes.</p>
+   <div class="mm-read-actions"><button id="mm-pause-hand" disabled>Pausar gestos</button><button id="mm-show-preview">Mostrar vista previa</button><button id="mm-calibrate" disabled>Calibrar área</button><button id="mm-reset-calibration">Restablecer área</button></div>
+   <div class="mm-private-note"><strong>Privacidad por diseño</strong><p>Las imágenes se procesan en este navegador. No se graban ni se envían. No se solicita micrófono. Al ocultar la pestaña, se apaga la cámara.</p></div>
+   <label for="mm-sensitivity">Sensibilidad <output id="mm-sensitivity-value">1.0x</output></label><input id="mm-sensitivity" type="range" min="0.6" max="1.6" step="0.1" value="1">
+   <label for="mm-smoothing">Respuesta del cursor <output id="mm-smoothing-value">0.32</output></label><input id="mm-smoothing" type="range" min="0.15" max="0.65" step="0.05" value="0.3"><p class="mm-small">Menor valor: más suavizado. Mayor valor: respuesta más rápida.</p>
+   <label class="mm-check"><input id="mm-mirror" type="checkbox" checked>Vista espejo y control intuitivo</label><p class="mm-small" id="mm-calibration-status">Área de movimiento predeterminada.</p>
+   <div class="mm-private-note"><strong>Recursos del seguimiento</strong><p id="mm-assets-info">Los recursos se descargan al activar la cámara. Necesitas conexión, salvo que los instales una vez con preparar_camara.py.</p></div>
+  </section>
+  <section id="mm-guide-panel" role="tabpanel" aria-labelledby="mm-tab-guide" hidden>
+   <div class="mm-context"><span class="eyebrow">GUÍA DE GESTOS</span><h2>Empieza con el índice.</h2><p>Muestra solo una mano, bien iluminada, dentro de la vista previa. Dobla los dedos que no uses.</p></div>
+   <dl class="mm-gesture-guide"><dt>Índice extendido</dt><dd>Mueve el cursor. Después de una pausa, mantenlo 1 segundo para reanudar.</dd><dt>Índice + pulgar: pinza corta</dt><dd>Junta y suelta para hacer clic. Mantener y mover arrastra gráficas y deslizadores.</dd><dt>Índice + medio: mueve juntos</dt><dd>Arriba o abajo: desplaza la página o panel. Sobre una gráfica, hacia los lados: recorre su historia.</dd><dt>Índice + medio: separa / acerca</dt><dd>Sobre una gráfica, sepáralos para acercar y júntalos para alejar. Usa los mismos dos dedos y la misma mano, sin el pulgar.</dd><dt>Palma abierta, medio segundo</dt><dd>Pausa los gestos sin apagar la vista previa. Índice durante 1 segundo para reanudar.</dd><dt>Puño cerrado</dt><dd>Cancela el gesto activo y detiene la lectura. No ejecuta el clic pendiente.</dd></dl>
+   <div class="mm-private-note"><strong>Un gesto a la vez</strong><p>El primer movimiento con dos dedos fija scroll, desplazamiento o zoom. Vuelve a un solo índice antes de cambiar de acción. No se permite salir del rango de datos; el eje vertical sigue siendo automático.</p></div>
+   <p class="mm-small">Para leer con el dedo, activa la voz y &laquo;Leer al señalar&raquo;. Para una orden final protegida, se piden dos pinzas separadas sobre Confirmar. Los formularios ofrecen teclado virtual y selectores accesibles.</p>
+   <p class="mm-small"><strong>Esc</strong>: detener lectura y pausar gestos. <strong>Alt + Mayús + A</strong>: abrir el asistente. <strong>Alt + Mayús + C</strong>: encender o apagar cámara.</p>
+   <p class="mm-small">El control solo actúa dentro de esta aplicación. Los permisos del navegador y otros controles del sistema necesitan ratón o teclado. La precisión depende de iluminación, cámara y postura; no reemplaza una pantalla táctil física.</p>
+  </section>
+ </div>
+ <footer class="mm-panel-footer"><i class="status-dot"></i><span>Opcional &middot; Sin modificar tus datos financieros</span></footer>
+</aside>
+<div id="mm-dock" class="mm-dock" role="group" aria-label="Controles de cámara y asistente">
+ <button id="mm-open" aria-controls="mm-panel" aria-expanded="true"><span class="mm-dock-mark">e</span><span>Asistente</span></button>
+ <button id="mm-camera-dock" aria-pressed="false"><span data-mm-icon="eye"></span><span>Cámara</span></button>
+ <button id="mm-voice-dock" aria-pressed="false"><span data-mm-icon="activity"></span><span>Voz</span></button>
+ <button id="mm-emergency" class="danger" title="Apagar cámara y detener voz" aria-label="Apagar cámara y detener voz"><span data-mm-icon="pause"></span></button>
+ <button id="mm-exit" class="icon-btn" aria-label="Salir del modo cámara y voz" title="Volver a la página normal">&times;</button>
+</div>
+<div id="mm-popup" class="mm-popup-backdrop" hidden><section class="mm-popup" role="dialog" aria-modal="true" aria-labelledby="mm-popup-title"><header><h2 id="mm-popup-title"></h2><button id="mm-popup-close" class="icon-btn" aria-label="Cerrar">&times;</button></header><div id="mm-popup-body"></div></section></div>
+<script src="js/ui.js"></script><script src="js/multimodal/gesture-engine.js"></script><script src="js/multimodal/reader.js"></script><script src="js/multimodal/input-bridge.js"></script><script src="js/multimodal/camera.js"></script><script src="js/multimodal/host.js"></script>
+</body></html>

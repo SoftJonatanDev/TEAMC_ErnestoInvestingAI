@@ -1,0 +1,117 @@
+[
+  {
+    "path": "data/01_universo_tickers.json",
+    "sha256": "2ee56b7baf5c60020db10de7b840206fcbe7cf25f63667ebf7daa863a8bcbec7",
+    "same_as_base": true
+  },
+  {
+    "path": "data/02_precios_sinteticos_504d.json",
+    "sha256": "81e406252ec7c53463a584cc7232005d7089e78a9a7345f45c26c2cfabbebf67",
+    "same_as_base": true
+  },
+  {
+    "path": "data/03_ohlcv_sintetico_120d.json",
+    "sha256": "1509e4c4f6a85a51645da4315c78e07b082a406c44435f107868c3fe850cf4f7",
+    "same_as_base": true
+  },
+  {
+    "path": "data/04_matriz_correlacion_covarianza.json",
+    "sha256": "fc9e8892238947b333d0e12ba9f39bb76f376ceac075d3164deb560758af522f",
+    "same_as_base": true
+  },
+  {
+    "path": "data/05_clasificadores_binarios.json",
+    "sha256": "09592a497926eb285b3c03e26162d92a8c813fa77163dc58ae1912becc2d8652",
+    "same_as_base": true
+  },
+  {
+    "path": "data/06_regresores_precio_30d.json",
+    "sha256": "43b5d51349ce280ee549aa88696279d16d51ca7046237dfa75f0b8c92f8cab65",
+    "same_as_base": true
+  },
+  {
+    "path": "data/07_optimizador_markowitz_nsga.json",
+    "sha256": "e976b30fb2de1bae4da3191cf195a142402af9baadbecfae996dc6685f196872",
+    "same_as_base": true
+  },
+  {
+    "path": "data/08_portafolios_3_niveles_riesgo.json",
+    "sha256": "adf38e5411254839659e0c074f9f0e7dcd38f30d41e89eb7ba186751016de3b6",
+    "same_as_base": true
+  },
+  {
+    "path": "data/09_backtesting_portafolios.json",
+    "sha256": "8f97d8aafda3ff6ae7bf2700ba5e6b0af6019ddf7470835505ee24e0ccaaafbd",
+    "same_as_base": true
+  },
+  {
+    "path": "data/10_dashboard_mercado.json",
+    "sha256": "64c55e6e45753f13147b58cb7dad34e6c20b9e348d14b36aa668383919da4584",
+    "same_as_base": true
+  },
+  {
+    "path": "data/11_watchlist_alertas_portafolio_demo.json",
+    "sha256": "7d50433bfdfe08fb045c0c5640467a67200a199f338188cc9bf4e81d3441fd1e",
+    "same_as_base": true
+  },
+  {
+    "path": "data/12_leaderboard_liga.json",
+    "sha256": "3776a2ebd369dda028a75c73d14fc938bb71f3826616b96721973c162aa9e777",
+    "same_as_base": true
+  },
+  {
+    "path": "data/13_patrones_y_parametros.json",
+    "sha256": "7765ca91430eeb8795731d333f273609533ff0bf3801d75b4bff99e4bfda2217",
+    "same_as_base": true
+  },
+  {
+    "path": "data/14_ohlcv_sintetico_504d.json",
+    "sha256": "ce8e28a7487ebe134439000881ddb6a10698604c67fceb3097e7340defb93737",
+    "same_as_base": true
+  },
+  {
+    "path": "js/chart-viewport.js",
+    "sha256": "2a1b7e1ce83848b2060022adda86823121ce18dd37aefb164423708117ba69ef",
+    "same_as_base": true
+  },
+  {
+    "path": "js/chart-bridge.js",
+    "sha256": "2577f7820b5194a225ad9f618a185b4930067550039ef97285beff5fa8d030ad",
+    "same_as_base": true
+  },
+  {
+    "path": "js/financial-chart.js",
+    "sha256": "d6b20f23d3bebd7c4958f556391c59d192cc3945024c13c41b246a48210c07b4",
+    "same_as_base": true
+  },
+  {
+    "path": "js/market.js",
+    "sha256": "5d71388acb680b0fc0d6c8ecc4b296d05377c5a54bdfd1884a6b37f1ce6c9135",
+    "same_as_base": true
+  },
+  {
+    "path": "js/clasificacion.js",
+    "sha256": "3565173410f1a6c0698e0a7ba9422a429a6cdbcb0f841b99c8a25d6109ca45e4",
+    "same_as_base": true
+  },
+  {
+    "path": "js/regresion.js",
+    "sha256": "33a058cca233fdabd5a77a284201966def22a8adbebc485b0f13f5e3dec65219",
+    "same_as_base": true
+  },
+  {
+    "path": "js/optimizador.js",
+    "sha256": "3b9591f39d4a84617bbcf8103916c99453b4624c0a2aacb052dee1fab86f6198",
+    "same_as_base": true
+  },
+  {
+    "path": "js/portafolios.js",
+    "sha256": "d96e353e91c8a18356b33e3bb569ed5e2b102332a43b987110b3c07a8e7f5741",
+    "same_as_base": true
+  },
+  {
+    "path": "js/backtesting.js",
+    "sha256": "75afa7569d06865934e2dd82c6a526d0d42e6436f961089a20a54435f395dc05",
+    "same_as_base": true
+  }
+]

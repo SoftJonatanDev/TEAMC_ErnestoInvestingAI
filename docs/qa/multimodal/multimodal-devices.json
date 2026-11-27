@@ -1,0 +1,125 @@
+{
+  "scope": "Deterministic device doubles; not a physical webcam, acoustic, or model accuracy test.",
+  "checks": [
+    {
+      "test": "Voice is OFF initially and preparing text never starts audio",
+      "passed": true
+    },
+    {
+      "test": "Prepared transcript remains available when voice is off",
+      "passed": true
+    },
+    {
+      "test": "Speech queue is segmented into bounded utterances",
+      "passed": true
+    },
+    {
+      "test": "Local Spanish voice is selected by default",
+      "passed": true
+    },
+    {
+      "test": "End event advances to next sentence exactly once",
+      "passed": true
+    },
+    {
+      "test": "Pause keeps queue and pauses synthesis",
+      "passed": true
+    },
+    {
+      "test": "Resume continues the same reading queue",
+      "passed": true
+    },
+    {
+      "test": "Stop invalidates pending callbacks and empties the queue",
+      "passed": true
+    },
+    {
+      "test": "Changing voice preferences cancels current speech safely",
+      "passed": true
+    },
+    {
+      "test": "Notifications do not interrupt ongoing narration",
+      "passed": true
+    },
+    {
+      "test": "Blocked browser audio reports an error with transcript preserved",
+      "passed": true
+    },
+    {
+      "test": "Disabling voice cancels and returns to OFF",
+      "passed": true
+    },
+    {
+      "test": "Remote-only voices are refused until user opt-in",
+      "passed": true
+    },
+    {
+      "test": "Remote voice becomes available only after opt-in",
+      "passed": true
+    },
+    {
+      "test": "Revoking remote consent prevents subsequent remote speech",
+      "passed": true
+    },
+    {
+      "test": "Missing system voices fail gracefully",
+      "passed": true
+    },
+    {
+      "test": "Insecure origin cannot request a camera",
+      "passed": true
+    },
+    {
+      "test": "Permission denial produces a recoverable error",
+      "passed": true
+    },
+    {
+      "test": "Camera requests explicitly disable microphone",
+      "passed": true
+    },
+    {
+      "test": "Cancelling pending permission stops any subsequently returned stream",
+      "passed": true
+    },
+    {
+      "test": "Successful camera lifecycle owns one video stream",
+      "passed": true
+    },
+    {
+      "test": "Worker results are delivered to the gesture callback",
+      "passed": true
+    },
+    {
+      "test": "Repeated activation cannot create a second stream",
+      "passed": true
+    },
+    {
+      "test": "Stop releases stream, worker, preview and pending frame state",
+      "passed": true
+    },
+    {
+      "test": "Device disconnection stops camera and reports an error",
+      "passed": true
+    },
+    {
+      "test": "Video startup failure does not leak the camera stream",
+      "passed": true
+    },
+    {
+      "test": "Model resource failure stops capture rather than leaving camera on",
+      "passed": true
+    },
+    {
+      "test": "Repeated inference errors trigger camera shutdown",
+      "passed": true
+    },
+    {
+      "test": "Default assets are version-pinned, not latest",
+      "passed": true
+    },
+    {
+      "test": "Local installation loads model and WASM from the same origin",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+[
+  {
+    "test": "Complete pinch sequence clicks an actual application button once",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Losing the tracked hand cancels a pending application click",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Index-middle separation reaches real chart zoom through the gesture engine",
+    "passed": true,
+    "detail": {
+      "before": [
+        443.5,
+        503.5
+      ],
+      "after": [
+        450.4071876606684,
+        496.87118766066845
+      ]
+    }
+  },
+  {
+    "test": "Closing the same index-middle pair zooms out",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Chart narration reflects currently selected visible period",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Private password text is excluded from contextual narration",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Two-second stable pointing reads actual component text",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Point-to-read never executes the pointed control",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Emergency shutdown needs only one virtual click",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Escape cancels narration without enabling camera",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Drawdown narration identifies percentage units",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Hiding the host triggers camera cleanup and reading cancellation",
+    "passed": true,
+    "detail": null
+  }
+]

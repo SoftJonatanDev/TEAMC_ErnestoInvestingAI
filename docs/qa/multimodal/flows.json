@@ -1,0 +1,179 @@
+[
+  {
+    "test": "Dashboard: 26 activos visibles",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Dashboard: cuatro indicadores",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Activo compartido persistido",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cambios de periodo y tipo conservan historial completo y ajustan la vista",
+    "passed": true,
+    "detail": {
+      "type": "scatter",
+      "n": 504,
+      "visible": 20
+    }
+  },
+  {
+    "test": "Filtro de tabla por empresa",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Estado vacio de busqueda",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Guardar activo en watchlist",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Filtro Mi watchlist",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Buscador global encuentra activo",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Escape cierra el buscador",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cambio al tema claro",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cantidad fraccionaria rechazada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Compra sin saldo rechazada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Revisar no ejecuta la orden",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Compra a mercado ejecutada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Efectivo y comision consistentes",
+    "passed": true,
+    "detail": {
+      "cash": 24290.07,
+      "fee": 0.71
+    }
+  },
+  {
+    "test": "Nueva posicion registrada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Conservacion del valor: spread y comision",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Venta sin acciones suficientes rechazada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Venta descuenta acciones y suma efectivo",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Orden limite no cruzada permanece pendiente",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Reserva de efectivo sin cobro prematuro",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cancelar libera la reserva",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Limite cruzada ejecuta al mejor precio simulado",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Watchlist persiste entre pantallas",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Selector de activos guarda MSFT",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Alerta configurable persistida",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Alerta se dispara y se desactiva",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Centro de notificaciones contiene eventos reales",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Notificaciones marcadas como leidas",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Historial persiste al cambiar de pantalla",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Leaderboard refleja operaciones ejecutadas",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Sin Sharpe ficticio para cuenta local",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Flujos principales sin excepciones de JavaScript",
+    "passed": true,
+    "detail": []
+  }
+]

@@ -1,0 +1,2037 @@
+[
+  {
+    "test": "Workspace starts with camera and voice OFF",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "No nested launcher inside persistent application",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Summary uses actual account and current module",
+    "passed": true,
+    "detail": "Panorama de mercado. Entorno educativo de datos sintéticos. Valor de tu cuenta virtual $57,473.40 +3.58% desde el inicio SPY / S&P 500 $757.66 +0.20% cambio demo QQQ / Nasdaq 100 $690.88 +2.33% cambio demo EPU / Perú $81.93 -1.42% cambio demo Apertura del tramo $351.61 Máximo del tramo $369.85 Mínimo del tramo $328.21 Volumen del tramo 2,677.49 M INTELIGENCIA EXPLICABLE AAPL: 5 de 18 modelos proyectan una subida. Explora el consenso, las probabilidades y las métricas detrás de la señal. Resultad"
+  },
+  {
+    "test": "Preparing text does not auto-enable speech",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Chart description includes synthetic nature and visible period",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "index: complete chart series still present",
+    "passed": true,
+    "detail": [
+      [
+        504,
+        null,
+        504
+      ],
+      [
+        504,
+        504,
+        null
+      ]
+    ]
+  },
+  {
+    "test": "index: gesture zoom narrows view with bounded X and fitted Y",
+    "passed": true,
+    "detail": {
+      "x": [
+        460.33933161953723,
+        487.33933161953723
+      ],
+      "y": [
+        325.099,
+        372.801
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 29,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "index: excessive gesture pan cannot create empty axes",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        26.5
+      ],
+      "y": [
+        216.7365,
+        253.2835
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 28,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "index: reverse pan also respects bounds",
+    "passed": true,
+    "detail": {
+      "x": [
+        476.5,
+        503.5
+      ],
+      "y": [
+        326.53825,
+        372.87175
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 28,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "index: maximum zoom-out cannot exceed data range",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        503.5
+      ],
+      "y": [
+        204.0915,
+        434.5285
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 504,
+      "min": 10,
+      "points": 504,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "index: maximum zoom-in enforces minimum span",
+    "passed": true,
+    "detail": {
+      "x": [
+        251.57969151670954,
+        261.57969151670954
+      ],
+      "y": [
+        346.08000000000004,
+        404.03999999999996
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 10,
+      "min": 10,
+      "points": 12,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "index: gesture navigation never changes series length",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "trading: complete chart series still present",
+    "passed": true,
+    "detail": [
+      [
+        504,
+        null,
+        504
+      ],
+      [
+        504,
+        504,
+        null
+      ]
+    ]
+  },
+  {
+    "test": "trading: gesture zoom narrows view with bounded X and fitted Y",
+    "passed": true,
+    "detail": {
+      "x": [
+        460.3510638297873,
+        487.3510638297873
+      ],
+      "y": [
+        325.099,
+        372.801
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 29,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "trading: excessive gesture pan cannot create empty axes",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        26.5
+      ],
+      "y": [
+        216.7365,
+        253.2835
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 28,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "trading: reverse pan also respects bounds",
+    "passed": true,
+    "detail": {
+      "x": [
+        476.5,
+        503.5
+      ],
+      "y": [
+        326.53825,
+        372.87175
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 27,
+      "min": 10,
+      "points": 28,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "trading: maximum zoom-out cannot exceed data range",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.49999999999994316,
+        503.5
+      ],
+      "y": [
+        204.0915,
+        434.5285
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 503.99999999999994,
+      "min": 10,
+      "points": 504,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "trading: maximum zoom-in enforces minimum span",
+    "passed": true,
+    "detail": {
+      "x": [
+        251.75531914893617,
+        261.7553191489362
+      ],
+      "y": [
+        346.08000000000004,
+        404.03999999999996
+      ],
+      "bounds": [
+        -0.5,
+        503.5
+      ],
+      "width": 10.000000000000057,
+      "min": 10,
+      "points": 12,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 504,
+      "series": [
+        [
+          504,
+          null,
+          504
+        ],
+        [
+          504,
+          504,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "trading: gesture navigation never changes series length",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "regresion: complete chart series still present",
+    "passed": true,
+    "detail": [
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ],
+      [
+        534,
+        534,
+        null
+      ]
+    ]
+  },
+  {
+    "test": "regresion: gesture zoom narrows view with bounded X and fitted Y",
+    "passed": true,
+    "detail": {
+      "x": [
+        424.75,
+        492.25
+      ],
+      "y": [
+        325.10875000000004,
+        399.80125
+      ],
+      "bounds": [
+        -0.5,
+        533.5
+      ],
+      "width": 67.5,
+      "min": 15,
+      "points": 70,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 534,
+      "series": [
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "regresion: excessive gesture pan cannot create empty axes",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        67
+      ],
+      "y": [
+        217.3065,
+        275.93350000000004
+      ],
+      "bounds": [
+        -0.5,
+        533.5
+      ],
+      "width": 67.5,
+      "min": 15,
+      "points": 68,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 534,
+      "series": [
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "regresion: reverse pan also respects bounds",
+    "passed": true,
+    "detail": {
+      "x": [
+        466,
+        533.5
+      ],
+      "y": [
+        326.69575000000003,
+        377.05424999999997
+      ],
+      "bounds": [
+        -0.5,
+        533.5
+      ],
+      "width": 67.5,
+      "min": 15,
+      "points": 689,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 534,
+      "series": [
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "regresion: maximum zoom-out cannot exceed data range",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        533.5
+      ],
+      "y": [
+        206.4615,
+        431.3785
+      ],
+      "bounds": [
+        -0.5,
+        533.5
+      ],
+      "width": 534,
+      "min": 15,
+      "points": 1155,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 534,
+      "series": [
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "regresion: maximum zoom-in enforces minimum span",
+    "passed": true,
+    "detail": {
+      "x": [
+        259,
+        274
+      ],
+      "y": [
+        318.11424999999997,
+        366.65575
+      ],
+      "bounds": [
+        -0.5,
+        533.5
+      ],
+      "width": 15,
+      "min": 15,
+      "points": 16,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 534,
+      "series": [
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ],
+        [
+          534,
+          534,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "regresion: gesture navigation never changes series length",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "optimizador: complete chart series still present",
+    "passed": true,
+    "detail": [
+      [
+        35,
+        35,
+        null
+      ],
+      [
+        40,
+        40,
+        null
+      ],
+      [
+        60,
+        60,
+        null
+      ],
+      [
+        1,
+        1,
+        null
+      ]
+    ]
+  },
+  {
+    "test": "optimizador: gesture zoom narrows view with bounded X and fitted Y",
+    "passed": true,
+    "detail": {
+      "x": [
+        16.468137499999997,
+        25.3018625
+      ],
+      "y": [
+        15.004249999999999,
+        20.30575
+      ],
+      "bounds": [
+        11.069749999999999,
+        30.70025
+      ],
+      "width": 8.833725000000001,
+      "min": 1.17783,
+      "points": 42,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 0,
+      "series": [
+        [
+          35,
+          35,
+          null
+        ],
+        [
+          40,
+          40,
+          null
+        ],
+        [
+          60,
+          60,
+          null
+        ],
+        [
+          1,
+          1,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "optimizador: excessive gesture pan cannot create empty axes",
+    "passed": true,
+    "detail": {
+      "x": [
+        11.069749999999999,
+        19.903474999999958
+      ],
+      "y": [
+        7.933749999999999,
+        18.45625
+      ],
+      "bounds": [
+        11.069749999999999,
+        30.70025
+      ],
+      "width": 8.833724999999959,
+      "min": 1.17783,
+      "points": 113,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 0,
+      "series": [
+        [
+          35,
+          35,
+          null
+        ],
+        [
+          40,
+          40,
+          null
+        ],
+        [
+          60,
+          60,
+          null
+        ],
+        [
+          1,
+          1,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "optimizador: reverse pan also respects bounds",
+    "passed": true,
+    "detail": {
+      "x": [
+        21.866525000000042,
+        30.70025
+      ],
+      "y": [
+        18.394,
+        21.246
+      ],
+      "bounds": [
+        11.069749999999999,
+        30.70025
+      ],
+      "width": 8.833724999999959,
+      "min": 1.17783,
+      "points": 15,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 0,
+      "series": [
+        [
+          35,
+          35,
+          null
+        ],
+        [
+          40,
+          40,
+          null
+        ],
+        [
+          60,
+          60,
+          null
+        ],
+        [
+          1,
+          1,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "optimizador: maximum zoom-out cannot exceed data range",
+    "passed": true,
+    "detail": {
+      "x": [
+        11.069750000000003,
+        30.70025
+      ],
+      "y": [
+        7.686999999999999,
+        21.993
+      ],
+      "bounds": [
+        11.069749999999999,
+        30.70025
+      ],
+      "width": 19.630499999999998,
+      "min": 1.17783,
+      "points": 135,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 0,
+      "series": [
+        [
+          35,
+          35,
+          null
+        ],
+        [
+          40,
+          40,
+          null
+        ],
+        [
+          60,
+          60,
+          null
+        ],
+        [
+          1,
+          1,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "optimizador: maximum zoom-in enforces minimum span",
+    "passed": true,
+    "detail": {
+      "x": [
+        20.296085,
+        21.473915
+      ],
+      "y": [
+        18.243000000000002,
+        18.537
+      ],
+      "bounds": [
+        11.069749999999999,
+        30.70025
+      ],
+      "width": 1.1778300000000002,
+      "min": 1.17783,
+      "points": 2,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 0,
+      "series": [
+        [
+          35,
+          35,
+          null
+        ],
+        [
+          40,
+          40,
+          null
+        ],
+        [
+          60,
+          60,
+          null
+        ],
+        [
+          1,
+          1,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "optimizador: gesture navigation never changes series length",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "backtesting: complete chart series still present",
+    "passed": true,
+    "detail": [
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ],
+      [
+        253,
+        253,
+        null
+      ]
+    ]
+  },
+  {
+    "test": "backtesting: gesture zoom narrows view with bounded X and fitted Y",
+    "passed": true,
+    "detail": {
+      "x": [
+        69.07499999999999,
+        182.925
+      ],
+      "y": [
+        78.0624,
+        118.55160000000001
+      ],
+      "bounds": [
+        -0.5,
+        252.5
+      ],
+      "width": 113.85000000000002,
+      "min": 10,
+      "points": 805,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 253,
+      "series": [
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "backtesting: excessive gesture pan cannot create empty axes",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        113.34999999999854
+      ],
+      "y": [
+        81.077575,
+        115.36942499999999
+      ],
+      "bounds": [
+        -0.5,
+        252.5
+      ],
+      "width": 113.84999999999854,
+      "min": 10,
+      "points": 805,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 253,
+      "series": [
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "backtesting: reverse pan also respects bounds",
+    "passed": true,
+    "detail": {
+      "x": [
+        138.65000000000146,
+        252.5
+      ],
+      "y": [
+        75.53055,
+        154.84145
+      ],
+      "bounds": [
+        -0.5,
+        252.5
+      ],
+      "width": 113.84999999999854,
+      "min": 10,
+      "points": 805,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 253,
+      "series": [
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "backtesting: maximum zoom-out cannot exceed data range",
+    "passed": true,
+    "detail": {
+      "x": [
+        -0.5,
+        252.5
+      ],
+      "y": [
+        75.53055,
+        154.84145
+      ],
+      "bounds": [
+        -0.5,
+        252.5
+      ],
+      "width": 253,
+      "min": 10,
+      "points": 1771,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 253,
+      "series": [
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "backtesting: maximum zoom-in enforces minimum span",
+    "passed": true,
+    "detail": {
+      "x": [
+        121,
+        131
+      ],
+      "y": [
+        89.7464,
+        116.2056
+      ],
+      "bounds": [
+        -0.5,
+        252.5
+      ],
+      "width": 10,
+      "min": 10,
+      "points": 77,
+      "within": true,
+      "fit": true,
+      "fixedY": true,
+      "total": 253,
+      "series": [
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ],
+        [
+          253,
+          253,
+          null
+        ]
+      ]
+    }
+  },
+  {
+    "test": "backtesting: gesture navigation never changes series length",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting group remains synchronized under gesture zoom",
+    "passed": true,
+    "detail": [
+      {
+        "id": "graf-capital",
+        "x": [
+          121,
+          131
+        ]
+      },
+      {
+        "id": "graf-dd",
+        "x": [
+          121,
+          131
+        ]
+      }
+    ]
+  },
+  {
+    "test": "Gesture on native select opens accessible choice panel",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Choice panel changes real asset selector",
+    "passed": true,
+    "detail": 26
+  },
+  {
+    "test": "Gesture on text field opens virtual keyboard",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Virtual keyboard filters actual market rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Only matching asset remains after virtual input",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original trading review still opens",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "First confirmation gesture is guarded, not executed",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Second explicit gesture executes one validated simulated order",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "watchlist: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "watchlist: contextual text is available",
+    "passed": true,
+    "detail": "Tu lista de seguimiento. Entorno educativo de datos sintéticos. Activos en seguimiento 5 Tu universo personal Alertas activas 3 Evaluadas en esta demo abierta Activos al alza 3 / 5"
+  },
+  {
+    "test": "leaderboard: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "leaderboard: contextual text is available",
+    "passed": true,
+    "detail": "Liga de inversores. Entorno educativo de datos sintéticos. Tu posición 03 de 11 participantes Tu retorno +3.59% Desde el capital virtual inicial Operaciones ejecutadas 1 Registrada"
+  },
+  {
+    "test": "clasificacion: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "clasificacion: contextual text is available",
+    "passed": true,
+    "detail": "Clasificación de tendencias. Entorno educativo de datos sintéticos. CONSENSO · MSFT ▲ SUBE ▲ SUBE 14 ▼ BAJA 4 Probabilidad media 55% Promedio de modelos visibles Confianza Media 18"
+  },
+  {
+    "test": "portafolios: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "portafolios: contextual text is available",
+    "passed": true,
+    "detail": "Portafolios por perfil. Entorno educativo de datos sintéticos. DETALLE SELECCIONADO Portafolio Moderado Maximiza el ratio de Sharpe del frente NSGA-II. Origen: NSGA-II N2-37 (simul"
+  },
+  {
+    "test": "perfil: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "perfil: contextual text is available",
+    "passed": true,
+    "detail": "Tu perfil de inversor. Entorno educativo de datos sintéticos. Efectivo disponible US$ 23,953.23 Valor de posiciones US$ 33,522.02 Activos en watchlist 5 Perfil de riesgo No selecci"
+  },
+  {
+    "test": "configuracion: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "configuracion: contextual text is available",
+    "passed": true,
+    "detail": "Tu espacio, a tu medida. Entorno educativo de datos sintéticos. Personaliza el idioma, la región y la apariencia. ERNESTO INVESTING AI Personaliza el idioma, la región y la aparien"
+  },
+  {
+    "test": "ayuda: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "ayuda: contextual text is available",
+    "passed": true,
+    "detail": "Centro de ayuda. Entorno educativo de datos sintéticos. Encuentra respuestas y descubre cómo funciona la simulación. ERNESTO INVESTING AI Encuentra respuestas y descubre cómo funci"
+  },
+  {
+    "test": "acerca: loads with persistent camera instance",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "acerca: contextual text is available",
+    "passed": true,
+    "detail": "Acerca de Ernesto. Entorno educativo de datos sintéticos. Tecnología, metodología y transparencia de los datos. ERNESTO INVESTING AI Tecnología, metodología y transparencia de los "
+  },
+  {
+    "test": "No JavaScript exceptions in desktop integration",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "Mobile host has no horizontal overflow",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Assistant fits the mobile viewport",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Gesture guide is available on mobile",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Dock remains available when assistant is minimized",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Host follows application light theme",
+    "passed": true,
+    "detail": null
+  }
+]

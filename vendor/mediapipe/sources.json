@@ -1,0 +1,1 @@
+{"mode":"cdn","version":"0.10.21","model_version":"float16/1","note":"Camera models load on explicit activation. Run preparar_camara.py to switch to fully local resources."}

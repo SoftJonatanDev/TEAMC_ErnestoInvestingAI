@@ -1,42 +1,57 @@
-ERNESTO INVESTING AI - INTERFAZ SIMULADA v2.1
+ERNESTO INVESTING AI - CAMARA Y VOZ v3.0
 
-1. Extrae TODO el ZIP. No abras archivos dentro del ZIP.
-2. Abre una terminal en esta carpeta (la que contiene iniciar.py).
-3. Ejecuta:
+1. Extrae TODO el ZIP en una carpeta nueva. No abras archivos dentro del ZIP.
+2. Abre una terminal en la carpeta que contiene iniciar.py.
+3. Inicia el modo nuevo:
 
-   Windows:     py iniciar.py
-   macOS/Linux: python3 iniciar.py
+   Windows:     py iniciar.py --multimodal
+   macOS/Linux: python3 iniciar.py --multimodal
 
-   Tambien puedes abrir INICIAR_WINDOWS.bat en Windows con Python 3 instalado.
-   El iniciador abre el navegador y muestra la direccion correcta en la terminal.
-   Deja esa terminal abierta. Ctrl+C detiene el servidor.
+   En Windows tambien puedes abrir INICIAR_MULTIMODAL_WINDOWS.bat.
+   Mantiene la terminal abierta. Ctrl+C detiene el servidor.
+   Se necesita Python 3; no necesitas npm, Node, base de datos ni claves API.
 
-ALTERNATIVA:
-   python -m http.server 8000 --bind 127.0.0.1
-   Abre http://127.0.0.1:8000
+4. En el navegador, abre Camara > Activar camara y acepta el permiso.
+   Este permiso inicial puede necesitar raton o teclado.
+5. Muestra una mano y extiende solo el indice. Usa Calibrar area.
+6. Abre Asistente > Activar voz para escuchar. La voz no necesita camara.
 
-IMPORTANTE:
-- La interfaz mejorada se abre desde ESTA carpeta, no desde figma-src.
-- No necesita npm, pnpm, Node.js, base de datos ni claves de API.
-- No abras index.html por doble clic: la carga de JSON necesita HTTP local.
-- Incluye graficos locales. No necesita Internet para funcionar.
-- Todos los precios dinamicos, ordenes y alertas son simulaciones educativas.
-- Si ya usaste una version anterior, Trading > Restablecer cuenta permite
-  empezar otra vez con el efectivo y las posiciones originales.
-- Usa la misma direccion, puerto y navegador para conservar tu cuenta local.
+GESTOS PRINCIPALES
+- Indice: mover el cursor.
+- Pulgar + indice: juntar y soltar para clic; mantener y mover para arrastrar.
+- Indice + medio: juntos arriba/abajo para scroll, lateral sobre una grafica
+  para recorrerla; separar/acercar esos mismos dedos para zoom.
+- Vuelve a un solo indice antes de cambiar entre desplazamiento y zoom.
+- Palma: pausar; indice durante 1 segundo: reanudar.
+- Puno: cancelar gesto y detener lectura.
+- Esc: pausa gestos y detiene voz. Boton de parada: apaga ambos.
 
-Mira README.md, CAMBIOS_INTERFAZ.md y docs/VALIDACION.md para mas detalles.
+CONEXION Y PRIVACIDAD
+- La camara esta apagada inicialmente y nunca pide microfono.
+- El seguimiento se procesa en el navegador: no se graban ni envian imagenes.
+- El ZIP NO incluye los binarios de MediaPipe. El modo predeterminado los
+  descarga de jsDelivr/Google al activar la camara y necesita conexion.
+- Para instalar esos recursos localmente, ejecuta UNA VEZ con Internet:
 
-NUEVO: GRAFICAS CON LIMITES
-- Arrastre horizontal acotado al inicio/fin de los datos; no cambia el zoom al llegar.
-- Escala vertical automatica: no puedes arrastrarla hacia zonas vacias.
-- Controles debajo del grafico: anterior/siguiente, posicion, +, -, Todo, Restablecer.
-- Doble clic restaura la vista inicial.
-- Dashboard/Trading: 504 sesiones, cierres originales y OHLCV anterior reconstruido.
-- Regresion: historia completa disponible, mismos 30 pronosticos originales.
-- Capital y drawdown se desplazan juntos en Backtesting.
-- Datos y resultados originales sin alteraciones.
-- Detalles y pruebas: CAMBIOS_GRAFICAS.md y docs/VALIDACION_GRAFICAS.md.
+   Windows:     py preparar_camara.py
+   macOS/Linux: python3 preparar_camara.py
 
-Extrae esta entrega en una carpeta nueva para no mezclar archivos de versiones.
-Si ya tenias la aplicacion abierta, recarga con Ctrl+F5. No necesitas borrar tu cuenta.
+  Despues recarga con Ctrl+F5. --verify comprueba la instalacion local.
+  No se garantiza que la cache del navegador permita trabajar sin conexion;
+  usa el instalador para una demostracion offline.
+- Las voces locales dependen del navegador/sistema. Las voces remotas estan
+  deshabilitadas por defecto; activarlas permite enviar texto al proveedor.
+- Al ocultar la pestana se apaga la camara. Para volver a usarla, activala otra vez.
+
+IMPORTANTE
+- Usa localhost/127.0.0.1 o HTTPS, nunca file://.
+- El control funciona dentro de la pagina, no sobre todo el sistema operativo.
+- No se puede asegurar precision de pantalla tactil: depende de camara y luz.
+- Para operar sin asistente, ejecuta iniciar.py sin --multimodal.
+- Conserva el mismo navegador, host y puerto para mantener tu cuenta virtual.
+- Todos los datos y operaciones siguen siendo simulaciones educativas.
+- La nueva entrega se ejecuta desde ESTA carpeta, no desde figma-src.
+
+Lee GUIA_CAMARA_Y_VOZ.md y docs/VALIDACION_MULTIMODAL.md.
+Las pruebas de logica usan entradas simuladas. No se valido una camara fisica,
+la inferencia del modelo descargable ni la voz audible en este entorno.

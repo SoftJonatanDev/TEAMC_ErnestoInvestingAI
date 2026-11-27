@@ -1,3 +1,27 @@
+# Cámara y voz · v3.0
+
+Esta entrega integra seguimiento de una mano y un lector contextual opcionales.
+Los datos financieros y el controlador de gráficas de v2.1 no se modifican.
+
+**Inicio directo:** `py iniciar.py --multimodal` (Windows) o
+`python3 iniciar.py --multimodal` (macOS/Linux). También puedes abrir
+`INICIAR_MULTIMODAL_WINDOWS.bat`. Desde cualquier pantalla normal, el botón
+**Cámara y voz** abre el mismo espacio de trabajo.
+
+**Importante:** el ZIP incluye la integración completa, pero no los binarios de
+MediaPipe. Por defecto se descargan de jsDelivr/Google al activar la cámara.
+Para instalarlos localmente y no depender de Internet después, ejecuta una vez
+`py preparar_camara.py` o `python3 preparar_camara.py` con conexión.
+El resto de la aplicación y sus gráficas continúan funcionando sin Internet.
+Las voces disponibles dependen de tu navegador y del sistema operativo.
+
+Consulta `GUIA_CAMARA_Y_VOZ.md`, `CAMBIOS_MULTIMODAL.md` y
+`docs/VALIDACION_MULTIMODAL.md`. La cámara física, el modelo descargable y el
+audio de tu dispositivo requieren verificación local; las pruebas automatizadas
+incluidas no sustituyen esa comprobación.
+
+---
+
 # Ernesto Investing AI
 ## Interfaz simulada de alta fidelidad - v2.1
 
