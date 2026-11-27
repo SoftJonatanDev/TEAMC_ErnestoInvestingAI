@@ -1,3 +1,5 @@
+> Informe de la entrega v2 anterior. La revision v2.1 y sus pruebas estan en `VALIDACION_GRAFICAS.md`.
+
 # Validación de la entrega
 
 Fecha de preparación: 27 de noviembre de 2026.

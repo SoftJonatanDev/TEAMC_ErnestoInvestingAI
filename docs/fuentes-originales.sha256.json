@@ -1,0 +1,15 @@
+{
+  "data/01_universo_tickers.json": "2ee56b7baf5c60020db10de7b840206fcbe7cf25f63667ebf7daa863a8bcbec7",
+  "data/02_precios_sinteticos_504d.json": "81e406252ec7c53463a584cc7232005d7089e78a9a7345f45c26c2cfabbebf67",
+  "data/03_ohlcv_sintetico_120d.json": "1509e4c4f6a85a51645da4315c78e07b082a406c44435f107868c3fe850cf4f7",
+  "data/04_matriz_correlacion_covarianza.json": "fc9e8892238947b333d0e12ba9f39bb76f376ceac075d3164deb560758af522f",
+  "data/05_clasificadores_binarios.json": "09592a497926eb285b3c03e26162d92a8c813fa77163dc58ae1912becc2d8652",
+  "data/06_regresores_precio_30d.json": "43b5d51349ce280ee549aa88696279d16d51ca7046237dfa75f0b8c92f8cab65",
+  "data/07_optimizador_markowitz_nsga.json": "e976b30fb2de1bae4da3191cf195a142402af9baadbecfae996dc6685f196872",
+  "data/08_portafolios_3_niveles_riesgo.json": "adf38e5411254839659e0c074f9f0e7dcd38f30d41e89eb7ba186751016de3b6",
+  "data/09_backtesting_portafolios.json": "8f97d8aafda3ff6ae7bf2700ba5e6b0af6019ddf7470835505ee24e0ccaaafbd",
+  "data/10_dashboard_mercado.json": "64c55e6e45753f13147b58cb7dad34e6c20b9e348d14b36aa668383919da4584",
+  "data/11_watchlist_alertas_portafolio_demo.json": "7d50433bfdfe08fb045c0c5640467a67200a199f338188cc9bf4e81d3441fd1e",
+  "data/12_leaderboard_liga.json": "3776a2ebd369dda028a75c73d14fc938bb71f3826616b96721973c162aa9e777",
+  "data/13_patrones_y_parametros.json": "7765ca91430eeb8795731d333f273609533ff0bf3801d75b4bff99e4bfda2217"
+}

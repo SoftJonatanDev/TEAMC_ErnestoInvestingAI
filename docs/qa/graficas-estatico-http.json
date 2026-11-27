@@ -1,0 +1,59 @@
+[
+  {
+    "test": "Local references and unique element ids: leaderboard.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: acerca.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: ayuda.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: optimizador.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: backtesting.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: trading.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: clasificacion.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: portafolios.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: watchlist.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: index.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: perfil.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: regresion.html",
+    "passed": true
+  },
+  {
+    "test": "Local references and unique element ids: configuracion.html",
+    "passed": true
+  },
+  {
+    "test": "HTTP serves all linked local assets, entry page and new data correctly",
+    "passed": true,
+    "detail": 24
+  }
+]

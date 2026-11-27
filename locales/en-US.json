@@ -137,7 +137,7 @@
   "next_step": "Next step",
   "view_regression": "View regression",
   "reg_title": "Price regression over 30 sessions",
-  "reg_description": "Compare 18 machine-learning (ML) and deep-learning (DL) models across the last 120 historical sessions, with the ensemble median and its p10–p90 band.",
+  "reg_description": "Compare 18 models with 504 historical sessions available and the original 30-session forecast. The initial view shows 120 historical sessions; the ensemble median and p10-p90 band are unchanged.",
   "forecast_notice": "Synthetic data · simulated forecast · not investment advice.",
   "forecast_summary": "Forecast summary",
   "projected_return": "Projected return over 30 sessions",

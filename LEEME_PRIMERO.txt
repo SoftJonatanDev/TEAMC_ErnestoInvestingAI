@@ -1,4 +1,4 @@
-ERNESTO INVESTING AI - INTERFAZ SIMULADA v2
+ERNESTO INVESTING AI - INTERFAZ SIMULADA v2.1
 
 1. Extrae TODO el ZIP. No abras archivos dentro del ZIP.
 2. Abre una terminal en esta carpeta (la que contiene iniciar.py).
@@ -26,3 +26,17 @@ IMPORTANTE:
 - Usa la misma direccion, puerto y navegador para conservar tu cuenta local.
 
 Mira README.md, CAMBIOS_INTERFAZ.md y docs/VALIDACION.md para mas detalles.
+
+NUEVO: GRAFICAS CON LIMITES
+- Arrastre horizontal acotado al inicio/fin de los datos; no cambia el zoom al llegar.
+- Escala vertical automatica: no puedes arrastrarla hacia zonas vacias.
+- Controles debajo del grafico: anterior/siguiente, posicion, +, -, Todo, Restablecer.
+- Doble clic restaura la vista inicial.
+- Dashboard/Trading: 504 sesiones, cierres originales y OHLCV anterior reconstruido.
+- Regresion: historia completa disponible, mismos 30 pronosticos originales.
+- Capital y drawdown se desplazan juntos en Backtesting.
+- Datos y resultados originales sin alteraciones.
+- Detalles y pruebas: CAMBIOS_GRAFICAS.md y docs/VALIDACION_GRAFICAS.md.
+
+Extrae esta entrega en una carpeta nueva para no mezclar archivos de versiones.
+Si ya tenias la aplicacion abierta, recarga con Ctrl+F5. No necesitas borrar tu cuenta.

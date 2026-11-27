@@ -40,3 +40,28 @@ dialog.modal{border:1px solid var(--bd);background:var(--panel);color:var(--fg);
 #market-panel .star-btn{width:20px!important;margin-inline-end:4px}#market-panel .asset-cell{gap:7px}#market-panel .asset-cell small{max-width:80px}#market-panel .asset-avatar.small{width:25px;height:25px;font-size:8px}
 #market-panel .pill{font-size:8px;padding:3px 5px}#market-panel td{font-size:10px}
 }
+
+/* Bounded chart navigation: mouse, touch, range input and keyboard. */
+.chart-navigation{padding:12px 18px 10px;border-top:1px solid var(--bd);background:var(--panel);min-width:0}
+.grafico>.chart-navigation,.bt-chart-card>.chart-navigation{padding-inline:0}
+.chart-navigation-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;min-width:0}
+.chart-window-status{font-size:10px;font-variant-numeric:tabular-nums;color:var(--fg);line-height:1.55;overflow-wrap:anywhere}
+.chart-scale-lock{font-size:9px;color:var(--ac);border:1px solid var(--bd);background:var(--bg);padding:4px 7px;border-radius:5px;white-space:nowrap}
+.chart-navigation-actions{display:flex;align-items:center;gap:6px;min-width:0}
+.chart-navigation-actions button{font-size:10px;min-width:29px;min-height:30px;padding:5px 9px;white-space:nowrap}
+.chart-navigation-actions button:disabled{opacity:.38;cursor:not-allowed}
+.chart-navigation-actions input.chart-position{appearance:auto;-webkit-appearance:auto;accent-color:var(--ac);flex:1;width:70px;min-width:28px;height:24px;padding:0;border:0;background:transparent;cursor:ew-resize}
+.chart-position:disabled{opacity:.35;cursor:default}
+.chart-navigation-hint{font-size:9px!important;color:var(--mut);margin:8px 0 0!important;line-height:1.6}
+.js-plotly-plot:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+@media(max-width:1180px){.chart-toolbox .chart-label{display:none}}
+@media(max-width:680px){
+ .chart-toolbox{flex-wrap:wrap;justify-content:flex-start;gap:8px}
+ .chart-toolbox #chart-ranges{margin-right:auto}.chart-toolbox #chart-reset{margin-left:auto}
+ .chart-navigation{padding:10px 12px}.chart-navigation-top{flex-wrap:wrap;gap:5px}
+ .chart-navigation-actions{flex-wrap:wrap}.chart-navigation-actions input.chart-position{flex-basis:calc(100% - 84px);order:0}
+ .chart-navigation-actions button{min-height:34px;padding:6px 10px}
+ .chart-navigation-hint{font-size:9px!important}.chart-scale-lock{padding:3px 6px}
+}
+.js-plotly-plot .nsewdrag,.js-plotly-plot .ewdrag{touch-action:pan-y;cursor:grab}
+.js-plotly-plot.chart-panning .nsewdrag,.js-plotly-plot.chart-panning .ewdrag{cursor:grabbing!important}

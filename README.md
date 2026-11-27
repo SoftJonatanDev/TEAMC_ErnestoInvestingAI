@@ -1,5 +1,5 @@
 # Ernesto Investing AI
-## Interfaz simulada de alta fidelidad - v2
+## Interfaz simulada de alta fidelidad - v2.1
 
 **Equipo C - Interaccion Humano-Computador, FISI-UNMSM.**
 
@@ -11,6 +11,23 @@ locales y una cuenta virtual compartida entre pantallas.
 > No es una plataforma de inversion real. No envia ordenes a un intermediario,
 > no conecta con mercados y no entrena modelos de IA. Los resultados analiticos
 > proceden de los JSON sinteticos suministrados. Sin dinero real ni asesoria financiera.
+
+## Actualizacion de graficas (v2.1)
+
+Los graficos de Dashboard, Trading, Regresion, Optimizador y Backtesting ya tienen
+limites de desplazamiento. Arrastrar contra un borde no cambia el zoom ni deja
+una ventana sin datos; Y se ajusta al tramo visible y no admite arrastre libre.
+La barra inferior permite desplazar, acercar, alejar, ver todo y restablecer.
+En las series temporales tambien puedes enfocar el grafico con Tab y usar
+flechas izquierda/derecha, Inicio, Fin, +, - y 0. Doble clic restaura la vista inicial.
+
+Dashboard y Trading incluyen 504 sesiones; Regresion ofrece esa misma historia
+mas las 30 proyecciones originales. Optimizador conserva los puntos originales.
+Capital y drawdown de Backtesting comparten exactamente el mismo intervalo.
+No se inventan proyecciones adicionales ni se extiende artificialmente un rendimiento.
+
+Consulta `CAMBIOS_GRAFICAS.md` y `docs/VALIDACION_GRAFICAS.md` para la procedencia
+de los datos nuevos, alcance, pruebas y limitaciones del entorno de validacion.
 
 ## Abrir la aplicacion
 
@@ -47,7 +64,9 @@ fuente del prototipo React original; no contiene el nuevo acabado de esta entreg
 ## Que puedes hacer
 
 - Explorar 26 activos, filtrar y ordenar la tabla, exportar CSV, guardar favoritos,
-  cambiar entre velas y lineas, y seleccionar 20, 60 o 120 sesiones historicas.
+  cambiar entre velas y lineas, y seleccionar 20, 60, 120, 252 o 504 sesiones historicas.
+  El historial completo permanece cargado: arrastre acotado, zoom, barra de posicion
+  y escala vertical automatica que impide perder las series fuera de la pantalla.
 - Buscar activos o pantallas con `Ctrl+K` / `Cmd+K`; consultar notificaciones reales
   de la simulacion y usar un menu lateral adaptable.
 - Comprar y vender acciones virtuales mediante ordenes a mercado o limite,
@@ -68,7 +87,11 @@ parcial, prioridad de mercado real ni garantias de liquidez.
 
 Las cotizaciones de demostracion varian cada cinco segundos con una funcion
 reproducible y acotada alrededor del snapshot del archivo. No son precios actuales.
-El historial OHLC permanece intacto, con corte al **11 de noviembre de 2026**.
+Los 13 archivos de datos originales permanecen intactos, con corte historico al
+**11 de noviembre de 2026**. El archivo adicional `14_ohlcv_sintetico_504d.json`
+conserva todos los cierres de la historia y las ultimas 120 velas originales;
+reconstruye unicamente apertura, maximo, minimo y volumen de 384 sesiones anteriores,
+de manera sintetica y reproducible. No agrega nuevas observaciones de mercado.
 La cotizacion dinamica y la ultima vela historica pueden diferir: estan etiquetadas
 por separado. Los resultados de Clasificacion, Regresion y Backtesting no se
 recalculan al cambiar esas cotizaciones.

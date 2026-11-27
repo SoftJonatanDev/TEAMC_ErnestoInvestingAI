@@ -37,3 +37,21 @@ navegacion HTTP del navegador. NO prueban persistencia nativa, concurrencia
 entre pestanas ni despliegue HTTP de extremo a extremo. Consulta
 `docs/VALIDACION.md` para distinguir lo ejecutado de lo pendiente.
 Los resultados se guardan en `test-results/`.
+
+## Graficas acotadas e integridad de datos (v2.1)
+
+```bash
+python tests/chart_data_integrity.py
+python tests/chart_navigation.py
+```
+
+La primera prueba solo usa Python estandar; verifica los SHA-256 de los 13 archivos
+originales, cierres, velas, anclas, bandas y resultados, y reproduce el nuevo historial.
+La segunda usa Playwright y el mismo transporte offline documentado arriba. Prueba
+arrastres reales de raton (tambien antes de soltar), tacto movil, limites, ausencia
+de zoom involuntario, escalado Y, selectores, resumenes, puntos del optimizador y
+sincronizacion de capital/drawdown. No sustituye el motor grafico.
+
+Se actualizo la asercion de periodo en offline_flows.py: ahora espera 504 puntos
+cargados y una ventana visible de 20 al seleccionar 1M, en lugar de eliminar datos.
+Los reportes de esta entrega se conservan en docs/qa/ con prefijo graficas-.

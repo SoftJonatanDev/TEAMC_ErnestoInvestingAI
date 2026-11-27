@@ -12,7 +12,7 @@
   // ---------- Constantes ----------
   var RUTA_REGRESORES = 'data/06_regresores_precio_30d.json';
   var RUTA_HISTORIA = 'data/02_precios_sinteticos_504d.json';
-  var N_HIST = 120;   // sesiones de historia visibles
+  var N_HIST = 504;   // historia completa disponible; la vista inicial usa 120 sesiones
   var N_PRON = 30;    // sesiones proyectadas
   var IDX_ULTIMO = N_HIST - 1; // posición del último cierre en el eje X
   var TOL_CENTAVO = 0.01;
@@ -259,7 +259,7 @@
   // ==========================================================================
   // Series del gráfico
   // ==========================================================================
-  // Devuelve un arreglo de 150 posiciones (120 historia + 30 pronóstico).
+  // Devuelve 534 posiciones (504 de historia + 30 de pronostico).
   // La posición del último cierre se "ancla" con el valor dado para que las líneas
   // proyectadas partan visualmente del último precio real.
   function rellenarPronostico(arr30, ancla) {
@@ -352,6 +352,7 @@
     var sinAnimacion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     grafico.setOption({
+      viewport: { key: 'regresion-' + estado.ticker, initialRange: [N_HIST - 120 - 0.5, N_HIST + N_PRON - 0.5], minSpan: 15, positive: true },
       animation: !sinAnimacion,
       textStyle: { color: css('--fg') },
       grid: { left: 64, right: 24, top: 24, bottom: 56, containLabel: true },

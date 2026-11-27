@@ -135,7 +135,7 @@
   "next_step": "Siguiente paso",
   "view_regression": "Ver regresión",
   "reg_title": "Regresión de precios a 30 sesiones",
-  "reg_description": "Compara los 18 modelos de aprendizaje automático (ML) y profundo (DL) sobre las últimas 120 sesiones históricas, con la mediana del ensamble y su banda p10–p90.",
+  "reg_description": "Compara los 18 modelos sobre 504 sesiones históricas disponibles y 30 de proyección. Vista inicial: 120 sesiones de historia; la mediana del ensamble y su banda p10–p90 no cambian.",
   "forecast_notice": "Datos sintéticos · pronóstico simulado · no es asesoría de inversión.",
   "forecast_summary": "Resumen del pronóstico",
   "projected_return": "Retorno proyectado a 30 sesiones",
