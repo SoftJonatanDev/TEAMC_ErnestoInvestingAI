@@ -45,7 +45,8 @@
   }
   function colorSerie(k) {
     if (k === 'mk_e') return css('--ac');
-    if (k === 'mk_u') return css('--ac2');
+    if (k === 'mk_u') return temaActual() === 'dark' ? '#c59cf7' : '#8b47b5';
+    if (k === 'n2') return css('--ac2');
     return css('--up');
   }
 
@@ -75,10 +76,10 @@
 
   function iniciar() {
     if (typeof echarts === 'undefined') {
-      mostrarError('No se cargó ECharts. Revisa tu conexión o aloja la librería localmente.');
+      mostrarError('No se pudo cargar el motor local de gráficos. Revisa la carpeta vendor.');
       return;
     }
-    fetch(RUTA_DATOS)
+    return fetch(RUTA_DATOS)
       .then(function (r) {
         if (!r.ok) throw new Error('No se pudo cargar ' + RUTA_DATOS + ' (HTTP ' + r.status + ')');
         return r.json();
@@ -162,6 +163,7 @@
     });
 
     actualizarTodo();
+    seleccionar('mk_e', Math.floor(estado.series.mk_e.puntos.length / 2), false);
   }
 
   function alCambiarSeries() {
@@ -526,6 +528,5 @@
   }
 
   // ---------- Inicio ----------
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar);
-  else iniciar();
+  window.init = iniciar;
 })();

@@ -44,7 +44,7 @@
     let positionValue = 0;
     const rows = positions.map((position) => {
       const market = dashboard.find((item) => item.ticker === position.ticker);
-      const last = market ? market.ultimo : position.costo;
+      const last = window.Market ? Market.quote(position.ticker).last : (market ? market.ultimo : position.costo);
       const value = last * position.cantidad;
       positionValue += value;
       const pnl = (last - position.costo) * position.cantidad;
@@ -72,15 +72,16 @@
     document.querySelector('#perfil-posiciones-tbody').innerHTML = rows ||
       '<tr><td colspan="5">' + (window.I18N ? window.I18N.t('cuenta.perfil.sin_posiciones') : 'No hay posiciones registradas.') + '</td></tr>';
 
-    document.querySelector('#perfil-reset').addEventListener('click', () => {
+    document.querySelector('#perfil-reset').onclick = async () => {
       const confirmation = window.I18N ? window.I18N.t('cuenta.perfil.confirmar_restablecer') :
         '¿Restablecer los datos locales de la simulación?';
-      if (!window.confirm(confirmation)) return;
+      if (!await UI.confirm('Restablecer la simulaci\u00f3n', confirmation, 'Restablecer', true)) return;
+      await Market.reset(true);
       ['eia_port', 'eia_watch', 'eia_pf', 'eia_ticker', 'portafolio_seleccionado'].forEach((key) => localStorage.removeItem(key));
       document.querySelector('#perfil-live').textContent = window.I18N ?
         window.I18N.t('cuenta.perfil.datos_restablecidos') : 'Datos locales de simulación restablecidos.';
       location.reload();
-    });
+    };
   }
 
   function initSettings() {
@@ -187,7 +188,7 @@
   window.init = async function () {
     applyRegionalState();
     normalizeTheme();
-    if (page === 'perfil') await initProfile();
+    if (page === 'perfil') { await initProfile(); window.addEventListener('market:tick', initProfile); window.addEventListener('market:state', initProfile); }
     if (page === 'configuracion') initSettings();
     if (page === 'acerca') await initAbout();
   };

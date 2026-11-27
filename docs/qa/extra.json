@@ -1,0 +1,80 @@
+[
+  {
+    "test": "Orden limite de venta reserva acciones",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "No se pueden vender dos veces acciones reservadas",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cancelar venta libera acciones",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Cantidad cero rechazada",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Restablecer cuenta recupera efectivo original",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Restablecer borra historial",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "index sin desborde a 320px",
+    "passed": true,
+    "detail": {
+      "width": 320
+    }
+  },
+  {
+    "test": "index sin excepciones a 320px",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "trading sin desborde a 320px",
+    "passed": true,
+    "detail": {
+      "width": 320
+    }
+  },
+  {
+    "test": "trading sin excepciones a 320px",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "regresion sin desborde a 768px",
+    "passed": true,
+    "detail": {
+      "width": 768
+    }
+  },
+  {
+    "test": "regresion sin excepciones a 768px",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "optimizador sin desborde a 1024px",
+    "passed": true,
+    "detail": {
+      "width": 1024
+    }
+  },
+  {
+    "test": "optimizador sin excepciones a 1024px",
+    "passed": true,
+    "detail": []
+  }
+]

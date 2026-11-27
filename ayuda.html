@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title data-i18n="cuenta.ayuda.titulo_documento">Ayuda · Ernesto Investing AI</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('eia_theme'))||'dark';}catch(e){document.documentElement.dataset.theme='dark';}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="css/styles.css">
   <style>
     :where(body[data-page="ayuda"]) .help-flow{display:grid;gap:1rem}
     :where(body[data-page="ayuda"]) .help-flow article{min-width:0}
@@ -14,7 +15,7 @@
     :where(body[data-page="ayuda"]) details p{padding:.75rem;margin:0;border-inline:1px solid var(--bd);border-block-end:1px solid var(--bd)}
     :where(body[data-page="ayuda"]) footer.pie{max-inline-size:78rem;margin-inline:auto;padding-inline:1rem;padding-block:1rem 2rem}
   </style>
-</head>
+<link rel="stylesheet" href="css/premium.css"></head>
 <body data-page="ayuda">
 <main>
   <h1 data-i18n="cuenta.ayuda.titulo">Centro de ayuda y guía de lectura</h1>
@@ -25,6 +26,7 @@
     <article class="card"><h2 data-i18n="cuenta.ayuda.portafolios">Portafolios por riesgo</h2><p data-i18n="cuenta.ayuda.portafolios_texto">Los niveles conservador, moderado y agresivo muestran composiciones simuladas. Revise pesos y razones antes de llevar una selección a Trading.</p></article>
     <article class="card"><h2 data-i18n="cuenta.ayuda.backtesting">Backtesting</h2><p data-i18n="cuenta.ayuda.backtesting_texto">El backtesting reproduce decisiones sobre series sintéticas pasadas. Compare métricas y evite asumir que el desempeño histórico garantiza resultados futuros.</p></article>
   </section>
+  <section class="card" aria-labelledby="demo-help-title"><h2 id="demo-help-title">Tu cuenta de demostración</h2><p>Compra al precio ASK y vende al BID, con una comisión simulada de 0.10 %. Revisa cada orden antes de confirmarla. Las órdenes límite pendientes reservan efectivo o acciones; al cancelarlas se libera la reserva.</p><p>Las cotizaciones cambian cada cinco segundos y pueden pausarse. El gráfico histórico conserva el corte del 11 de noviembre de 2026; no representa operaciones en vivo. Las alertas y órdenes pendientes solo se evalúan mientras la demo está abierta y la pestaña visible.</p><p>Usa <kbd>Ctrl</kbd> + <kbd>K</kbd> (o <kbd>Cmd</kbd> + <kbd>K</kbd>) para buscar un activo o una pantalla. <kbd>Escape</kbd> cierra buscadores y ventanas de confirmación. La campana muestra tus eventos, no noticias de mercado.</p><p>La cuenta se guarda en este navegador. Cambiar de host, puerto o navegador crea otro espacio local. En Trading puedes restablecer efectivo, posiciones e historial; desde Perfil puedes reiniciar también favoritos y alertas.</p></section>
   <section aria-labelledby="faq-titulo">
     <h2 id="faq-titulo" data-i18n="cuenta.ayuda.faq">Preguntas frecuentes</h2>
     <details><summary data-i18n="cuenta.ayuda.neutras_p">¿Por qué no hay señales neutras?</summary><p data-i18n="cuenta.ayuda.neutras_r">La clasificación contempla dos tendencias previstas, SUBE o BAJA. Los casos cercanos al empate deben interpretarse con cautela y no generan una tercera categoría neutra.</p></details>
@@ -34,7 +36,7 @@
 </main>
 <footer class="pie"><p data-i18n="cuenta.ayuda.footer">Esta guía explica el uso educativo del sistema; no constituye asesoría de inversión.</p></footer>
 <script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
+<script src="vendor/plotly.min.js"></script><script src="js/chart-bridge.js"></script><script src="js/ui.js"></script><script src="js/premium-shell.js"></script><script src="js/common.js"></script><script src="js/market.js"></script>
 <script src="js/cuenta.js"></script>
 </body>
 </html>

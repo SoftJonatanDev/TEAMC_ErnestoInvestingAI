@@ -85,6 +85,7 @@ const EIA = {
     const button = $("#tema");
     if (button) button.setAttribute("aria-pressed", theme === "dark");
     if (window.onTheme) window.onTheme(theme);
+    window.dispatchEvent(new CustomEvent("themechange"));
   },
   ticker: () => store("eia_ticker"),
   setTicker(ticker) { if (ticker) store("eia_ticker", String(ticker).toUpperCase()); },
@@ -137,63 +138,22 @@ function refreshRegionalShell() {
 }
 
 function buildShell() {
-  const currentPage = document.body.dataset.page;
-  const nav = PAGES.map(([href, key, page, isNew]) =>
-    `<li><a href="${href}" data-i18n="${key}" ${page === currentPage ? 'aria-current="page"' : ""} class="${isNew ? "nuevo" : ""}"></a></li>`
-  ).join("");
-  const labels = {
-    "es-PE": "Español (Perú)", "en-US": "English (US)", "ar-EG": "العربية (مصر)",
-    "ja-JP": "日本語", "qu-PE": "Runasimi (Quechua)"
-  };
-  const options = LOCALES.map(value => `<option value="${value}">${labels[value]}</option>`).join("");
-  document.body.insertAdjacentHTML("afterbegin", `
-    <a class="skip" href="#contenido" data-i18n="skip"></a>
-    <header class="top"><div class="bar">
-      <a class="brand" href="index.html">Ernesto <span>Investing AI</span></a>
-      <nav data-i18n-aria="nav_label"><ul>${nav}</ul></nav><span class="sp"></span>
-      <label class="sr-only" for="idioma" data-i18n="lang_label"></label>
-      <select id="idioma" class="idioma" aria-label="Idioma">${options}</select>
-      <button id="i18n-pseudo" type="button" aria-pressed="false" data-i18n="pseudo" data-i18n-title="pseudo_title"></button>
-      <button id="tema" type="button" aria-pressed="false" data-i18n="theme" data-i18n-title="theme_title"></button>
-    </div></header>
-    <p id="draft-notice" class="aviso" role="note" data-i18n="draft_notice" hidden></p>`);
-
-  const skipLink = $(".skip");
-  skipLink.style.position = "fixed";
-  skipLink.style.insetInlineStart = "1rem";
-  skipLink.style.insetBlockStart = "-999px";
-  skipLink.addEventListener("focus", () => { skipLink.style.insetBlockStart = "1rem"; });
-  skipLink.addEventListener("blur", () => { skipLink.style.insetBlockStart = "-999px"; });
-
-  const main = $("main");
-  if (main) {
-    main.id = "contenido";
-    main.insertAdjacentHTML("beforeend", `
-      <p class="aviso" style="margin-top:2rem" data-i18n="synthetic_notice"></p>
-      <p class="mut" id="market-close" role="status" aria-live="polite"></p>`);
-  }
+  PremiumShell.build();
   I18N.apply();
   refreshRegionalShell();
-  const theme = store("eia_theme");
-  applyTheme(theme);
-  const prefersDark = matchMedia("(prefers-color-scheme:dark)").matches;
-  $("#tema").setAttribute("aria-pressed", theme ? theme === "dark" : prefersDark);
-  $("#idioma").addEventListener("change", event => EIA.setLang(event.target.value));
-  $("#i18n-pseudo").addEventListener("click", () => EIA.setPseudo(!I18N.state().pseudo));
-  $("#tema").addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || (prefersDark ? "dark" : "light");
-    EIA.setTheme(current === "dark" ? "light" : "dark");
-  });
 }
 function showError(error) {
-  const main = $("main");
+  const main = document.querySelector('main');
   if (main) {
-    const notice = document.createElement("p");
-    notice.className = "err";
-    notice.setAttribute("role", "alert");
-    notice.textContent = error.message + ". " + I18N.t("load_error");
-    main.prepend(notice);
+    const box = document.createElement('section'); box.className = 'load-error'; box.setAttribute('role','alert');
+    const title = document.createElement('h2'); title.textContent = 'No se pudo abrir el espacio de trabajo';
+    const detail = document.createElement('p'); detail.textContent = error.message;
+    const help = document.createElement('p'); help.textContent = 'Ejecuta el proyecto desde su carpeta principal con el siguiente comando y abre localhost:8000 en el navegador.';
+    const cmd = document.createElement('pre'); cmd.textContent = 'python -m http.server 8000 --bind 127.0.0.1';
+    const btn = document.createElement('button'); btn.textContent = 'Volver a intentar'; btn.onclick = () => location.reload();
+    box.append(title,detail,help,cmd,btn); main.prepend(box);
   }
+  document.body.classList.add('app-ready');
 }
 async function initializeI18n() {
   const locales = ["es-PE", "en-US", "ar-EG", "ja-JP", "qu-PE"];
@@ -229,7 +189,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     await initializeI18n();
     buildShell();
+    await Market.init();
+    PremiumShell.connect();
     if (window.init) await window.init();
+    PremiumShell.ready();
   } catch (error) {
     showError(error);
   }

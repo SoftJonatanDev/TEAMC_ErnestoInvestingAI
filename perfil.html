@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title data-i18n="cuenta.perfil.titulo_documento">Perfil · Ernesto Investing AI</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('eia_theme'))||'dark';}catch(e){document.documentElement.dataset.theme='dark';}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="css/styles.css">
   <style>
     :where(body[data-page="perfil"]) .account-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
     :where(body[data-page="perfil"]) .account-grid>*{min-width:0}
@@ -15,7 +16,7 @@
     :where(body[data-page="perfil"]) .skip{inset-inline-start:-999px}
     :where(body[data-page="perfil"]) footer.pie{max-inline-size:78rem;margin-inline:auto;padding-inline:1rem;padding-block:1rem 2rem}
   </style>
-</head>
+<link rel="stylesheet" href="css/premium.css"></head>
 <body data-page="perfil">
 <main>
   <h1 data-i18n="cuenta.perfil.titulo">Perfil del inversor simulado</h1>
@@ -51,7 +52,7 @@
 </main>
 <footer class="pie"><p data-i18n="cuenta.perfil.footer">Los datos de esta pantalla son simulados y locales al navegador; no constituyen asesoría de inversión.</p></footer>
 <script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
+<script src="vendor/plotly.min.js"></script><script src="js/chart-bridge.js"></script><script src="js/ui.js"></script><script src="js/premium-shell.js"></script><script src="js/common.js"></script><script src="js/market.js"></script>
 <script src="js/cuenta.js"></script>
 </body>
 </html>

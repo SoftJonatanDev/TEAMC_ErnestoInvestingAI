@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title data-i18n="reg_title">Regresión de precios a 30 sesiones · Ernesto Investing AI</title>
-<link rel="stylesheet" href="css/styles.css">
+<script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('eia_theme'))||'dark';}catch(e){document.documentElement.dataset.theme='dark';}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/premium.css">
 </head>
 <body data-page="regresion">
 <main>
@@ -89,9 +90,9 @@
 <footer class="pie">
   <p data-i18n="synthetic_notice">Los datos de este módulo son sintéticos y simulados con fines educativos; no son precios reales ni constituyen asesoría de inversión.</p>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
 <script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
+<script src="vendor/plotly.min.js"></script><script src="js/chart-bridge.js"></script><script src="js/ui.js"></script><script src="js/premium-shell.js"></script><script src="js/common.js"></script><script src="js/market.js"></script>
 <script src="js/regresion.js"></script>
 </body>
 </html>

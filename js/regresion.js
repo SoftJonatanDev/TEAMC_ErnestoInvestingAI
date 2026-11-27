@@ -80,10 +80,10 @@
 
   function iniciar() {
     if (typeof echarts === 'undefined') {
-      mostrarError('No se cargó ECharts. Revisa tu conexión o aloja la librería localmente.');
+      mostrarError('No se pudo cargar el motor local de gráficos. Revisa la carpeta vendor.');
       return;
     }
-    Promise.all([cargarJSON(RUTA_REGRESORES), cargarJSON(RUTA_HISTORIA)])
+    return Promise.all([cargarJSON(RUTA_REGRESORES), cargarJSON(RUTA_HISTORIA)])
       .then(function (r) {
         estado.reg = r[0];
         estado.hist = r[1];
@@ -557,6 +557,5 @@
   };
 
   // ---------- Inicio ----------
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar);
-  else iniciar();
+  window.init = iniciar;
 })();

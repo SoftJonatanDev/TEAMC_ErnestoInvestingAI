@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title data-i18n="cuenta.acerca.titulo_documento">Acerca de · Ernesto Investing AI</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem('eia_theme'))||'dark';}catch(e){document.documentElement.dataset.theme='dark';}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="css/styles.css">
   <style>
     :where(body[data-page="acerca"]) .about-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
     :where(body[data-page="acerca"]) .about-grid>*{min-width:0}
     :where(body[data-page="acerca"]) footer.pie{max-inline-size:78rem;margin-inline:auto;padding-inline:1rem;padding-block:1rem 2rem}
   </style>
-</head>
+<link rel="stylesheet" href="css/premium.css"></head>
 <body data-page="acerca">
 <main>
   <h1 data-i18n="cuenta.acerca.titulo">Acerca de Ernesto Investing AI</h1>
   <p data-i18n="cuenta.acerca.descripcion">Ernesto Investing AI — Equipo C · IHC 2026-II · FISI-UNMSM</p>
 
+  <p class="aviso">Entorno local de demostración: las cotizaciones dinámicas, órdenes, alertas y resultados de la cuenta son simulados. No hay conexión con bolsas ni intermediarios. Los precios de referencia del archivo no son cotizaciones actuales verificadas.</p>
   <div class="about-grid">
     <section class="card" aria-labelledby="transparencia-titulo">
       <h2 id="transparencia-titulo" data-i18n="cuenta.acerca.transparencia">Transparencia y veracidad</h2>
@@ -35,7 +37,7 @@
 </main>
 <footer class="pie"><p data-i18n="cuenta.acerca.footer">Proyecto académico educativo; no es un servicio real de asesoría financiera.</p></footer>
 <script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
+<script src="vendor/plotly.min.js"></script><script src="js/chart-bridge.js"></script><script src="js/ui.js"></script><script src="js/premium-shell.js"></script><script src="js/common.js"></script><script src="js/market.js"></script>
 <script src="js/cuenta.js"></script>
 </body>
 </html>

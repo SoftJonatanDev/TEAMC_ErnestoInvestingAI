@@ -2,3 +2,8 @@
 Thumbs.db
 desktop.ini
 node_modules/
+
+# Generated local test output
+test-results/
+__pycache__/
+*.pyc
