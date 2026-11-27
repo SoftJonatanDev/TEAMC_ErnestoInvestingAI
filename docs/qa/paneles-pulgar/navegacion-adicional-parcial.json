@@ -1,0 +1,1143 @@
+{
+  "completed": false,
+  "reason": "Process exceeded 180-second execution limit; not counted as a completed suite.",
+  "checks": [
+    {
+      "test": "index: bounded initial view and fitted Y",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: complete underlying dataset loaded",
+      "passed": true,
+      "detail": 504
+    },
+    {
+      "test": "index: drag beyond right edge stops while held",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: hitting edge does not zoom",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: vertical drag cannot escape observations",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: zoom retains a nonempty fitted view",
+      "passed": true,
+      "detail": {
+        "x": [
+          454,
+          493
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "03 set. 2026 — 28 oct. 2026 · 40 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: diagonal drag moves X with continuous Y fit",
+      "passed": true,
+      "detail": {
+        "x": [
+          437.95886889460155,
+          476.95886889460155
+        ],
+        "y": [
+          322.9285,
+          403.9115
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 41,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "12 ago. 2026 — 05 oct. 2026 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: navigator first edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          38.5
+        ],
+        "y": [
+          215.90025,
+          265.26975
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 29 ene. 2025 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: navigator last edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          464.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "18 set. 2026 — 11 nov. 2026 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: invalid external ranges repaired",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          38.5
+        ],
+        "y": [
+          215.90025,
+          265.26975
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 29 ene. 2025 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: reset restores the selected initial window",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "index: double click restores view",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "index: all 504 candles reachable",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          503.5
+        ],
+        "y": [
+          204.0915,
+          434.5285
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 504,
+        "minSpan": 10,
+        "points": 504,
+        "initial": [
+          -0.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 11 nov. 2026 · 504 / 504 sesiones"
+      }
+    },
+    {
+      "test": "index: line mode preserves original closes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "index: 3M restored without data truncation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "All 26 assets keep a valid view on selection",
+      "passed": true,
+      "detail": [
+        [
+          "AAPL",
+          true
+        ],
+        [
+          "MSFT",
+          true
+        ],
+        [
+          "GOOGL",
+          true
+        ],
+        [
+          "AMZN",
+          true
+        ],
+        [
+          "NVDA",
+          true
+        ],
+        [
+          "META",
+          true
+        ],
+        [
+          "TSLA",
+          true
+        ],
+        [
+          "BVN",
+          true
+        ],
+        [
+          "FSM",
+          true
+        ],
+        [
+          "SCCO",
+          true
+        ],
+        [
+          "BHP",
+          true
+        ],
+        [
+          "B",
+          true
+        ],
+        [
+          "XLK",
+          true
+        ],
+        [
+          "XLF",
+          true
+        ],
+        [
+          "XLE",
+          true
+        ],
+        [
+          "XLV",
+          true
+        ],
+        [
+          "XLY",
+          true
+        ],
+        [
+          "XLP",
+          true
+        ],
+        [
+          "XLI",
+          true
+        ],
+        [
+          "XLU",
+          true
+        ],
+        [
+          "XLB",
+          true
+        ],
+        [
+          "XLRE",
+          true
+        ],
+        [
+          "XLC",
+          true
+        ],
+        [
+          "SPY",
+          true
+        ],
+        [
+          "QQQ",
+          true
+        ],
+        [
+          "EPU",
+          true
+        ]
+      ]
+    },
+    {
+      "test": "Dashboard summaries follow the exact visible candles",
+      "passed": true,
+      "detail": {
+        "actual": [
+          "$224.63",
+          "$273.39",
+          "$219.12",
+          "2,852.28 M"
+        ],
+        "expected": [
+          "$224.63",
+          "$273.39",
+          "$219.12",
+          "2,852.28 M"
+        ]
+      }
+    },
+    {
+      "test": "index: keyboard Home/End/reset stays inside data",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "index: no horizontal page overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: bounded initial view and fitted Y",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: complete underlying dataset loaded",
+      "passed": true,
+      "detail": 504
+    },
+    {
+      "test": "trading: drag beyond right edge stops while held",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: hitting edge does not zoom",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: vertical drag cannot escape observations",
+      "passed": true,
+      "detail": {
+        "x": [
+          443.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 60,
+        "minSpan": 10,
+        "points": 61,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "20 ago. 2026 — 11 nov. 2026 · 60 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: zoom retains a nonempty fitted view",
+      "passed": true,
+      "detail": {
+        "x": [
+          454,
+          493
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "03 set. 2026 — 28 oct. 2026 · 40 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: diagonal drag moves X with continuous Y fit",
+      "passed": true,
+      "detail": {
+        "x": [
+          437.40425531914894,
+          476.40425531914894
+        ],
+        "y": [
+          322.9285,
+          403.9115
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 41,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "12 ago. 2026 — 05 oct. 2026 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: navigator first edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          38.5
+        ],
+        "y": [
+          215.90025,
+          265.26975
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 29 ene. 2025 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: navigator last edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          464.5,
+          503.5
+        ],
+        "y": [
+          325.087,
+          372.973
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "18 set. 2026 — 11 nov. 2026 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: invalid external ranges repaired",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          38.5
+        ],
+        "y": [
+          215.90025,
+          265.26975
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 39,
+        "minSpan": 10,
+        "points": 40,
+        "initial": [
+          443.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 29 ene. 2025 · 39 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: reset restores the selected initial window",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: double click restores view",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: all 504 candles reachable",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          503.5
+        ],
+        "y": [
+          204.0915,
+          434.5285
+        ],
+        "bounds": [
+          -0.5,
+          503.5
+        ],
+        "span": 504,
+        "minSpan": 10,
+        "points": 504,
+        "initial": [
+          -0.5,
+          503.5
+        ],
+        "empty": false,
+        "total": 504,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 11 nov. 2026 · 504 / 504 sesiones"
+      }
+    },
+    {
+      "test": "trading: line mode preserves original closes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: 3M restored without data truncation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Trading changes ticker without changing bounds coverage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: keyboard Home/End/reset stays inside data",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "trading: no horizontal page overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "regresion: bounded initial view and fitted Y",
+      "passed": true,
+      "detail": {
+        "x": [
+          383.5,
+          533.5
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 150,
+        "minSpan": 15,
+        "points": 772,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "28 may. 2026 — 24 dic. 2026 · 150 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: complete underlying dataset loaded",
+      "passed": true,
+      "detail": 534
+    },
+    {
+      "test": "regresion: drag beyond right edge stops while held",
+      "passed": true,
+      "detail": {
+        "x": [
+          383.5,
+          533.5
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 150,
+        "minSpan": 15,
+        "points": 772,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "28 may. 2026 — 24 dic. 2026 · 150 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: hitting edge does not zoom",
+      "passed": true,
+      "detail": {
+        "x": [
+          383.5,
+          533.5
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 150,
+        "minSpan": 15,
+        "points": 772,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "28 may. 2026 — 24 dic. 2026 · 150 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: vertical drag cannot escape observations",
+      "passed": true,
+      "detail": {
+        "x": [
+          383.5,
+          533.5
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 150,
+        "minSpan": 15,
+        "points": 772,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "28 may. 2026 — 24 dic. 2026 · 150 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: zoom retains a nonempty fitted view",
+      "passed": true,
+      "detail": {
+        "x": [
+          409.75,
+          507.25
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 97.5,
+        "minSpan": 15,
+        "points": 221,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "03 jul. 2026 — 17 nov. 2026 · 98 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: diagonal drag moves X with continuous Y fit",
+      "passed": true,
+      "detail": {
+        "x": [
+          367.4735772357724,
+          464.9735772357724
+        ],
+        "y": [
+          324.23375,
+          420.77625
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 97.5,
+        "minSpan": 15,
+        "points": 99,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 may. 2026 — 17 set. 2026 · 97 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: navigator first edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          97
+        ],
+        "y": [
+          217.302,
+          275.998
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 97.5,
+        "minSpan": 15,
+        "points": 98,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 22 abr. 2025 · 98 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: navigator last edge",
+      "passed": true,
+      "detail": {
+        "x": [
+          436,
+          533.5
+        ],
+        "y": [
+          325.10875000000004,
+          399.80125
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 97.5,
+        "minSpan": 15,
+        "points": 719,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "10 ago. 2026 — 24 dic. 2026 · 98 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: invalid external ranges repaired",
+      "passed": true,
+      "detail": {
+        "x": [
+          -0.5,
+          38.5
+        ],
+        "y": [
+          218.2485,
+          262.4315
+        ],
+        "bounds": [
+          -0.5,
+          533.5
+        ],
+        "span": 39,
+        "minSpan": 15,
+        "points": 40,
+        "initial": [
+          383.5,
+          533.5
+        ],
+        "empty": false,
+        "total": 534,
+        "within": true,
+        "fit": true,
+        "fixedY": true,
+        "status": "06 dic. 2024 — 29 ene. 2025 · 39 / 534 puntos"
+      }
+    },
+    {
+      "test": "regresion: reset restores the selected initial window",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "regresion: double click restores view",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Regression last historical close anchors forecast at index 503",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Regression volatility cone included in fitted Y",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Regression keeps history and median with no individual model",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "test": "Regression complete 504+30 window and data boundary",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

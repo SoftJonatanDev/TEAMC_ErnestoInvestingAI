@@ -1,0 +1,202 @@
+[
+  {
+    "test": "Voice and camera start OFF",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Two independent named tool regions exist",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "There is no shared tab strip or tab panel",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Voice region contains no camera activation",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Camera region contains no voice activation",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Dock buttons target different panels",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Default voice panel is visible without requesting audio",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Desktop can show both panels at the same time",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Desktop panels do not overlap",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Opening camera settings does not enable the camera",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Closing voice leaves camera settings open",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Voice close restores focus to its own launcher",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Camera close restores focus to its own launcher",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Both tools can be minimized while dock remains usable",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Camera keyboard shortcut opens ONLY camera settings",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Voice keyboard shortcut opens voice settings independently",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Camera activation does not enable voice (device double)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Minimizing camera keeps its active state (device double)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Voice activation does not restart or stop camera (device doubles)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Minimizing voice preserves both activated modes (device doubles)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Disabling voice leaves camera on (device doubles)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Disabling camera leaves voice enabled (device doubles)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Compact layout displays only the last opened panel",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Mobile voice button shows its separate panel",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Switching mobile panels does not change device activation (doubles)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Mobile camera button shows only camera settings",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Gesture guide belongs to camera, not voice",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Guide teaches thumb to palm, not fingertip pinch",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Guide preserves same-hand index-middle zoom",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Mobile host has no horizontal overflow",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Mobile tool fits viewport",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Emergency stop still disables both modes together",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Independent panels retain light-theme synchronization",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "No JavaScript exceptions in panel workflows",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "test": "index: ordinary page has TWO independent tool entry points",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "index: separate voice and camera launcher identities",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "index: ordinary page has no horizontal overflow",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "trading: ordinary page has TWO independent tool entry points",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "trading: separate voice and camera launcher identities",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "trading: ordinary page has no horizontal overflow",
+    "passed": true,
+    "detail": null
+  }
+]

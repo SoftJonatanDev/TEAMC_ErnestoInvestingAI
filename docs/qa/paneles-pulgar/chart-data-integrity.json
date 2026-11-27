@@ -1,0 +1,142 @@
+[
+  {
+    "test": "26 assets x 504 valid OHLCV observations",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Deterministic generator reproduces delivered data",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 01_universo_tickers.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 02_precios_sinteticos_504d.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 03_ohlcv_sintetico_120d.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 04_matriz_correlacion_covarianza.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 05_clasificadores_binarios.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 06_regresores_precio_30d.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 07_optimizador_markowitz_nsga.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 08_portafolios_3_niveles_riesgo.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 09_backtesting_portafolios.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 10_dashboard_mercado.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 11_watchlist_alertas_portafolio_demo.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 12_leaderboard_liga.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Original source unchanged: 13_patrones_y_parametros.json",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "All dashboard anchors match full history",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Forecast dates begin after history; exactly 30",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "All regression anchors, 18 models and bands consistent",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Stored median agrees within source rounding",
+    "passed": true,
+    "detail": 0.005000000000109139
+  },
+  {
+    "test": "Projected returns agree within source rounding",
+    "passed": true,
+    "detail": 0.004761904761920288
+  },
+  {
+    "test": "Backtesting curve and reported result: Conservador",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: Moderado",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: Agresivo",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: SPY",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: QQQ",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: EPU",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "Backtesting curve and reported result: Igual ponderado (1/N)",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "test": "170 original portfolios, weight limits unchanged",
+    "passed": true,
+    "detail": null
+  }
+]

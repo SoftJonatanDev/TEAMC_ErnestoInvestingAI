@@ -97,7 +97,7 @@ with sync_playwright() as pw:
     page.locator('[data-edit="apply"]').click();page.wait_for_timeout(100)
     check('Virtual keyboard filters actual market rows',app.locator('#asset-filter').input_value()=='nvda' and app.locator('#market-table tr').count()==1)
     check('Only matching asset remains after virtual input','NVDA' in app.locator('#market-table').inner_text())
-    # Two explicit pinches retain the existing order review and validations.
+    # Two explicit thumb cycles retain the existing order review and validations.
     goto(page,'trading')
     page.evaluate('()=>{const w=document.getElementById("mm-app").contentWindow;if(w.Market.state().enabled)w.Market.toggle();}')
     app.locator('#order-qty').fill('2');app.locator('#review-order').click()
@@ -122,8 +122,8 @@ with sync_playwright() as pw:
     check('Mobile host has no horizontal overflow',mobile.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     check('Assistant fits the mobile viewport',mobile.locator('#mm-panel').bounding_box()['width']<=390)
     mobile.screenshot(path=str(OUT/'multimodal-mobile.png'))
-    mobile.locator('#mm-tab-guide').click();check('Gesture guide is available on mobile',mobile.locator('#mm-guide-panel').is_visible())
-    mobile.locator('#mm-panel-close').click();check('Dock remains available when assistant is minimized',mobile.locator('#mm-dock').is_visible())
+    mobile.locator('#mm-camera-dock').click();mobile.locator('#mm-guide-panel summary').click();check('Gesture guide is available on mobile',mobile.locator('#mm-guide-panel').is_visible())
+    mobile.locator('#mm-camera-close').click();check('Dock remains available when assistant is minimized',mobile.locator('#mm-dock').is_visible())
     mobile.evaluate("document.getElementById('mm-app').contentDocument.documentElement.dataset.theme='light'")
     mobile.wait_for_timeout(100);check('Host follows application light theme',mobile.evaluate("document.documentElement.dataset.theme==='light'"))
     mobile.close();browser.close()

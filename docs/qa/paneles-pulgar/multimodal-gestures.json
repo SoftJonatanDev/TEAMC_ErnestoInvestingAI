@@ -1,0 +1,178 @@
+[
+  {
+    "test": "Open -> palm-closed -> open with raised index emits ONE click",
+    "passed": true
+  },
+  {
+    "test": "A closed thumb on first appearance cannot click",
+    "passed": true
+  },
+  {
+    "test": "A fresh open posture is required after every click",
+    "passed": true
+  },
+  {
+    "test": "Two intentional thumb cycles produce two clicks after cooldown",
+    "passed": true
+  },
+  {
+    "test": "Stable closed thumb does not repeat clicks",
+    "passed": true
+  },
+  {
+    "test": "Very brief closed-thumb jitter is ignored",
+    "passed": true
+  },
+  {
+    "test": "Release must also remain stable (hysteresis)",
+    "passed": true
+  },
+  {
+    "test": "Old fingertip pinch feature never triggers a click",
+    "passed": true
+  },
+  {
+    "test": "Close index/thumb tips alone are not used by the new engine",
+    "passed": true
+  },
+  {
+    "test": "Click cannot start until index pointing is armed",
+    "passed": true
+  },
+  {
+    "test": "Lowering index cancels pending click immediately",
+    "passed": true
+  },
+  {
+    "test": "Neutral / unsupported posture cancels pending click",
+    "passed": true
+  },
+  {
+    "test": "Switching to index-middle gestures cannot complete a click",
+    "passed": true
+  },
+  {
+    "test": "Thumb closure while index+middle extended never clicks",
+    "passed": true
+  },
+  {
+    "test": "Tracking loss cancels even a one-frame pending click",
+    "passed": true
+  },
+  {
+    "test": "Loss hides cursor, releases visual press, and disarms",
+    "passed": true
+  },
+  {
+    "test": "Reconfiguration cancels an active click",
+    "passed": true
+  },
+  {
+    "test": "Long stationary press is cancelled, not deferred until release",
+    "passed": true
+  },
+  {
+    "test": "Ambiguous thumb posture for too long cancels a press",
+    "passed": true
+  },
+  {
+    "test": "Cursor excursion then return cannot accidentally become a click",
+    "passed": true
+  },
+  {
+    "test": "Held palm-folded thumb plus motion starts drag, no extra click",
+    "passed": true
+  },
+  {
+    "test": "Interrupted drag is cancelled without click",
+    "passed": true
+  },
+  {
+    "test": "Open palm pauses; one held index resumes",
+    "passed": true
+  },
+  {
+    "test": "Fist cancels gesture and stops reading",
+    "passed": true
+  },
+  {
+    "test": "Paused engine cannot perform thumb click",
+    "passed": true
+  },
+  {
+    "test": "Index-middle vertical motion chooses scroll only",
+    "passed": true
+  },
+  {
+    "test": "Index-middle horizontal motion chooses pan only",
+    "passed": true
+  },
+  {
+    "test": "Spreading the SAME index and middle fingers zooms in",
+    "passed": true
+  },
+  {
+    "test": "Bringing index and middle together zooms out",
+    "passed": true
+  },
+  {
+    "test": "Chosen scroll cannot simultaneously become zoom",
+    "passed": true
+  },
+  {
+    "test": "Returning from two fingers requires a new thumb cycle",
+    "passed": true
+  },
+  {
+    "test": "Cursor mapping retains calibration, mirror and screen limits",
+    "passed": true
+  },
+  {
+    "test": "Invalid and degenerate landmark arrays are rejected",
+    "passed": true
+  },
+  {
+    "test": "Geometry recognizes index-up and thumb open to palm side",
+    "passed": true
+  },
+  {
+    "test": "Geometry recognizes thumb folded towards palm, index still up",
+    "passed": true
+  },
+  {
+    "test": "Touching thumb to raised INDEX TIP is NOT palm closure",
+    "passed": true
+  },
+  {
+    "test": "Mirrored left/right hand geometry gives same thumb state",
+    "passed": true
+  },
+  {
+    "test": "Palm-local thumb geometry survives scale and rotation in 3D world coordinates",
+    "passed": true
+  },
+  {
+    "test": "World palm geometry makes thumb state independent of image size",
+    "passed": true
+  },
+  {
+    "test": "Open-hand geometry still classifies as palm",
+    "passed": true
+  },
+  {
+    "test": "Two-finger geometry still identifies index and middle",
+    "passed": true
+  },
+  {
+    "test": "Finger separation remains uniform-scale invariant",
+    "passed": true
+  },
+  {
+    "test": "Actual landmark open-close-open sequence reaches click FSM",
+    "passed": true
+  },
+  {
+    "test": "Actual old pinch landmarks cannot click even after arming",
+    "passed": true
+  }
+]

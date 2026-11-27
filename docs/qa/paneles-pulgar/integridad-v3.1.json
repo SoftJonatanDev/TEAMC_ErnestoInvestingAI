@@ -1,0 +1,129 @@
+{
+  "base_zip": "Ernesto_Investing_AI_Camara_y_Voz.zip",
+  "data": [
+    {
+      "file": "data/01_universo_tickers.json",
+      "sha256": "2ee56b7baf5c60020db10de7b840206fcbe7cf25f63667ebf7daa863a8bcbec7",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/02_precios_sinteticos_504d.json",
+      "sha256": "81e406252ec7c53463a584cc7232005d7089e78a9a7345f45c26c2cfabbebf67",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/03_ohlcv_sintetico_120d.json",
+      "sha256": "1509e4c4f6a85a51645da4315c78e07b082a406c44435f107868c3fe850cf4f7",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/04_matriz_correlacion_covarianza.json",
+      "sha256": "fc9e8892238947b333d0e12ba9f39bb76f376ceac075d3164deb560758af522f",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/05_clasificadores_binarios.json",
+      "sha256": "09592a497926eb285b3c03e26162d92a8c813fa77163dc58ae1912becc2d8652",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/06_regresores_precio_30d.json",
+      "sha256": "43b5d51349ce280ee549aa88696279d16d51ca7046237dfa75f0b8c92f8cab65",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/07_optimizador_markowitz_nsga.json",
+      "sha256": "e976b30fb2de1bae4da3191cf195a142402af9baadbecfae996dc6685f196872",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/08_portafolios_3_niveles_riesgo.json",
+      "sha256": "adf38e5411254839659e0c074f9f0e7dcd38f30d41e89eb7ba186751016de3b6",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/09_backtesting_portafolios.json",
+      "sha256": "8f97d8aafda3ff6ae7bf2700ba5e6b0af6019ddf7470835505ee24e0ccaaafbd",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/10_dashboard_mercado.json",
+      "sha256": "64c55e6e45753f13147b58cb7dad34e6c20b9e348d14b36aa668383919da4584",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/11_watchlist_alertas_portafolio_demo.json",
+      "sha256": "7d50433bfdfe08fb045c0c5640467a67200a199f338188cc9bf4e81d3441fd1e",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/12_leaderboard_liga.json",
+      "sha256": "3776a2ebd369dda028a75c73d14fc938bb71f3826616b96721973c162aa9e777",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/13_patrones_y_parametros.json",
+      "sha256": "7765ca91430eeb8795731d333f273609533ff0bf3801d75b4bff99e4bfda2217",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "data/14_ohlcv_sintetico_504d.json",
+      "sha256": "ce8e28a7487ebe134439000881ddb6a10698604c67fceb3097e7340defb93737",
+      "same_as_input_zip": true
+    }
+  ],
+  "preserved_logic": [
+    {
+      "file": "js/chart-viewport.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/chart-bridge.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/financial-chart.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/market.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/trading-pro.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/dashboard.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/regresion.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/optimizador.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/backtesting.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/multimodal/reader.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/multimodal/camera.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "js/multimodal/hand-worker.js",
+      "same_as_input_zip": true
+    },
+    {
+      "file": "vendor/mediapipe/sources.json",
+      "same_as_input_zip": true
+    }
+  ]
+}

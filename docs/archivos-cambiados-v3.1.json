@@ -1,0 +1,166 @@
+{
+  "base_zip": "Ernesto_Investing_AI_Camara_y_Voz.zip",
+  "note": "Inventory excludes this manifest and temporary test-results. Data integrity is recorded separately.",
+  "files": [
+    {
+      "path": "CAMBIOS_MULTIMODAL.md",
+      "change": "modified",
+      "sha256": "f19df10b77d33c8def580e8bd4157565c7e3d6ce4401c1cc2f46dcf4ffea315f"
+    },
+    {
+      "path": "CAMBIOS_PANEL_Y_PULGAR.md",
+      "change": "added",
+      "sha256": "869bfaa934a58af1df58769a1b461a1017bddf9159b22295ee45b2abb518012a"
+    },
+    {
+      "path": "GUIA_CAMARA_Y_VOZ.md",
+      "change": "modified",
+      "sha256": "99f57e3c0b55c195cbb3cfd17c5483ccecf29f95d3db8936a003fcf57ff042e8"
+    },
+    {
+      "path": "LEEME_PRIMERO.txt",
+      "change": "modified",
+      "sha256": "4e19234bba50a12849a41b156ffd50570dd5985afc9b6cd8d910c8601f26b8cd"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "293efa0872fef3d67b9e480397b1241ca904417543d67683f6baee33bd7f36fa"
+    },
+    {
+      "path": "css/multimodal.css",
+      "change": "modified",
+      "sha256": "97e2601f5582b4c9e32e19ed92577e08b082413a03dad37aa1e154e55ce7ab4d"
+    },
+    {
+      "path": "docs/VALIDACION_PANEL_Y_PULGAR.md",
+      "change": "added",
+      "sha256": "7f4d3395c8c3ee29453d8cd914b7353f2e8d1a9d290e3630f63346cd0fe3c023"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/asistente-voz-movil.png",
+      "change": "added",
+      "sha256": "1a598b68544c0d39d0738b5a84156dc70422a82cc2ce60e57fba319c714f4881"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/chart-data-integrity.json",
+      "change": "added",
+      "sha256": "84d1b552af0b4c90396529b9768a04bc2121f78e25f5f574f77f69f0a0259d26"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/integridad-v3.1.json",
+      "change": "added",
+      "sha256": "02bb45f85dd87cb77c8c427538acd6aebe55dfd8fe30585007ea5b10bd94ff2d"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-browser.json",
+      "change": "added",
+      "sha256": "358a39185c9871dbb6b24cdf70e21a7cc4e818d9db5573a9a79d0cce98a4dafc"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-devices.json",
+      "change": "added",
+      "sha256": "66a17f6fc4c3af674ea9d5b0689e96200a3dd39bb1cead0e2f8a49775e590c1c"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-gestures.json",
+      "change": "added",
+      "sha256": "73118795f38ca706448c99e7cc23f218ce7a32c9120e32bdc12fbfcd6a31f6a6"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-http.json",
+      "change": "added",
+      "sha256": "26e0faa27641b0486e846e1216edadb831bf764826911cd08503da700d150865"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-interaction.json",
+      "change": "added",
+      "sha256": "2bcc69297cd689011e9c68cfd08cad2ca1903c4becbe90d5caf088f9d7226abd"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/multimodal-panels.json",
+      "change": "added",
+      "sha256": "ce85d9004aca2a6e9201310f24a919f20562f23451a87a4f5b07986157b68d7d"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/native-http-panels.json",
+      "change": "added",
+      "sha256": "4615b0686fca5fa18e71a0e88e29378480d165225dcc6d11a1dde3526c073230"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/navegacion-adicional-parcial.json",
+      "change": "added",
+      "sha256": "675c2cdfe6eaf9a73e8743eaf7d5da0bbba1de916c3273825ba71dc9c04c037c"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/paneles-separados-escritorio.png",
+      "change": "added",
+      "sha256": "27b5afdf9eba8408e21d39c43ec8e1ff2d43a58091217477571ec492b22f65f9"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/paneles-separados-movil.png",
+      "change": "added",
+      "sha256": "29dea4d8b2fb7ab05184af4bed3715ba23d61fca47f129b18d7d10bcb82ce80e"
+    },
+    {
+      "path": "docs/qa/paneles-pulgar/resumen-validacion.json",
+      "change": "added",
+      "sha256": "6ec58eea2e742b5ce178fa95b129f815677d242298ba520a903627effed47b5e"
+    },
+    {
+      "path": "interaccion.html",
+      "change": "modified",
+      "sha256": "5268912ff5c57333f69ac2537e0fcdf8442465fa6c75d5fcb339e780308c91ec"
+    },
+    {
+      "path": "js/multimodal/gesture-engine.js",
+      "change": "modified",
+      "sha256": "a5c8db9f6f913a4b1ed0c05aa23aae2940d5ff7b09d6d4cc2504bcc938398bb8"
+    },
+    {
+      "path": "js/multimodal/host.js",
+      "change": "modified",
+      "sha256": "785048dd83713f43bb466a799cf5dec731bc8d631bd193621130d0b2b065ca65"
+    },
+    {
+      "path": "js/multimodal/input-bridge.js",
+      "change": "modified",
+      "sha256": "5c472241e6a2e45d62d05626dc12c49ad5ccf9c3609c3c3373e8b9e6be316e86"
+    },
+    {
+      "path": "js/multimodal/launcher.js",
+      "change": "modified",
+      "sha256": "e0f8d1a46e41eaa0200501233fd3788d7c9e39f55c49ab02dbf4ef5f5b27822c"
+    },
+    {
+      "path": "js/premium-shell.js",
+      "change": "modified",
+      "sha256": "406eac1b88f08c383894f41df2d9ba302cfa07d0aaa1fe9fb25deeafbcee1ef8"
+    },
+    {
+      "path": "tests/README.md",
+      "change": "modified",
+      "sha256": "f6f5c10337036a6865b919a67aabe3215efc5c2e5c48f1067f2cfebf02db8afb"
+    },
+    {
+      "path": "tests/multimodal_browser.py",
+      "change": "modified",
+      "sha256": "261a3fc2a387c1439e49eea807cce988ec530a3c8843ad2d546c742228302c15"
+    },
+    {
+      "path": "tests/multimodal_gestures.cjs",
+      "change": "modified",
+      "sha256": "2543a75728443a3b1c1d2820fbe8579c3452ab9495da450ab77a3f5fef1f453d"
+    },
+    {
+      "path": "tests/multimodal_interaction.py",
+      "change": "modified",
+      "sha256": "770b7793ebf8f9c8e8706c71168f20b92baa604b8aed193a765880de68d0cca3"
+    },
+    {
+      "path": "tests/multimodal_panels.py",
+      "change": "added",
+      "sha256": "92ab77fd4cfdc94029bc0d96406a0dd1de9318d097cf4e4acc2c1557a1df8cbf"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "version": "3.1",
+  "date": "2026-11-27",
+  "completed_checks": 235,
+  "suites": [
+    {
+      "suite": "Geometria y maquina de estados",
+      "file": "multimodal-gestures.json",
+      "passed": 44,
+      "total": 44,
+      "completed": true
+    },
+    {
+      "suite": "Contratos de camara y voz con dobles",
+      "file": "multimodal-devices.json",
+      "passed": 30,
+      "total": 30,
+      "completed": true
+    },
+    {
+      "suite": "Paneles independientes",
+      "file": "multimodal-panels.json",
+      "passed": 40,
+      "total": 40,
+      "completed": true
+    },
+    {
+      "suite": "Gestos conectados a la interfaz",
+      "file": "multimodal-interaction.json",
+      "passed": 12,
+      "total": 12,
+      "completed": true
+    },
+    {
+      "suite": "Integracion de modulos, graficas y formularios",
+      "file": "multimodal-browser.json",
+      "passed": 71,
+      "total": 71,
+      "completed": true
+    },
+    {
+      "suite": "Integridad financiera",
+      "file": "chart-data-integrity.json",
+      "passed": 28,
+      "total": 28,
+      "completed": true
+    },
+    {
+      "suite": "Recursos HTTP",
+      "file": "multimodal-http.json",
+      "passed": 10,
+      "total": 10,
+      "completed": true
+    }
+  ],
+  "physical_camera_tested": false,
+  "live_model_inference_tested": false,
+  "audible_speech_tested": false,
+  "native_browser_http": "blocked_by_environment_policy",
+  "additional_mouse_navigation_suite": "incomplete: 53 checks before execution timeout"
+}

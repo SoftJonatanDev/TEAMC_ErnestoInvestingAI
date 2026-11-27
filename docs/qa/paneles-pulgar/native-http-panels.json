@@ -1,0 +1,6 @@
+{
+  "transport": "Real Chromium navigation over localhost HTTP",
+  "completed": false,
+  "checks": [],
+  "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:41799/\nCall log:\n  - navigating to \"http://127.0.0.1:41799/\", waiting until \"domcontentloaded\"\n"
+}

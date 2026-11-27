@@ -1,4 +1,4 @@
-ERNESTO INVESTING AI - CAMARA Y VOZ v3.0
+ERNESTO INVESTING AI - CAMARA Y VOZ INDEPENDIENTES v3.1
 
 1. Extrae TODO el ZIP en una carpeta nueva. No abras archivos dentro del ZIP.
 2. Abre una terminal en la carpeta que contiene iniciar.py.
@@ -11,14 +11,22 @@ ERNESTO INVESTING AI - CAMARA Y VOZ v3.0
    Mantiene la terminal abierta. Ctrl+C detiene el servidor.
    Se necesita Python 3; no necesitas npm, Node, base de datos ni claves API.
 
-4. En el navegador, abre Camara > Activar camara y acepta el permiso.
+4. En el navegador, pulsa el boton Camara para abrir SU panel.
+   Pulsa Activar camara y acepta el permiso.
    Este permiso inicial puede necesitar raton o teclado.
 5. Muestra una mano y extiende solo el indice. Usa Calibrar area.
-6. Abre Asistente > Activar voz para escuchar. La voz no necesita camara.
+6. Usa el boton independiente Asistente de voz > Activar voz para escuchar.
+   La voz no necesita camara. Cada panel tiene su propio boton de cerrar.
+   Minimizar o cambiar de panel NO apaga la camara ni detiene la lectura.
+   En movil se muestra un panel a la vez; en escritorio pueden verse ambos.
 
 GESTOS PRINCIPALES
 - Indice: mover el cursor.
-- Pulgar + indice: juntar y soltar para clic; mantener y mover para arrastrar.
+- Clic NUEVO: indice arriba; abre el pulgar, cierralo hacia la palma y vuelve
+  a abrirlo. Los otros tres dedos permanecen doblados. Un clic al reabrir.
+  NO juntes las puntas del pulgar y del indice: la pinza ya no hace clic.
+- Arrastrar: manten el pulgar cerrado hacia la palma y mueve la mano.
+  Reabre el pulgar para soltar, sin generar otro clic.
 - Indice + medio: juntos arriba/abajo para scroll, lateral sobre una grafica
   para recorrerla; separar/acercar esos mismos dedos para zoom.
 - Vuelve a un solo indice antes de cambiar entre desplazamiento y zoom.
@@ -41,7 +49,7 @@ CONEXION Y PRIVACIDAD
   usa el instalador para una demostracion offline.
 - Las voces locales dependen del navegador/sistema. Las voces remotas estan
   deshabilitadas por defecto; activarlas permite enviar texto al proveedor.
-- Al ocultar la pestana se apaga la camara. Para volver a usarla, activala otra vez.
+- Al ocultar la pestana DEL NAVEGADOR se apaga la camara (no al cerrar su panel). Para volver a usarla, activala otra vez.
 
 IMPORTANTE
 - Usa localhost/127.0.0.1 o HTTPS, nunca file://.
@@ -52,6 +60,7 @@ IMPORTANTE
 - Todos los datos y operaciones siguen siendo simulaciones educativas.
 - La nueva entrega se ejecuta desde ESTA carpeta, no desde figma-src.
 
-Lee GUIA_CAMARA_Y_VOZ.md y docs/VALIDACION_MULTIMODAL.md.
+Lee GUIA_CAMARA_Y_VOZ.md, CAMBIOS_PANEL_Y_PULGAR.md
+y docs/VALIDACION_PANEL_Y_PULGAR.md.
 Las pruebas de logica usan entradas simuladas. No se valido una camara fisica,
 la inferencia del modelo descargable ni la voz audible en este entorno.

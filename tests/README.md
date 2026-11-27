@@ -84,3 +84,26 @@ caracteristicas gestuales sinteticas al adaptador real de graficas/formularios.
 Consulta docs/VALIDACION_MULTIMODAL.md para los resultados exactos, los limites
 de estas pruebas y la lista de verificaciones manuales. Las evidencias finales
 entregadas estan en docs/qa/multimodal/; ejecutar pruebas genera test-results/.
+
+
+## Paneles independientes y pulgar hacia palma (v3.1)
+
+```bash
+node tests/multimodal_gestures.cjs
+node tests/multimodal_devices.cjs
+python tests/multimodal_panels.py
+python tests/multimodal_interaction.py
+python tests/multimodal_browser.py
+python tests/chart_data_integrity.py
+python tests/multimodal_http.py
+```
+
+La geometria y maquina de estados comprueban el ciclo de pulgar abierto-cerrado
+hacia palma-abierto, la exclusion de la pinza antigua, arrastre, cancelacion,
+mano reflejada, rotacion y conservacion del zoom indice-medio. Los paneles prueban
+accesos independientes y que minimizar o cambiar entre ellos no apaga servicios.
+Estas pruebas usan coordenadas sinteticas y dobles de dispositivos donde se
+indica; no acreditan exactitud de una webcam ni audio audible.
+
+Resultados de esta revision: `docs/qa/paneles-pulgar/`. Consulta el informe
+`docs/VALIDACION_PANEL_Y_PULGAR.md`; los reportes de v3.0 son historicos.

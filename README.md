@@ -1,24 +1,32 @@
-# Cámara y voz · v3.0
+# Asistente de voz y cámara independientes · v3.1
 
-Esta entrega integra seguimiento de una mano y un lector contextual opcionales.
-Los datos financieros y el controlador de gráficas de v2.1 no se modifican.
+Esta revisión separa la lectura y el control gestual en **dos paneles con accesos
+propios**, y cambia el clic al movimiento del **pulgar respecto a la palma**.
+
+**Clic:** mantén el índice arriba y los otros tres dedos doblados. Abre el pulgar,
+ciérralo hacia la palma y reábrelo. Se ejecuta un clic al soltar. No se usa la
+pinza pulgar-índice. Para arrastrar, mantén el pulgar cerrado y mueve la mano.
+El zoom continúa con los mismos índice y medio de una sola mano.
 
 **Inicio directo:** `py iniciar.py --multimodal` (Windows) o
 `python3 iniciar.py --multimodal` (macOS/Linux). También puedes abrir
-`INICIAR_MULTIMODAL_WINDOWS.bat`. Desde cualquier pantalla normal, el botón
-**Cámara y voz** abre el mismo espacio de trabajo.
+`INICIAR_MULTIMODAL_WINDOWS.bat`. Desde las pantallas normales hay botones separados
+**Asistente de voz** y **Cámara**. Abrir un panel no activa sus dispositivos;
+minimizarlo no apaga la función. En móvil los paneles se alternan sin interrumpir
+las modalidades ya activadas.
 
-**Importante:** el ZIP incluye la integración completa, pero no los binarios de
-MediaPipe. Por defecto se descargan de jsDelivr/Google al activar la cámara.
-Para instalarlos localmente y no depender de Internet después, ejecuta una vez
-`py preparar_camara.py` o `python3 preparar_camara.py` con conexión.
-El resto de la aplicación y sus gráficas continúan funcionando sin Internet.
-Las voces disponibles dependen de tu navegador y del sistema operativo.
+Los 14 JSON de datos, la lógica financiera, el lector de texto y el controlador
+de gráficas permanecen iguales a los de la entrega anterior. Se conservan los
+límites horizontales, ajuste vertical y sincronización de las gráficas.
 
-Consulta `GUIA_CAMARA_Y_VOZ.md`, `CAMBIOS_MULTIMODAL.md` y
-`docs/VALIDACION_MULTIMODAL.md`. La cámara física, el modelo descargable y el
-audio de tu dispositivo requieren verificación local; las pruebas automatizadas
-incluidas no sustituyen esa comprobación.
+**Recursos de cámara:** el ZIP no incluye los binarios de MediaPipe. Por defecto
+se descargan de jsDelivr/Google al activar la cámara. Para instalarlos localmente,
+ejecuta `py preparar_camara.py` (o `python3 preparar_camara.py`) con Internet.
+No hacen falta npm, claves API ni base de datos. Las voces dependen del dispositivo.
+
+Consulta `GUIA_CAMARA_Y_VOZ.md`, `CAMBIOS_PANEL_Y_PULGAR.md` y
+`docs/VALIDACION_PANEL_Y_PULGAR.md`. Las pruebas automatizadas no sustituyen una
+verificación local de la cámara, la inferencia del modelo y la voz audible.
 
 ---
 

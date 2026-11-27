@@ -1,5 +1,9 @@
 # Cambios v3.0: cámara y voz
 
+> Registro histórico de la entrega anterior. El clic por pinza y el panel
+> compartido fueron sustituidos en v3.1. Consulta `CAMBIOS_PANEL_Y_PULGAR.md`
+> y la guía actual para el comportamiento vigente.
+
 Base: `Ernesto_Investing_AI_Graficas_Con_Limites.zip`.
 
 ## Incorporado

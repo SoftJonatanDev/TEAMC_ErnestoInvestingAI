@@ -1,0 +1,52 @@
+[
+  {
+    "test": "interaccion.html HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/html"
+  },
+  {
+    "test": "css/multimodal.css HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/css"
+  },
+  {
+    "test": "js/multimodal/launcher.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/gesture-engine.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/host.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/reader.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/input-bridge.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/camera.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "js/multimodal/hand-worker.js HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "text/javascript"
+  },
+  {
+    "test": "vendor/mediapipe/sources.json HTTP bytes match delivered file",
+    "passed": true,
+    "content_type": "application/json"
+  }
+]

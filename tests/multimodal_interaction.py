@@ -17,18 +17,18 @@ with sync_playwright() as pw:
     p=b.new_page(viewport={'width':1440,'height':1000});app=open_workspace(p)
     p.locator('#mm-panel-close').click()
     p.evaluate(r'''()=>{
-      window.__gesturePoint=(point,t,shape='point',pinch=1,separation=.4)=>{
+      window.__gesturePoint=(point,t,shape='point',thumbValue=1,separation=.4)=>{
         const prefs=EIAMultimodal.prefs,b=prefs.bounds;
         let x=b.left+point.x/innerWidth*(b.right-b.left);if(prefs.mirror)x=1-x;
         const y=b.top+point.y/innerHeight*(b.bottom-b.top);
-        EIAMultimodal.engine.step({shape,pinch,separation,index:{x,y},mid:{x,y}},t,{width:innerWidth,height:innerHeight});
+        EIAMultimodal.engine.step({shape,thumbState:thumbValue<.3?'closed':'open',separation,index:{x,y},mid:{x,y}},t,{width:innerWidth,height:innerHeight});
       };
       const doc=document.getElementById('mm-app').contentDocument;
       const btn=doc.createElement('button');btn.id='contract-button';btn.textContent='Boton de prueba';btn.style='position:fixed;left:500px;top:160px;width:160px;height:60px;z-index:99999';btn.onclick=()=>window.__contractClicks=(window.__contractClicks||0)+1;doc.body.append(btn);
-      EIAMultimodal.engine.reset();const point={x:580,y:190};for(const t of [1000,1200])__gesturePoint(point,t);__gesturePoint(point,1300,'pinch',.2);__gesturePoint(point,1380,'pinch',.2);__gesturePoint(point,1500,'point',.6);
+      EIAMultimodal.engine.reset();const point={x:580,y:190};for(const t of [1000,1200])__gesturePoint(point,t);__gesturePoint(point,1300,'point',.2);__gesturePoint(point,1380,'point',.2);__gesturePoint(point,1500,'point',.6);__gesturePoint(point,1580,'point',.6);
     }''')
-    check('Complete pinch sequence clicks an actual application button once',p.evaluate('window.__contractClicks===1'))
-    p.evaluate(r'''()=>{const point={x:580,y:190};__gesturePoint(point,2200);__gesturePoint(point,2300,'pinch',.2);__gesturePoint(point,2380,'pinch',.2);EIAMultimodal.engine.step(null,2700);__gesturePoint(point,2800);__gesturePoint(point,3000);}''')
+    check('Complete thumb-to-palm cycle clicks an actual application button once',p.evaluate('window.__contractClicks===1'))
+    p.evaluate(r'''()=>{const point={x:580,y:190};__gesturePoint(point,2200);__gesturePoint(point,2300,'point',.2);__gesturePoint(point,2380,'point',.2);EIAMultimodal.engine.step(null,2700);__gesturePoint(point,2800);__gesturePoint(point,3000);}''')
     check('Losing the tracked hand cancels a pending application click',p.evaluate('window.__contractClicks===1'))
     p.evaluate('document.getElementById("mm-app").contentDocument.getElementById("contract-button").remove()')
     p.wait_for_function("()=>document.getElementById('mm-app').contentDocument.getElementById('market-chart')?._eiaViewport && !document.getElementById('mm-app').contentDocument.getElementById('market-chart')._eiaViewport.rendering")

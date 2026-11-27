@@ -22,9 +22,9 @@
     if(el.readOnly||el.type==='file'||el.type==='password'){this.cb.notice?.('Este campo se completa con teclado o ratón por privacidad y permisos del navegador.');return;}
     this.cb.edit?.(el);return;
    }
-   // A new, separate pinch is required for destructive/final confirmation buttons.
+   // A new, separate thumb open-close-open cycle is required for destructive/final confirmation buttons.
    if(el.ownerDocument!==document&&el.matches('[data-confirm-order],button.danger,[data-confirm].danger')){
-    const now=performance.now();if(this.pending?.el!==el||now>this.pending.until){this.pending={el,until:now+6000};this.cb.notice?.('Confirmación protegida: suelta la pinza y haz otra sobre este botón en los próximos 6 segundos.');return;}this.pending=null;
+    const now=performance.now();if(this.pending?.el!==el||now>this.pending.until){this.pending={el,until:now+6000};this.cb.notice?.('Confirmación protegida: mantén el índice arriba y repite el ciclo de cerrar y reabrir el pulgar hacia la palma sobre este botón en los próximos 6 segundos.');return;}this.pending=null;
    }
    el.focus({preventScroll:true});el.click();this.cb.clicked?.(el);
   }
